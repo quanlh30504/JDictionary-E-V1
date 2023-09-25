@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="540.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jdictionaryev1.HelloController">
+   <children>
+      <ImageView id="game" fitHeight="540.0" fitWidth="840.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../MyDictionary.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="39.0" fitWidth="50.0" layoutX="13.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../icons/icons8-visual-game-boy-64.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="11.0" layoutY="195.0" mnemonicParsing="false" onAction="#switchToGame" opacity="0.0" prefHeight="36.0" prefWidth="42.0" text="Go to game" />
+      <ImageView fitHeight="42.0" fitWidth="54.0" layoutX="13.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../icons/icons8-search-64.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="48.0" fitWidth="36.0" layoutX="15.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../icons/icons8-add-64.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="48.0" fitWidth="36.0" layoutX="14.0" layoutY="308.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../icons/icons8-translate-64.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="48.0" fitWidth="36.0" layoutX="14.0" layoutY="371.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../icons/icons8-remove-64.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="50.0" fitWidth="61.0" layoutX="8.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../icons/icons8-account-10.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="61.0" fitWidth="62.0" layoutX="155.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../icons/icons8-dictionary-64.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="48.0" fitWidth="36.0" layoutX="14.0" layoutY="475.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../icons/icons8-logout-96.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="24.0" fitWidth="30.0" layoutX="286.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../icons/icons8-magnifying-glass-64.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="buttonSearch" layoutX="282.0" layoutY="57.0" mnemonicParsing="false" onAction="#search" opacity="0.0" prefHeight="35.0" prefWidth="30.0" text="Search" />
+      <ImageView fitHeight="20.0" fitWidth="30.0" layoutX="563.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../icons/icons8-x-90.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="labelSearch" layoutX="393.0" layoutY="63.0" text="">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="textFieldSearch" promptText="English Search" layoutX="316.0" layoutY="59.0" onDragDetected="#search" opacity="0.5" prefHeight="30.0" prefWidth="244.0" />
+      <Button fx:id="logoutButton" layoutX="14.0" layoutY="475.0" mnemonicParsing="false" onAction="#logout" opacity="0.0" prefHeight="35.0" prefWidth="39.0" text="Button" />
+      <ImageView fitHeight="24.0" fitWidth="30.0" layoutX="115.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../icons/loop.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
