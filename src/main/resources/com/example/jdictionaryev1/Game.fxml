@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="540.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jdictionaryev1.HelloController">
+   <children>
+      <ImageView fitHeight="540.0" fitWidth="840.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Game.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="42.0" fitWidth="54.0" layoutX="13.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../icons/icons8-search-64.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="16.0" layoutY="130.0" mnemonicParsing="false" onAction="#switchToDictionary" opacity="0.0" prefHeight="35.0" prefWidth="34.0" text="Go to dictionary" />
+      <Label layoutX="366.0" layoutY="58.0" prefHeight="46.0" prefWidth="96.0" text="Game">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="39.0" fitWidth="50.0" layoutX="13.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../icons/icons8-visual-game-boy-64.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="48.0" fitWidth="36.0" layoutX="14.0" layoutY="308.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../icons/icons8-translate-64.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="48.0" fitWidth="36.0" layoutX="15.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../icons/icons8-add-64.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="48.0" fitWidth="36.0" layoutX="14.0" layoutY="371.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../icons/icons8-remove-64.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="68.0" fitWidth="70.0" layoutX="118.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../icons/icons8-dictionary-64.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="48.0" fitWidth="36.0" layoutX="14.0" layoutY="475.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../icons/icons8-logout-96.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="50.0" fitWidth="58.0" layoutX="8.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../icons/icons8-account-10.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
