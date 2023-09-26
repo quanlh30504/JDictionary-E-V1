@@ -1,5 +1,6 @@
 package com.example.jdictionaryev1;
 
+import graphic.DictionaryScence;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -24,27 +25,17 @@ public class HelloApplication extends Application {
         stage.setScene(new Scene(root,840,540));
         stage.show();
 
+        // Dictionary Scence
+        DictionaryScence dictionaryScence = new DictionaryScence();
+
         // Search bar on click
         searchBar();
 
         // tạo mục hỏi logout cho nút X trên window
         stage.setOnCloseRequest(event -> {
             event.consume();
-            logout(stage);
+            dictionaryScence.logout(stage);
         });
-    }
-    // hàm tạo mục hỏi logout cho nút X trên window
-    public void logout(Stage stage){
-        //Tạo hộp xác nhận
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Logout");
-        alert.setHeaderText("You're about to logout!");
-        alert.setContentText("Do you want to save before exiting!: ");
-        //System.out.println("im here");
-        if(alert.showAndWait().get() == ButtonType.OK){
-            System.out.println("You successfully logged out");
-            stage.close();
-        }
     }
 
     /* SearchBar */

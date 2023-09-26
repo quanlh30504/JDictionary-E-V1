@@ -147,10 +147,10 @@ public class AhoCorasick {
     }
 
     // Returns the next state the machine will transition to using goto
-// and failure functions.
-// currentState - The current state of the machine. Must be between
-//			 0 and the number of states - 1, inclusive.
-// nextInput - The next character that enters into the machine.
+    // and failure functions.
+    // currentState - The current state of the machine. Must be between
+    //			 0 and the number of states - 1, inclusive.
+    // nextInput - The next character that enters into the machine.
     public static int findNextState(int currentState, char nextInput) {
         int answer = currentState;
         int ch = nextInput - 'a';
@@ -199,5 +199,15 @@ public class AhoCorasick {
                 }
             }
         }
+
+    }
+
+    public static void main(String[] args)
+    {
+        String arr[] = { "he", "she", "hers", "his" };
+        String text = "ahishers";
+        int k = arr.length;
+
+        searchWords(arr, k, text);
     }
 }
