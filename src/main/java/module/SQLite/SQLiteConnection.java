@@ -5,7 +5,7 @@ import java.sql.*;
 public class SQLiteConnection {
 
     public static SQLiteConnection sqLiteConnection;
-    public Connection connection = null;
+    public static Connection connection = null;
 
     public SQLiteConnection() {
 
@@ -18,9 +18,9 @@ public class SQLiteConnection {
         return sqLiteConnection;
     }
 
-    public void setConnection() {
+    public void setConnection(String path) {
         try {
-            connection = DriverManager.getConnection("jdbc:sqlite:dict_hh.db");
+            connection = DriverManager.getConnection(path);
             if (connection != null) {
                 System.out.println("Connected");
             } else {
@@ -32,9 +32,26 @@ public class SQLiteConnection {
         }
     }
 
+    // Query
+    public void query() {
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = connection.prepareStatement("SELECT * FROM AV");
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next() == true) {
+                int id = resultSet.getInt(1);
+                System.out.println(id);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void main(String[] args) {
         SQLiteConnection sqLiteConnection1 = new SQLiteConnection();
-        sqLiteConnection1.setConnection();
+        sqLiteConnection1.setConnection("jdbc:sqlite:src/main/resources/database/dict_hh.db");
+        sqLiteConnection1.query();
     }
 
 }
