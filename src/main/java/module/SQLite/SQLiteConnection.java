@@ -7,8 +7,12 @@ public class SQLiteConnection {
     public static SQLiteConnection sqLiteConnection;
     public static Connection connection = null;
 
-    public SQLiteConnection() {
+    public static String dbName = "jdbc:sqlite:src/main/resources/database/dict_hh.db";
 
+    public static String dataTable = "AV";
+
+    public SQLiteConnection() {
+        sqLiteConnection = new SQLiteConnection();
     }
 
     public SQLiteConnection getSqLiteConnection() {
@@ -20,8 +24,8 @@ public class SQLiteConnection {
 
     public void setConnection(String path) {
         try {
-            connection = DriverManager.getConnection(path);
-            if (connection != null) {
+            this.connection = DriverManager.getConnection(path);
+            if (this.connection != null) {
                 System.out.println("Connected");
             } else {
                 System.out.println("Can't connect to SQLite");
@@ -34,9 +38,10 @@ public class SQLiteConnection {
 
     // Query
     public void query() {
-        PreparedStatement preparedStatement;
+
         try {
-            preparedStatement = connection.prepareStatement("SELECT * FROM AV");
+            PreparedStatement preparedStatement;
+            preparedStatement = this.connection.prepareStatement("SELECT * FROM " + dataTable);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next() == true) {
@@ -44,13 +49,13 @@ public class SQLiteConnection {
                 System.out.println(id);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
     public static void main(String[] args) {
         SQLiteConnection sqLiteConnection1 = new SQLiteConnection();
-        sqLiteConnection1.setConnection("jdbc:sqlite:src/main/resources/database/dict_hh.db");
+        sqLiteConnection1.setConnection(dbName);
         sqLiteConnection1.query();
     }
 

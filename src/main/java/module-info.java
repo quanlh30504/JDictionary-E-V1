@@ -8,6 +8,7 @@ module com.example.jdictionaryev1 {
     requires org.kordamp.bootstrapfx.core;
     requires com.almasb.fxgl.all;
     requires java.sql;
+    requires jsapi;
 
     opens com.example.jdictionaryev1 to javafx.fxml;
     exports com.example.jdictionaryev1;
