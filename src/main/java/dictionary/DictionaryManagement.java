@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Dictionary;
 import java.util.Scanner;
+import utils.Utils;
 
 public class DictionaryManagement extends SQLiteConnection {
 
@@ -19,14 +20,11 @@ public class DictionaryManagement extends SQLiteConnection {
         ResultSet resultSet = sqLiteConnection.query(searchQuery);
 
         if (resultSet != null) {
-            while (resultSet.next()) {
-                return resultSet.getString(3);
-            }
+            return resultSet.getString(3);
         } else {
             return "Đần";
         }
 
-        return "";
     }
 
     public void dictionarySpelling() {
@@ -69,6 +67,7 @@ public class DictionaryManagement extends SQLiteConnection {
         SQLiteConnection sqLiteConnection3 = new SQLiteConnection();
         sqLiteConnection3.setConnection(dbName);
         //sqLiteConnection3.getSqLiteConnection();
+        Utils utils = new Utils();
         Scanner scanner = new Scanner(System.in);
         String data = scanner.nextLine();
 
