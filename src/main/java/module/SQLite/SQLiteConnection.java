@@ -24,7 +24,7 @@ public class SQLiteConnection {
 
     public void setConnection(String path) {
         try {
-            this.connection = DriverManager.getConnection(path);
+            connection = DriverManager.getConnection(path);
             if (this.connection != null) {
                 System.out.println("Connected");
             } else {
@@ -37,26 +37,33 @@ public class SQLiteConnection {
     }
 
     // Query
-    public void query() {
+    public ResultSet query(String searchQuery) {
+
+        ResultSet resultSet = null;
 
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = this.connection.prepareStatement("SELECT * FROM " + dataTable);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            preparedStatement = this.connection.prepareStatement(searchQuery);
+            resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next() == true) {
                 int id = resultSet.getInt(1);
                 System.out.println(id);
             }
+
+            return resultSet;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        return resultSet;
     }
 
     public static void main(String[] args) {
         SQLiteConnection sqLiteConnection1 = new SQLiteConnection();
         sqLiteConnection1.setConnection(dbName);
-        sqLiteConnection1.query();
+        String searchQuery = "SELECT * FROM " + dataTable;
+        System.out.println(sqLiteConnection1.query(searchQuery));
     }
 
 }
