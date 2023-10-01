@@ -46,8 +46,8 @@ public class DictionaryManagement extends SQLiteConnection {
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(editQuery);
-            preparedStatement.setString(1, word);
-            preparedStatement.setString(2, wordExplain);
+            preparedStatement.setString(1, wordExplain);
+            preparedStatement.setString(2, word);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
