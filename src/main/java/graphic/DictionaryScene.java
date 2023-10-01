@@ -2,11 +2,9 @@ package graphic;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-public class DictionaryScence {
+public class DictionaryScene {
 
     // hàm tạo mục hỏi logout cho nút X trên window
     public void logout(Stage stage){

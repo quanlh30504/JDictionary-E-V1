@@ -11,12 +11,22 @@ import java.util.Scanner;
 
 public class DictionaryManagement extends SQLiteConnection {
 
-    public SQLiteConnection sqLiteConnection2 = new SQLiteConnection();
-    public String dictionarySearcher(String word) throws SQLException {
-        String searchQuery = "SELECT * FROM" + dataTable + " WHERE word LIKE " + word;
-        ResultSet resultSet = sqLiteConnection2.query(searchQuery);
+    //public static SQLiteConnection sqLiteConnection2 = new SQLiteConnection();
+    public String dictionarySearcher(String word, SQLiteConnection sqLiteConnection) throws SQLException {
 
-        return resultSet.getString("html");
+        String searchQuery = "SELECT * FROM " + dataTable + " WHERE word LIKE " + "'" + word + "'";
+        System.out.println(searchQuery);
+        ResultSet resultSet = sqLiteConnection.query(searchQuery);
+
+        if (resultSet != null) {
+            while (resultSet.next()) {
+                return resultSet.getString(3);
+            }
+        } else {
+            return "Đần";
+        }
+
+        return "";
     }
 
     public void dictionarySpelling() {
@@ -54,11 +64,15 @@ public class DictionaryManagement extends SQLiteConnection {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         DictionaryManagement dictionaryManagement = new DictionaryManagement();
+        SQLiteConnection sqLiteConnection3 = new SQLiteConnection();
+        sqLiteConnection3.setConnection(dbName);
+        //sqLiteConnection3.getSqLiteConnection();
         Scanner scanner = new Scanner(System.in);
-        scanner.nextLine();
-        //dictionaryManagement.
+        String data = scanner.nextLine();
+
+        System.out.println(dictionaryManagement.dictionarySearcher(data, sqLiteConnection3));
     }
 
 }
