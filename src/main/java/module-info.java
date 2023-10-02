@@ -10,6 +10,7 @@ module com.example.jdictionaryev1 {
     requires java.sql;
     requires jsapi;
     requires org.jsoup;
+    requires annotations;
 
     opens com.example.jdictionaryev1 to javafx.fxml;
     exports com.example.jdictionaryev1;
