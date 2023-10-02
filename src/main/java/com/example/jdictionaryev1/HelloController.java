@@ -1,5 +1,7 @@
 package com.example.jdictionaryev1;
 
+import com.almasb.fxgl.audio.Audio;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,8 +14,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 public class HelloController {
     @FXML
@@ -36,6 +40,7 @@ public class HelloController {
         scene = new Scene(root,840,540);
         stage.setScene(scene);
         stage.show();
+
     }
     //----------------------------------------------------------------
 
@@ -57,6 +62,7 @@ public class HelloController {
         if(alert.showAndWait().get() == ButtonType.OK){
             stage = (Stage) scenePane.getScene().getWindow(); //đang lỗi ở đây help me!!!!!
             System.out.println("You successfully logged out");
+
             stage.close();
         }
     }
@@ -76,6 +82,17 @@ public class HelloController {
         }catch (Exception e){
             System.out.println(e);  // xử lí ngoại lệ nhập văn bản
                                     // , về sau thêm sử lí ngoại lệ chỉ nhập kí tự ko dc nhập số
+        }
+
+        /*Đã thêm xử lí ngoại lệ ký tự số,hiện lên alert thay vì dùng exception (Muốn dùng ngoại lệ
+        dùng throw new Exepction("Message")
+         */
+        for (char c : textFieldSearch.getText().toCharArray()) {
+            if (Character.isDigit(c)) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Number is not a word, please try again");
+                alert.show();
+            }
         }
     }
 
