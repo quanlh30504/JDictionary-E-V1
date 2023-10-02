@@ -1,19 +1,15 @@
 package dictionary;
 
+import java.util.ArrayList;
+
 public class Dictionary {
 
-    private Word[] words;
+    private ArrayList<Word> words = new ArrayList<>();
     public Dictionary() {
 
     }
 
-    public void insertWord() {
 
-    }
-
-    public void deleteWord() {
-
-    }
 
     public void wordCorrect() {
 
