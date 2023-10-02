@@ -94,7 +94,6 @@ public class DictionaryManagement extends SQLiteConnection {
         DictionaryManagement dictionaryManagement = new DictionaryManagement();
         SQLiteConnection sqLiteConnection3 = new SQLiteConnection();
         sqLiteConnection3.setConnection(dbName);
-        //sqLiteConnection3.getSqLiteConnection();
         Utils utils = new Utils();
         Scanner scanner = new Scanner(System.in);
         String data = scanner.nextLine();
