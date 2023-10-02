@@ -4,28 +4,28 @@ import java.sql.*;
 
 public class SQLiteConnection {
 
-    public static SQLiteConnection sqLiteConnection;
+    public static SQLiteConnection sqLiteConnection = new SQLiteConnection();
     public static Connection connection = null;
 
     public static String dbName = "jdbc:sqlite:src/main/resources/database/dict_hh.db";
 
     public static String dataTable = "AV";
 
-    public SQLiteConnection() {
-        sqLiteConnection = new SQLiteConnection();
-    }
+//    public SQLiteConnection() {
+//        sqLiteConnection = new SQLiteConnection();
+//    }
 
     public SQLiteConnection getSqLiteConnection() {
         if (sqLiteConnection != null) {
             return sqLiteConnection = new SQLiteConnection();
         }
-        return sqLiteConnection;
+        return null;
     }
 
     public void setConnection(String path) {
         try {
-            this.connection = DriverManager.getConnection(path);
-            if (this.connection != null) {
+            connection = DriverManager.getConnection(path);
+            if (connection != null) {
                 System.out.println("Connected");
             } else {
                 System.out.println("Can't connect to SQLite");
@@ -37,26 +37,37 @@ public class SQLiteConnection {
     }
 
     // Query
-    public void query() {
+    public ResultSet query(String searchQuery) {
+
+        ResultSet resultSet = null;
 
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = this.connection.prepareStatement("SELECT * FROM " + dataTable);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next() == true) {
-                int id = resultSet.getInt(1);
-                System.out.println(id);
+            if (connection != null) {
+                preparedStatement = connection.prepareStatement(searchQuery);
+                resultSet = preparedStatement.executeQuery();
             }
+
+//            if (resultSet != null) {
+//                while (resultSet.next() == true) {
+//                    String id = resultSet.getString(3);
+//                    System.out.println(id);
+//                }
+//            }
+
+            return resultSet;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        return resultSet;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         SQLiteConnection sqLiteConnection1 = new SQLiteConnection();
         sqLiteConnection1.setConnection(dbName);
-        sqLiteConnection1.query();
+        String searchQuery = "SELECT * FROM " + dataTable + " WHERE word LIKE " + "'neural'";
+        System.out.println(sqLiteConnection1.query(searchQuery));
     }
 
 }

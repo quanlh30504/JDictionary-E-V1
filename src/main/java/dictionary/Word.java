@@ -1,8 +1,8 @@
 package dictionary;
 
 public class Word {
-    private String wordFound;
-    private String wordExplaination;
+    public static String wordFound;
+    public static String wordExplaination;
 
     public String getWordFound() {
         return wordFound;
