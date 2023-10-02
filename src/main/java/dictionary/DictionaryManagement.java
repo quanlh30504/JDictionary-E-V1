@@ -9,6 +9,10 @@ import java.sql.SQLException;
 import java.util.Dictionary;
 import java.util.Scanner;
 import utils.Utils;
+import module.TextToSpeech;
+
+import javax.speech.AudioException;
+import javax.speech.EngineException;
 
 public class DictionaryManagement extends SQLiteConnection {
 
@@ -27,12 +31,21 @@ public class DictionaryManagement extends SQLiteConnection {
 
     }
 
-    public void dictionarySpelling() {
-
+    public void dictionarySpelling(String word) {
+        TextToSpeech textToSpeech = new TextToSpeech();
+        try {
+            textToSpeech.Spelling(word);
+        } catch (EngineException e) {
+            throw new RuntimeException(e);
+        } catch (AudioException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void deleteWord(String word) {
-        String deleteQuery = "DELETE FROM" + dataTable + " WHERE word LIKE " + word;
+        String deleteQuery = "DELETE FROM" + dataTable + " WHERE word LIKE " + "'" + word + "'";
 
         try {
             PreparedStatement preparedStatement;
@@ -44,8 +57,23 @@ public class DictionaryManagement extends SQLiteConnection {
 
     }
 
-    public void insertWord() {
+    public void insertWord(Word word) {
 
+        String insertQuery = "INSERT INTO " + dataTable + "(id, word, html, favorite)" + "VALUES(?,?,?, 0)";
+        String getMaxID = "SELECT id FROM " + dataTable + " WHERE id = (SELECT MAX(id) FROM " + dataTable + ")";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(getMaxID);
+            int numOfRows = preparedStatement.getMaxRows();
+            preparedStatement = connection.prepareStatement(insertQuery);
+            preparedStatement.setInt(1, numOfRows + 1);
+            preparedStatement.setString(2, Word.wordFound);
+            preparedStatement.setString(3, Word.wordExplaination);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -72,6 +100,7 @@ public class DictionaryManagement extends SQLiteConnection {
         String data = scanner.nextLine();
 
         System.out.println(dictionaryManagement.dictionarySearcher(data, sqLiteConnection3));
+        dictionaryManagement.dictionarySpelling(data);
     }
 
 }
