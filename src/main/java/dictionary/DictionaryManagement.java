@@ -20,7 +20,7 @@ public class DictionaryManagement extends SQLiteConnection {
     public String dictionarySearcher(String word, SQLiteConnection sqLiteConnection) throws SQLException {
 
         String searchQuery = "SELECT * FROM " + dataTable + " WHERE word LIKE " + "'" + word + "'";
-        System.out.println(searchQuery);
+        //System.out.println(searchQuery);
         ResultSet resultSet = sqLiteConnection.query(searchQuery);
 
         if (resultSet != null) {
@@ -90,6 +90,10 @@ public class DictionaryManagement extends SQLiteConnection {
         }
     }
 
+    public void autoComplete() {
+
+    }
+
     public static void main(String[] args) throws SQLException {
         DictionaryManagement dictionaryManagement = new DictionaryManagement();
         SQLiteConnection sqLiteConnection3 = new SQLiteConnection();
@@ -98,8 +102,10 @@ public class DictionaryManagement extends SQLiteConnection {
         Scanner scanner = new Scanner(System.in);
         String data = scanner.nextLine();
 
-        System.out.println(dictionaryManagement.dictionarySearcher(data, sqLiteConnection3));
+        //System.out.println(dictionaryManagement.dictionarySearcher(data, sqLiteConnection3));
         dictionaryManagement.dictionarySpelling(data);
+        data = dictionaryManagement.dictionarySearcher(data, sqLiteConnection3);
+        System.out.println(data);
+        //System.out.println(utils.getTextFromHTML(data));
     }
-
 }

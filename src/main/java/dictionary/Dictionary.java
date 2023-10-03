@@ -9,8 +9,6 @@ public class Dictionary {
 
     }
 
-
-
     public void wordCorrect() {
 
     }
