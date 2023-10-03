@@ -2,11 +2,11 @@ package game.Olympia.UserInfo;
 
 public abstract class Player extends User {
 
-    private int startingScore;
-    private int obstacleScore;
-    private int accelerationScore;
-    private int finishScore;
-    private int overallScore;
+    protected int startingScore;
+    protected int obstacleScore;
+    protected int accelerationScore;
+    protected int finishScore;
+    public static int overallScore;
 
     public Player(String password, String userName, int startingScore, int obstacleScore, int accelerationScore, int finishScore, int overallScore) {
         super(password, userName);
