@@ -1,0 +1,39 @@
+.vbox_background_center{
+    -fx-background-image:url("login/bkCenter.jpg")
+
+
+}
+.vbox_background_right{
+    -fx-background-image:url("login/bkRight.jpg")
+
+}
+.profile_button{
+    -fx-background-color:#000000
+}
+.profile_button:hover{
+    -fx-background-color:#d39d50
+}
+.cursor_hand{
+    -fx-cursor:hand
+}
+.login_button{
+    -fx-background-color:#ed6637
+}
+.login_button:hover{
+    -fx-background-color:#d39d50
+}
+.signup_button{
+    -fx-background-color:transpasent
+}
+.signup_button:hover{
+    -fx-background-color:#D3D3D3
+}
+.forgotPassword_button .label{
+    -fx-text-fill: #5897d1
+
+}
+.forgotPassword_button:hover .label{
+    -fx-underline: true;
+    -fx-text-fill: #66CCFF;
+
+}
