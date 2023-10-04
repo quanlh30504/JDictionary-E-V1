@@ -1,7 +1,9 @@
 package game.Olympia.client_server;
 
 import java.io.*;
+import java.net.InetAddress;
 import java.net.Socket;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Client {
@@ -78,7 +80,9 @@ public class Client {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter your username for the groupchat: ");
         String username = scanner.nextLine();
-        Socket socket = new Socket("localhost", 1234);
+        InetAddress inetAddress = InetAddress.getLocalHost();
+        System.out.println(inetAddress.getHostAddress());
+        Socket socket = new Socket(inetAddress.getHostAddress(), 1234);
         Client client = new Client(socket, username);
         client.listenForMessage();
         client.sendMessage();
