@@ -1,0 +1,37 @@
+.root{
+    -fx-background-color: #111;
+
+}
+.label{
+    -fx-font-size: 20;
+    -fx-font_family: "Lucida Console";
+    -fx-text-fill: "white";
+
+}
+#titleLabel{
+    -fx-font-size: 60;
+}
+.search_button{
+    -fx-background-color:transpasent
+}
+.search_button:hover{
+    -fx-background-color: #FF9900
+}
+.delete_button{
+    -fx-background-color:transpasent
+}
+.delete_button:hover{
+    -fx-background-color: #F5F5F5
+}
+.menu_button{
+    -fx-background-color:transpasent
+}
+.menu_button:hover{
+    -fx-background-color:#828282
+}
+.quit_button{
+    -fx-background-color:transpasent
+}
+.quit_button:hover{
+    -fx-background-color:#CC3366
+}
