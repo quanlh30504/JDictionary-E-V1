@@ -30,7 +30,6 @@ public class LoginController {
         stage.show();
     }
 
-
     public LoginController() {
     }
     @FXML
@@ -55,7 +54,7 @@ public class LoginController {
 
             wrongLogin.setText("Success");
             //chuyển sang màn hình dictionary
-            helloApplication.changeScreen("Dictionary.fxml");
+            helloApplication.changeScreen("Dictionary.fxml",840,540);
 
         }else if(username.getText().isEmpty() && password.getText().isEmpty() )
         {

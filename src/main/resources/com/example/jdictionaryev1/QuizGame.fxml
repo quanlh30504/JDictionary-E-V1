@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="540.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jdictionaryev1.QuizGameController">
+   <children>
+      <Label fx:id="question" alignment="CENTER" layoutX="152.0" layoutY="89.0" prefHeight="68.0" prefWidth="534.0" text="My Question">
+         <font>
+            <Font name="Book Antiqua Bold Italic" size="23.0" />
+         </font></Label>
+      <Button fx:id="opt1" alignment="CENTER" layoutX="121.0" layoutY="271.0" mnemonicParsing="false" onAction="#opt1clicked" prefHeight="49.0" prefWidth="243.0" style="-fx-background-radius: 32;" styleClass="choice_Game" stylesheets="@../../../application.css" text="Opt1">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Button>
+      <Button fx:id="opt4" alignment="CENTER" layoutX="477.0" layoutY="354.0" mnemonicParsing="false" onAction="#opt4clicked" prefHeight="50.0" prefWidth="243.0" style="-fx-background-radius: 32;" styleClass="choice_Game" stylesheets="@../../../application.css" text="Opt4">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Button>
+      <Button fx:id="opt3" alignment="CENTER" layoutX="121.0" layoutY="353.0" mnemonicParsing="false" onAction="#opt3clicked" prefHeight="50.0" prefWidth="243.0" style="-fx-background-radius: 32;" styleClass="choice_Game" stylesheets="@../../../application.css" text="Opt3">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Button>
+      <Button fx:id="opt2" alignment="CENTER" layoutX="477.0" layoutY="271.0" mnemonicParsing="false" onAction="#opt2clicked" prefHeight="50.0" prefWidth="243.0" style="-fx-background-radius: 32;" styleClass="choice_Game" stylesheets="@../../../application.css" text="Opt2">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Button>
+      <Button fx:id="outGame" layoutX="25.0" layoutY="475.0" mnemonicParsing="false" onAction="#returnApp" prefHeight="27.0" prefWidth="41.0" style="-fx-background-radius: 80;" styleClass="out" stylesheets="@../../../application.css">
+         <graphic>
+            <ImageView fitHeight="34.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 180;">
+               <image>
+                  <Image url="@../../../icons/icons8-export-100.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>
