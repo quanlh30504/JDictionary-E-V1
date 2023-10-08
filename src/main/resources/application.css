@@ -12,26 +12,35 @@
     -fx-font-size: 60;
 }
 .search_button{
-    -fx-background-color:transpasent
+    -fx-background-color:transparent
 }
 .search_button:hover{
     -fx-background-color: #FF9900
 }
 .delete_button{
-    -fx-background-color:transpasent
+    -fx-background-color:transparent
 }
 .delete_button:hover{
     -fx-background-color: #F5F5F5
 }
 .menu_button{
-    -fx-background-color:transpasent
+    -fx-background-color:transparent
 }
 .menu_button:hover{
     -fx-background-color:#828282
 }
 .quit_button{
-    -fx-background-color:transpasent
+    -fx-background-color:transparent
 }
 .quit_button:hover{
     -fx-background-color:#CC3366
+}
+.add_button{
+   -fx-background-color:transparent;
+}
+.add_button:hover{
+ -fx-background-color:#828282
+}
+.save_button:hover{
+ -fx-background-color:#828282
 }
