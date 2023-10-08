@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #EF87BE;" stylesheets="@../../../application.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jdictionaryev1.Addcontroller">
+   <children>
+      <TextField fx:id="questionInsert" layoutX="128.0" layoutY="95.0" prefHeight="26.0" prefWidth="194.0" promptText="Type question" />
+      <TextField fx:id="answerInsert" layoutX="128.0" layoutY="148.0" prefHeight="26.0" prefWidth="193.0" promptText="Type Answer" />
+      <Button fx:id="Save" layoutX="219.0" layoutY="267.0" mnemonicParsing="false" onAction="#addQuestion" styleClass="save_button" stylesheets="@../../../application.css" text="Save" />
+   </children>
+</AnchorPane>

@@ -1,5 +1,6 @@
 package module.SQLite;
 
+
 import java.sql.*;
 
 public class SQLiteConnection {
@@ -10,6 +11,8 @@ public class SQLiteConnection {
     public static String dbName = "jdbc:sqlite:src/main/resources/database/dict_hh.db";
 
     public static String dataTable = "AV";
+
+    public static String question = "QUESTION";
 
 //    public SQLiteConnection() {
 //        sqLiteConnection = new SQLiteConnection();
@@ -68,6 +71,13 @@ public class SQLiteConnection {
         sqLiteConnection1.setConnection(dbName);
         String searchQuery = "SELECT * FROM " + dataTable + " WHERE word LIKE " + "'neural'";
         System.out.println(sqLiteConnection1.query(searchQuery));
+        String a = "A";
+        try (Statement statement = connection.createStatement()) {
+            String insertQuery = "INSERT INTO " + question + " (DESCRIPTION,ANSWER) VALUES ('What is your name?','Your mom')";
+            statement.executeUpdate(insertQuery);
+        } catch (SQLException E) {
+            E.printStackTrace();
+        }
     }
 
 }
