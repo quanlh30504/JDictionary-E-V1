@@ -11,7 +11,8 @@ import java.io.IOException;
 import java.sql.*;
 public class AddQuestionController extends SQLiteConnection {
 
-
+    @FXML
+    private Button outPage;
     @FXML
     private Button outPage;
     @FXML
