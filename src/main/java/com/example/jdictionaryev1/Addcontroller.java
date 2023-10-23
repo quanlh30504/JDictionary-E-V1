@@ -9,11 +9,13 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import module.SQLite.SQLiteConnection;
 
+import java.io.IOException;
 import java.sql.*;
 public class Addcontroller extends SQLiteConnection {
 
 
-
+    @FXML
+    private Button outPage;
     @FXML
     private TextField answerInsert;
 
@@ -37,5 +39,10 @@ public class Addcontroller extends SQLiteConnection {
         } catch (SQLException E) {
             E.printStackTrace();
         }
+    }
+    public void QuitPage(ActionEvent event) throws IOException {
+        //chuyển về màn hình app
+        HelloApplication helloApplication = new HelloApplication();
+        helloApplication.changeScreen("Dictionary.fxml",840,540);
     }
 }

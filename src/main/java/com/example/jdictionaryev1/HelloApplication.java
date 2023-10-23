@@ -12,7 +12,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -24,7 +26,11 @@ public class HelloApplication extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("LoginGUI.fxml"));
         stg.setTitle("JDictionary English-Vietnamese");
         stg.getIcons().add(new Image("dictionary_icon.png"));
-        stg.setScene(new Scene(root,780  ,460));
+        Scene scene = new Scene(root,780  ,460);
+        stg.setScene(scene);
+        // ẩn viền ứng dụng
+//        stg.initStyle(StageStyle.TRANSPARENT);
+//        scene.setFill(Color.TRANSPARENT);
         stg.show();
 
         // Dictionary Scence
@@ -50,19 +56,16 @@ public class HelloApplication extends Application {
     }
 
     //change screen
-    public void changeScreen(String fxml)throws IOException{
+    public void changeScreen(String fxml,int width, int height)throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource(fxml));
-        stg.setScene(new Scene(root,840 ,540));
+        stg.setScene(new Scene(root,width ,height));
         stg.show();
 
 //        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 //        scene = new Scene(root,840,540);
 //        stage.setScene(scene);
 //        stage.show();
-
-
     }
-
     public static void main(String[] args) {
         launch();
     }

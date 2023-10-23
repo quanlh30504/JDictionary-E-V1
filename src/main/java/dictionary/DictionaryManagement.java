@@ -28,9 +28,7 @@ public class DictionaryManagement extends SQLiteConnection {
         } else {
             return "Đần";
         }
-
     }
-
     public void dictionarySpelling(String word) {
         TextToSpeech textToSpeech = new TextToSpeech();
         try {

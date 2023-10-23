@@ -35,6 +35,36 @@
 .quit_button:hover{
     -fx-background-color:#CC3366
 }
+
+.start_game{
+    -fx-background-color: #FFCCFF
+}
+.start_game:hover{
+    -fx-background-color: #FF99FF
+}
+.choice_Game{
+    -fx-background-color: #33FFFF
+}
+.choice_Game:hover{
+    -fx-background-color: #33CCFF
+}
+
+.out{
+    -fx-background-color: transpasent
+}
+.out:hover{
+    -fx-background-color: #FF9999
+}
+
+.text-field-custom {
+    -fx-text-fill: white; /* Đặt màu chữ */
+    -fx-font-family: "Verdana"; /* Đặt font chữ */
+    -fx-font-size: 14px; /* Đặt kích thước font chữ */
+}
+
+
+
+
 .add_button{
    -fx-background-color:transparent;
 }
