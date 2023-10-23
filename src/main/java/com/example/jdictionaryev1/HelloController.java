@@ -3,6 +3,8 @@ package com.example.jdictionaryev1;
 import com.almasb.fxgl.audio.Audio;
 import dictionary.DictionaryManagement;
 import dictionary.Word;
+import dictionary.Dictionary;
+import dictionary.DictionaryManagement;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,8 +21,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
+import javafx.stage.Popup;
+import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
 import javafx.util.Pair;
+import module.SQLite.SQLiteConnection;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -55,6 +62,16 @@ public class HelloController {
         scene = new Scene(root, 840, 540);
         stage.setScene(scene);
         stage.show();
+
+    }
+
+    public void switchToAdd(ActionEvent event) throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("Addq.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root,840,540);
+        stage.setScene(scene);
+        stage.show();
+
     }
     //------------------------------ start game-------------------------
     @FXML
@@ -349,6 +366,9 @@ public class HelloController {
             System.out.println("Entered meaning: " + pair.getValue());
         });
     }
+    //-----------------Add Question into database-----------------------
+
+
 
 
 }
