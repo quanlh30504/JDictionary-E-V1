@@ -1,17 +1,15 @@
 package com.example.jdictionaryev1;
 
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import module.SQLite.SQLiteConnection;
 
 import java.io.IOException;
 import java.sql.*;
-public class Addcontroller extends SQLiteConnection {
+public class AddQuestionController extends SQLiteConnection {
 
 
     @FXML
