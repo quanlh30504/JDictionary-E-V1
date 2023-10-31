@@ -6,6 +6,7 @@ import module.SQLite.SQLiteConnection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Dictionary;
 import java.util.Scanner;
 import utils.Utils;
@@ -42,9 +43,15 @@ public class DictionaryManagement extends SQLiteConnection {
         }
     }
 
+    /*TODO:- Work more on adjusting id after delete since id is not auto_increment (not that important?).
+           - Check if the word is in the database or not.
+           - Standardize String word.
+         */
     public void deleteWord(String word) {
-        String deleteQuery = "DELETE FROM" + dataTable + " WHERE word LIKE " + "'" + word + "'";
-
+        SQLiteConnection sqLiteConnection1 = new SQLiteConnection();
+        sqLiteConnection1.setConnection(dbName);
+        String deleteQuery = "DELETE FROM " + dataTable + " WHERE word = " + '"' + word +'"';
+        System.out.println(deleteQuery);
         try {
             PreparedStatement preparedStatement;
             preparedStatement = connection.prepareStatement(deleteQuery);
@@ -55,16 +62,17 @@ public class DictionaryManagement extends SQLiteConnection {
 
     }
 
-    public void insertWord(Word word) {
-
-        String insertQuery = "INSERT INTO " + dataTable + "(id, word, html, favorite)" + "VALUES(?,?,?, 0)";
+    public void insertWord(Word word) throws SQLException {
+        SQLiteConnection sqLiteConnection1 = new SQLiteConnection();
+        sqLiteConnection1.setConnection(dbName);
+        String insertQuery = "INSERT INTO " + dataTable + "(id, word, html, pronounce)" + "VALUES(?,?,?, 0)";
         String getMaxID = "SELECT id FROM " + dataTable + " WHERE id = (SELECT MAX(id) FROM " + dataTable + ")";
-
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(getMaxID);
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(getMaxID);
-            int numOfRows = preparedStatement.getMaxRows();
             preparedStatement = connection.prepareStatement(insertQuery);
-            preparedStatement.setInt(1, numOfRows + 1);
+            preparedStatement.setInt(1, resultSet.getInt("id")+ 1);
             preparedStatement.setString(2, Word.wordFound);
             preparedStatement.setString(3, Word.wordExplaination);
             preparedStatement.executeUpdate();
@@ -97,6 +105,7 @@ public class DictionaryManagement extends SQLiteConnection {
         SQLiteConnection sqLiteConnection3 = new SQLiteConnection();
         sqLiteConnection3.setConnection(dbName);
         Utils utils = new Utils();
+        /*
         Scanner scanner = new Scanner(System.in);
         String data = scanner.nextLine();
 
@@ -104,6 +113,9 @@ public class DictionaryManagement extends SQLiteConnection {
         dictionaryManagement.dictionarySpelling(data);
         data = dictionaryManagement.dictionarySearcher(data, sqLiteConnection3);
         System.out.println(data);
-        //System.out.println(utils.getTextFromHTML(data));
+         */
+        /* System.out.println(utils.getTextFromHTML(data)); */
+        Word news = new  Word("Balon d'or","Bóng vàng");
+        dictionaryManagement.deleteWord("Balon d'or");
     }
 }
