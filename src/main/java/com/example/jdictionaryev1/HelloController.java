@@ -33,10 +33,11 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class HelloController {
+public class HelloController extends DictionaryManagement {
 
     //--------------------------------tạo chuyển cảnh---------------------------
     @FXML
@@ -268,6 +269,15 @@ public class HelloController {
         result.ifPresent(pair -> {
             System.out.println("Entered new vocab: " + pair.getKey());
             System.out.println("Entered meaning: " + pair.getValue());
+            Word newWord = new Word(pair.getKey(), pair.getValue());
+            try {
+                insertWord(newWord);
+                Alert alert =new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("Add word successfully");
+                alert.show();
+            } catch (SQLException e) {
+                throw new RuntimeException("Help me ");
+            }
         });
     }
 
@@ -314,7 +324,14 @@ public class HelloController {
         Optional<String> result = dialog.showAndWait();
 
         // Process the result
-        result.ifPresent(name -> System.out.println("Entered delete word: " + name));
+        result.ifPresent(name -> {
+            System.out.println("Entered delete word: " + name);
+                    deleteWord(name);
+                    Alert alert =new Alert(Alert.AlertType.INFORMATION);
+                    alert.setHeaderText("Delete word successfully");
+                    alert.show();
+                }
+        );
     }
 
     //-----------------------------sửa từ ---------------------------
