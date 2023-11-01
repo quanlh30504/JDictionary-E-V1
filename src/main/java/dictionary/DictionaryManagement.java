@@ -129,7 +129,7 @@ public class DictionaryManagement extends SQLiteConnection {
         return trie;
     }
 
-    private void setTrie() {
+    public void setTrie() {
         try {
             for (String word : wordList) {
                 trie.insert(word);

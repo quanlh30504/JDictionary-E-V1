@@ -29,11 +29,13 @@ import javafx.stage.Stage;
 import javafx.util.Pair;
 import module.SQLite.SQLiteConnection;
 import org.jetbrains.annotations.NotNull;
+import searchingAlgorithm.Trie;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -112,13 +114,22 @@ public class HelloController extends DictionaryManagement {
     public Label labelSearch;
     public TextField textFieldSearch ;
     public Button buttonSearch;
+    public ListView<String> listVocab;
     String wordSearch;
 
     // --wordSearch nhận đầu vào văn bản nhập từ bàn phím
-    public void search(ActionEvent event) {
+    public void search(ActionEvent event) throws IOException {
+        DictionaryManagement dictionaryManagement = new DictionaryManagement();
+        SQLiteConnection sqLiteConnection3 = new SQLiteConnection();
+        sqLiteConnection3.setConnection(dbName);
+        dictionaryManagement.getAllWord(dbName);
+        dictionaryManagement.setTrie();
+        Trie trie1 = dictionaryManagement.getTrie();
         try {
-            wordSearch = textFieldSearch.getText();
-            System.out.println(wordSearch);
+            //textFieldSearch.textProperty().addListener((observableValue, oldvalue, newvalue) -> {//
+                wordSearch = textFieldSearch.getText();
+                System.out.println(wordSearch);
+            //});//
         } catch (Exception e) {
             System.out.println(e);  // xử lí ngoại lệ nhập văn bản
 
@@ -133,6 +144,15 @@ public class HelloController extends DictionaryManagement {
                 alert.setHeaderText("Number is not a word, please try again");
                 alert.show();
             }
+        }
+        List<String> searchResult = trie1.autoComplete(wordSearch);
+        if (searchResult != null) {
+            ObservableList<String> res = FXCollections.observableArrayList(searchResult);
+            listVocab.setItems(res);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Word not found!");
+            alert.show();
         }
     }
     //-----------------------------table view hiện nghĩa của từ-------------------------
