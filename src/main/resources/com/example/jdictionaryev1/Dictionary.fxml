@@ -84,7 +84,7 @@
             <Image url="@../../../icons/loop.png" />
          </image>
       </ImageView>
-      <ListView layoutX="100.0" layoutY="197.0" prefHeight="306.0" prefWidth="206.0" style="-fx-background-radius: 30; -fx-border-radius: 30;" />
+      <ListView fx:id="listVocab" layoutX="100.0" layoutY="197.0" prefHeight="306.0" prefWidth="206.0" style="-fx-background-radius: 30; -fx-border-radius: 30;" />
       <Button fx:id="toggleButton" layoutX="12.0" layoutY="247.0" mnemonicParsing="false" onAction="#toggleButtonClicked" prefHeight="46.0" prefWidth="52.0" style="-fx-background-radius: 50;" styleClass="menu_button" stylesheets="@../../../application.css">
          <graphic>
             <ImageView fitHeight="38.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
