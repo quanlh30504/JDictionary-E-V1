@@ -7,8 +7,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Dictionary;
+import java.util.List;
 import java.util.Scanner;
+
+import searchingAlgorithm.Trie;
 import utils.Utils;
 import module.TextToSpeech;
 
@@ -18,6 +22,13 @@ import javax.speech.EngineException;
 public class DictionaryManagement extends SQLiteConnection {
 
     //public static SQLiteConnection sqLiteConnection2 = new SQLiteConnection();
+    public Trie trie = new Trie();
+    public List<String> wordList = new ArrayList<>();
+
+    public DictionaryManagement() {
+
+    }
+
     public String dictionarySearcher(String word, SQLiteConnection sqLiteConnection) throws SQLException {
 
         String searchQuery = "SELECT * FROM " + dataTable + " WHERE word LIKE " + "'" + word + "'";
@@ -96,8 +107,36 @@ public class DictionaryManagement extends SQLiteConnection {
         }
     }
 
-    public void autoComplete() {
+    public void getAllWord(String dbName) {
+        String query = "SELECT WORD FROM AV";
+        int count = 0;
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+            while (resultSet.next()) {
+                String word = resultSet.getString("WORD");
+                //System.out.println(word);
+                wordList.add(word);
+                count++;
+            }
+            //System.out.print(count);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
+    }
+
+    public Trie getTrie() {
+        return trie;
+    }
+
+    private void setTrie() {
+        try {
+            for (String word : wordList) {
+                trie.insert(word);
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Something went wrong: " + e);
+        }
     }
 
     public static void main(String[] args) throws SQLException {
@@ -105,11 +144,24 @@ public class DictionaryManagement extends SQLiteConnection {
         SQLiteConnection sqLiteConnection3 = new SQLiteConnection();
         sqLiteConnection3.setConnection(dbName);
         Utils utils = new Utils();
+        //Scanner scanner = new Scanner(System.in);
+        //String data = scanner.nextLine();
+        dictionaryManagement.getAllWord(dbName);
+        dictionaryManagement.setTrie();
+        Trie trie1 = dictionaryManagement.getTrie();
+        List<String> ans = trie1.autoComplete("a");
+        for (String a : ans) {
+            System.out.println(a);
+        }
         /*
         Scanner scanner = new Scanner(System.in);
         String data = scanner.nextLine();
 
         //System.out.println(dictionaryManagement.dictionarySearcher(data, sqLiteConnection3));
+        //dictionaryManagement.dictionarySpelling(data);
+        //data = dictionaryManagement.dictionarySearcher(data, sqLiteConnection3);
+        //System.out.println(data);
+        //System.out.println(utils.getTextFromHTML(data));
         dictionaryManagement.dictionarySpelling(data);
         data = dictionaryManagement.dictionarySearcher(data, sqLiteConnection3);
         System.out.println(data);

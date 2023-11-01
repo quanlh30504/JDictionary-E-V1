@@ -1,5 +1,6 @@
 package game.Olympia.Round;
 
+import game.Olympia.Countdown.CountdownTimer;
 import game.Olympia.UserInfo.Player;
 
 import java.util.Scanner;
@@ -26,13 +27,8 @@ public class Starting extends Player {
 
     public static void main(String[] args) {
         Starting starting = new Starting(0);
-        Scanner scanner = new Scanner(System.in);
-        int rowNumber;
-        while (true) {
-            rowNumber = scanner.nextInt();
-            //obstacle.finalAnswer(rowNumber, obstacle.obstacleScore);
-            starting.correctAnsPlus(starting.startingScore);
-            System.out.println(starting.getStartingScore());
-        }
+        CountdownTimer countdownTimer = new CountdownTimer();
+        System.out.println("Player " + ". Let's start");
+        countdownTimer.Countdown(60);
     }
 }

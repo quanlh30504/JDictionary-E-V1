@@ -5,6 +5,10 @@ import java.util.TimerTask;
 
 public class CountdownTimer {
 
+    public int getIndex(int index) {
+        return index;
+    }
+
     public void Countdown(int seconds) {
         Timer timer = new Timer();
 

@@ -13,6 +13,10 @@ public class Finish extends Player {
 
     }
 
+    public void scorePick() {
+
+    }
+
     public boolean starOfHope() {
         return true;
     }
