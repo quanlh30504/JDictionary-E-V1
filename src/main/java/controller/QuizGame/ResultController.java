@@ -1,11 +1,9 @@
-package com.example.jdictionaryev1;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+package controller.QuizGame;
+import com.example.jdictionaryev1.HelloApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
-import javafx.scene.text.Text;
 
 import java.io.IOException;
 

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="540.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jdictionaryev1.QuizGameController">
+<AnchorPane prefHeight="540.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.QuizGame.QuizGameController">
    <children>
       <Label fx:id="question" alignment="CENTER" layoutX="152.0" layoutY="89.0" prefHeight="68.0" prefWidth="534.0" text="My Question">
          <font>

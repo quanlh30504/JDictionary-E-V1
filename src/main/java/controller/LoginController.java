@@ -1,5 +1,6 @@
-package com.example.jdictionaryev1;
+package controller;
 
+import com.example.jdictionaryev1.HelloApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

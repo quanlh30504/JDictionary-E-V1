@@ -15,4 +15,8 @@ module com.example.jdictionaryev1 {
 
     opens com.example.jdictionaryev1 to javafx.fxml;
     exports com.example.jdictionaryev1;
+    exports controller;
+    opens controller to javafx.fxml;
+    exports controller.QuizGame;
+    opens controller.QuizGame to javafx.fxml;
 }

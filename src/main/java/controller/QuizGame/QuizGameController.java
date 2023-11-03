@@ -1,5 +1,6 @@
-package com.example.jdictionaryev1;
+package controller.QuizGame;
 
+import com.example.jdictionaryev1.HelloApplication;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="684.0" style="-fx-background-color: white; -fx-background-radius: 32px; -fx-border-radius: 32px;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jdictionaryev1.ResultController">
+<AnchorPane prefHeight="400.0" prefWidth="684.0" style="-fx-background-color: white; -fx-background-radius: 32px; -fx-border-radius: 32px;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.QuizGame.ResultController">
     <children>
         <Label layoutX="292.0" layoutY="39.0" text="Result" textFill="#f70303">
             <font>
