@@ -95,7 +95,7 @@
          </graphic>
       </Button>
       <VBox fx:id="buttonContainer" layoutX="66.0" layoutY="181.0" prefHeight="161.0" prefWidth="89.0" />
-      <TextArea layoutX="335.0" layoutY="201.0" prefHeight="286.0" prefWidth="438.0" style="-fx-background-radius: 20;" />
+      <TextArea fx:id="meaning" layoutX="335.0" layoutY="201.0" prefHeight="286.0" prefWidth="438.0" style="-fx-background-radius: 20;" />
       <Button fx:id="addButon" layoutX="154.0" layoutY="465.0" mnemonicParsing="false" onAction="#switchToAdd" prefHeight="43.0" prefWidth="98.0" style="-fx-background-radius: 50;" stylesheets="@../../../application.css" text="add question" />
    </children>
 </AnchorPane>

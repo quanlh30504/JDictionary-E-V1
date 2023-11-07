@@ -31,12 +31,12 @@ public class DictionaryManagement extends SQLiteConnection {
 
     public String dictionarySearcher(String word, SQLiteConnection sqLiteConnection) throws SQLException {
 
-        String searchQuery = "SELECT * FROM " + dataTable + " WHERE word LIKE " + "'" + word + "'";
+        String searchQuery = "SELECT html FROM " + dataTable + " WHERE word LIKE " + "'" + word + "'";
         //System.out.println(searchQuery);
         ResultSet resultSet = sqLiteConnection.query(searchQuery);
-
         if (resultSet != null) {
-            return resultSet.getString(3);
+            String htmlContent = resultSet.getString(1).replaceAll("<[^>]*>" ,"\n");;
+            return htmlContent.trim().replaceAll("[\n]{2,}", "\n");
         } else {
             return "Đần";
         }
@@ -67,6 +67,7 @@ public class DictionaryManagement extends SQLiteConnection {
             PreparedStatement preparedStatement;
             preparedStatement = connection.prepareStatement(deleteQuery);
             preparedStatement.executeUpdate();
+            connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -87,11 +88,10 @@ public class DictionaryManagement extends SQLiteConnection {
             preparedStatement.setString(2, Word.wordFound);
             preparedStatement.setString(3, Word.wordExplaination);
             preparedStatement.executeUpdate();
-
+            connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     public void editWord(String word, String wordExplain) {
@@ -102,6 +102,7 @@ public class DictionaryManagement extends SQLiteConnection {
             preparedStatement.setString(1, wordExplain);
             preparedStatement.setString(2, word);
             preparedStatement.executeUpdate();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -150,9 +151,8 @@ public class DictionaryManagement extends SQLiteConnection {
         dictionaryManagement.setTrie();
         Trie trie1 = dictionaryManagement.getTrie();
         List<String> ans = trie1.autoComplete("a");
-        for (String a : ans) {
-            System.out.println(a);
-        }
+        System.out.println(dictionaryManagement.dictionarySearcher("a la mode",sqLiteConnection3));
+        connection.close();
         /*
         Scanner scanner = new Scanner(System.in);
         String data = scanner.nextLine();
