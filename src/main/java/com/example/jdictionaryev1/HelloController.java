@@ -35,9 +35,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Handler;
 
 public class HelloController extends DictionaryManagement {
 
@@ -115,6 +117,7 @@ public class HelloController extends DictionaryManagement {
     public TextField textFieldSearch ;
     public Button buttonSearch;
     public ListView<String> listVocab;
+    public TextArea meaning;
     String wordSearch;
 
     // --wordSearch nhận đầu vào văn bản nhập từ bàn phím
@@ -146,15 +149,32 @@ public class HelloController extends DictionaryManagement {
             }
         }
         List<String> searchResult = trie1.autoComplete(wordSearch);
+        List<String> shorterResult = new ArrayList<>();
+        int limit = 0;
         if (searchResult != null) {
-            ObservableList<String> res = FXCollections.observableArrayList(searchResult);
-            listVocab.setItems(res);
+        while (limit <= 15 && searchResult.size() > limit) {
+            shorterResult.add(searchResult.get(limit));
+            limit++;
+        }
+        ObservableList<String> res = FXCollections.observableArrayList(shorterResult);
+        listVocab.setItems(res);
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Word not found!");
             alert.show();
         }
+        listVocab.setOnMouseClicked(event2 -> {
+            String selectedItem = listVocab.getSelectionModel().getSelectedItem();
+            if (selectedItem != null) {
+                try {
+                    meaning.setText(dictionaryManagement.dictionarySearcher(selectedItem,sqLiteConnection3));
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
     }
+
     //-----------------------------table view hiện nghĩa của từ-------------------------
 
 
@@ -345,11 +365,16 @@ public class HelloController extends DictionaryManagement {
 
         // Process the result
         result.ifPresent(name -> {
-            System.out.println("Entered delete word: " + name);
-                    deleteWord(name);
-                    Alert alert =new Alert(Alert.AlertType.INFORMATION);
-                    alert.setHeaderText("Delete word successfully");
-                    alert.show();
+                    System.out.println("Entered delete word: " + name);
+                    try {
+                        deleteWord(name);
+                        connection.close();
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setHeaderText("Delete word successfully");
+                        alert.show();
+                    } catch (SQLException E) {
+                        throw new RuntimeException("");
+                    }
                 }
         );
     }
