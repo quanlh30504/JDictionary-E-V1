@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="608.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jdictionaryev1.OlympiaController">
+   <children>
+      <ImageView fitHeight="617.0" fitWidth="1088.0" layoutX="-1.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../GameOlympia/8.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="myAnswer" alignment="CENTER" layoutX="351.0" layoutY="452.0" prefHeight="70.0" prefWidth="311.0" promptText="My Answer" styleClass="text-field-Olympia" stylesheets="@../../../application.css">
+         <font>
+            <Font name="Impact" size="25.0" />
+         </font>
+      </TextField>
+      <Label fx:id="score" layoutX="96.0" layoutY="237.0" text="Score">
+         <font>
+            <Font name="Impact" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="Answer" layoutX="555.0" layoutY="548.0" prefHeight="24.0" prefWidth="215.0" text="Answer" textFill="WHITE">
+         <font>
+            <Font name="Impact" size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="nextToRound4Review" layoutX="816.0" layoutY="207.0" mnemonicParsing="false" onAction="#gotoRound4Review" prefHeight="36.0" prefWidth="246.0" styleClass="choice_Game" stylesheets="@../../../application.css" text="Next Round &gt;&gt;">
+         <font>
+            <Font name="Impact" size="34.0" />
+         </font>
+      </Button>
+      <Button fx:id="endGameButton" layoutX="1001.0" layoutY="535.0" mnemonicParsing="false" onAction="#endGame" prefHeight="63.0" prefWidth="68.0" style="-fx-background-radius: 60;" styleClass="out" stylesheets="@../../../application.css">
+         <graphic>
+            <ImageView fitHeight="54.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../GameOlympia/outGame.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="674.0" layoutY="457.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="63.0" style="-fx-background-radius: 30;" styleClass="submit_button" stylesheets="@../../../application.css">
+         <graphic>
+            <ImageView fitHeight="58.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../GameOlympia/submit.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <ImageView fx:id="correctImage" fitHeight="40.0" fitWidth="48.0" layoutX="787.0" layoutY="443.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../GameOlympia/correct.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="wrongImage" fitHeight="40.0" fitWidth="48.0" layoutX="788.0" layoutY="495.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../GameOlympia/wrong.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

@@ -58,7 +58,7 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <Button layoutX="564.0" layoutY="58.0" mnemonicParsing="false" opacity="0.5" prefHeight="35.0" prefWidth="24.0" style="-fx-background-radius: 50;" styleClass="delete_button" stylesheets="@../../../application.css">
+      <Button layoutX="564.0" layoutY="58.0" mnemonicParsing="false" onAction="#deleteTextField" opacity="0.5" prefHeight="35.0" prefWidth="24.0" style="-fx-background-radius: 50;" styleClass="delete_button" stylesheets="@../../../application.css">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -84,7 +84,7 @@
             <Image url="@../../../icons/loop.png" />
          </image>
       </ImageView>
-      <ListView fx:id="listVocab" layoutX="100.0" layoutY="197.0" prefHeight="306.0" prefWidth="206.0" style="-fx-background-radius: 30; -fx-border-radius: 30;" />
+      <ListView fx:id="listVocab" layoutX="104.0" layoutY="199.0" prefHeight="305.0" prefWidth="198.0" style="-fx-background-radius: 30;" />
       <Button fx:id="toggleButton" layoutX="12.0" layoutY="247.0" mnemonicParsing="false" onAction="#toggleButtonClicked" prefHeight="46.0" prefWidth="52.0" style="-fx-background-radius: 50;" styleClass="menu_button" stylesheets="@../../../application.css">
          <graphic>
             <ImageView fitHeight="38.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
@@ -95,7 +95,6 @@
          </graphic>
       </Button>
       <VBox fx:id="buttonContainer" layoutX="66.0" layoutY="181.0" prefHeight="161.0" prefWidth="89.0" />
-      <TextArea fx:id="meaning" layoutX="335.0" layoutY="201.0" prefHeight="286.0" prefWidth="438.0" style="-fx-background-radius: 20;" />
-      <Button fx:id="addButon" layoutX="154.0" layoutY="465.0" mnemonicParsing="false" onAction="#switchToAdd" prefHeight="43.0" prefWidth="98.0" style="-fx-background-radius: 50;" stylesheets="@../../../application.css" text="add question" />
+      <TextArea fx:id="meaning" layoutX="340.0" layoutY="201.0" prefHeight="286.0" prefWidth="428.0" style="-fx-background-radius: 20;" />
    </children>
 </AnchorPane>

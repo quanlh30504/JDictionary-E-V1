@@ -28,7 +28,7 @@ public class CountdownTimer {
         }, 0, 1000);
     }
 
-    public static void main(String[] args) {
+     public static void main(String[] args) {
         int seconds = 60;
         CountdownTimer countdownTimer = new CountdownTimer();
         countdownTimer.Countdown(seconds);

@@ -65,17 +65,13 @@
             </HBox>
             <HBox alignment="TOP_RIGHT" prefHeight="46.0" prefWidth="332.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="137.0" style="-fx-background-color: transpasent;" styleClass="forgotPassword_button" stylesheets="@../../../loginPage.css">
-                     <graphic>
-                        <Label prefHeight="20.0" prefWidth="122.0" text="Forgot Password?" textFill="#5897d1">
-                           <font>
-                              <Font name="System Bold Italic" size="14.0" />
-                           </font>
-                        </Label>
-                     </graphic>
+                  <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="137.0" style="-fx-background-color: transpasent;" styleClass="forgotPassword_button" stylesheets="@../../../loginPage.css" text="Forgot Password?" textFill="#5897d1">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
                   </Button>
                </children>
             </HBox>
@@ -111,7 +107,7 @@
                         <Insets left="15.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Label style="-fx-border-style: black;" text="Menu" textFill="#ed6637">
+                  <Label text="Menu" textFill="#ed6637">
                      <font>
                         <Font name="Ebrima Bold" size="26.0" />
                      </font>
@@ -121,7 +117,7 @@
                   </Label>
                   <HBox alignment="CENTER_RIGHT" prefHeight="87.0" prefWidth="244.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="96.0" style="-fx-background-radius: 50; -fx-border-radius: 50;" styleClass="signup_button" stylesheets="@../../../application.css" text="Sign Up">
+                        <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="96.0" style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-background-color: transparent;" styleClass="signup_button" stylesheets="@../../../application.css" text="Sign Up">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
