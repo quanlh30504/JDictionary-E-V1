@@ -2,17 +2,12 @@ package controller.QuizGame;
 
 import com.example.jdictionaryev1.HelloApplication;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -27,8 +22,8 @@ public class QuizGameController {
 
     @FXML
     public Button opt1;
-    public Button  opt2;
-    public Button  opt3;
+    public Button opt2;
+    public Button opt3;
     public Button opt4;
    public Button outGame;
 
@@ -87,28 +82,28 @@ public class QuizGameController {
             opt4.setText("William Pasteur");
         }
         if (counter == 6) { //Question 7
-            question.setText("7. Hydrochloric acid (HCl) is produced by -?");
+            question.setText("7. Hydrochloric acid (HCl) is produced by ?");
             opt1.setText("Small Intestine");
             opt2.setText("Liver");
             opt3.setText("Oesophagus");
             opt4.setText("Stomach");
         }
         if (counter == 7) { //Question 8
-            question.setText("8. The fastest animal in the world is -");
+            question.setText("8. The fastest animal in the world is ?");
             opt1.setText("Lion");
             opt2.setText("Blackbuck");
             opt3.setText("Cheetah");
             opt4.setText("Quarter Horse");
         }
         if (counter == 8) { //Question 9
-            question.setText("9. Complementary colour of Red is -");
+            question.setText("9. Complementary colour of Red is ?");
             opt1.setText("Blue");
             opt2.setText("Green");
             opt3.setText("Yellow");
             opt4.setText("Pink");
         }
         if (counter == 9) { //Question 10
-            question.setText("10. World Environment Day is on -");
+            question.setText("10. World Environment Day is on ?");
             opt1.setText("5th June");
             opt2.setText("5th July");
             opt3.setText("15th June");
@@ -116,8 +111,6 @@ public class QuizGameController {
         }
 
     }
-
-
     boolean checkAnswer(String answer) {
 
         if (counter == 0) {
@@ -213,8 +206,9 @@ public class QuizGameController {
 //                quizstage.setScene(quizscene);
 //                quizstage.initStyle(StageStyle.TRANSPARENT);
 //                quizstage.show();
+                counter = 0; // reset game
                 HelloApplication helloApplication = new HelloApplication();
-                helloApplication.changeScreen("Result.fxml",684,400);
+                helloApplication.changeScreen("Result.fxml",700,700);
             } catch(IOException e) {
                 e.printStackTrace();
             }
@@ -244,8 +238,9 @@ public class QuizGameController {
 //                quizstage.setScene(quizscene);
 //                quizstage.initStyle(StageStyle.TRANSPARENT);
 //                quizstage.show();
+                counter = 0; // reset game
                 HelloApplication helloApplication = new HelloApplication();
-                helloApplication.changeScreen("Result.fxml",684,400);
+                helloApplication.changeScreen("Result.fxml",700,700);
             } catch(IOException e) {
                 e.printStackTrace();
             }
@@ -275,8 +270,9 @@ public class QuizGameController {
 //                quizstage.setScene(quizscene);
 //                quizstage.initStyle(StageStyle.TRANSPARENT);
 //                quizstage.show();
+                counter = 0; // reset game
                 HelloApplication helloApplication = new HelloApplication();
-                helloApplication.changeScreen("Result.fxml",684,400);
+                helloApplication.changeScreen("Result.fxml",700,700);
             } catch(IOException e) {
                 e.printStackTrace();
             }
@@ -306,8 +302,9 @@ public class QuizGameController {
 //                quizstage.setScene(quizscene);
 //                quizstage.initStyle(StageStyle.TRANSPARENT);
 //                quizstage.show();
+                counter = 0; // reset game
                 HelloApplication helloApplication = new HelloApplication();
-                helloApplication.changeScreen("Result.fxml",684,400);
+                helloApplication.changeScreen("Result.fxml",700,700);
             } catch(IOException e) {
                 e.printStackTrace();
             }

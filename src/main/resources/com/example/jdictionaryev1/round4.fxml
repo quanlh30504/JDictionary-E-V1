@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="608.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jdictionaryev1.OlympiaController">
+   <children>
+      <ImageView fitHeight="636.0" fitWidth="1108.0" layoutX="-1.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../GameOlympia/11.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="myAnswer" alignment="CENTER" layoutX="369.0" layoutY="363.0" prefHeight="56.0" prefWidth="299.0" promptText="My Answer" styleClass="text-field-Olympia" stylesheets="@../../../application.css">
+         <font>
+            <Font name="Impact" size="36.0" />
+         </font>
+      </TextField>
+      <Label layoutX="522.0" layoutY="467.0" prefHeight="24.0" prefWidth="139.0" text="Answer" textFill="#c90b0b">
+         <font>
+            <Font name="Impact" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="score" layoutX="1026.0" layoutY="154.0" text="Score">
+         <font>
+            <Font name="Impact" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="Question" alignment="CENTER" layoutX="303.0" layoutY="128.0" prefHeight="126.0" prefWidth="521.0" text="Very good work!! This is your hard work and dedication which helped you to reach the zeinth of success.blablablablablalalalallaa" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="QSscore" layoutX="109.0" layoutY="232.0" prefHeight="53.0" prefWidth="64.0" text="Question Score">
+         <font>
+            <Font name="Impact" size="20.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="correctImage" fitHeight="40.0" fitWidth="48.0" layoutX="782.0" layoutY="343.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../GameOlympia/correct.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="wrongImage" fitHeight="40.0" fitWidth="48.0" layoutX="782.0" layoutY="396.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../GameOlympia/wrong.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="countdownLabel" layoutX="97.0" layoutY="311.0" prefHeight="108.0" prefWidth="307.0" text="15" textFill="#fff9f9">
+         <font>
+            <Font name="Rockwell Condensed" size="72.0" />
+         </font>
+      </Label>
+      <Button fx:id="countdownButton" layoutX="60.0" layoutY="416.0" mnemonicParsing="false" onAction="#startCountDownRound1" prefHeight="62.0" prefWidth="148.0" text="Start">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Button>
+      <Button fx:id="endGameButton" layoutX="1013.0" layoutY="532.0" mnemonicParsing="false" onAction="#endGame" prefHeight="63.0" prefWidth="68.0" style="-fx-background-radius: 60;" styleClass="out" stylesheets="@../../../application.css">
+         <graphic>
+            <ImageView fitHeight="54.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../GameOlympia/outGame.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="resultButton" layoutX="423.0" layoutY="255.0" mnemonicParsing="false" onAction="#gotoResult" prefHeight="36.0" prefWidth="246.0" styleClass="choice_Game" stylesheets="@../../../application.css" text="End Game">
+         <font>
+            <Font name="Impact" size="34.0" />
+         </font>
+      </Button>
+      <Label fx:id="PackageQS" layoutX="1044.0" layoutY="274.0" text="PK">
+         <font>
+            <Font name="Impact" size="20.0" />
+         </font>
+      </Label>
+      <Button layoutX="666.0" layoutY="357.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="63.0" style="-fx-background-radius: 30;" styleClass="submit_button" stylesheets="@../../../application.css">
+         <graphic>
+            <ImageView fitHeight="58.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../GameOlympia/submit.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>

@@ -59,7 +59,7 @@ public class HelloController extends DictionaryManagement {
         stage.show();
     }
 
-    // -----------------------------chuyển sang game------------------------
+    // -----------------------------chuyển sang quiz game------------------------
     @FXML
     public void switchToGame(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Game.fxml"));
@@ -69,21 +69,34 @@ public class HelloController extends DictionaryManagement {
         stage.show();
 
     }
+    //-------------------------------Chuyển sang olympia game--------------------------
+    @FXML
+    public void switchToOlympiaGame(ActionEvent event) throws IOException {
 
-    public void switchToAdd(ActionEvent event) throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("OlympiaStart.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root, 1080, 608);
+        stage.setScene(scene);
+        stage.show();
+    }
+        //----------------------------------------
+
+    @FXML
+    public void switchToAdd(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Addq.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root,840,540);
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root, 840, 540);
         stage.setScene(scene);
         stage.show();
 
     }
+
     //------------------------------ start game-------------------------
     @FXML
-    public void startGame(ActionEvent event) throws IOException {
+    public void startQuizGame(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("QuizGame.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root, 840, 540);
+        scene = new Scene(root, 700, 700);
         stage.setScene(scene);
         stage.show();
     }
@@ -94,7 +107,7 @@ public class HelloController extends DictionaryManagement {
     public Button logoutButton;
     @FXML
     public AnchorPane scenePane;
-
+    @FXML
     public void logout(ActionEvent event) {
         //Tạo hộp xác nhận
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -114,7 +127,7 @@ public class HelloController extends DictionaryManagement {
     //-----------------TextField Searching-----------------------
     @FXML
     public Label labelSearch;
-    public TextField textFieldSearch ;
+    public TextField textFieldSearch;
     public Button buttonSearch;
     public ListView<String> listVocab;
     public TextArea meaning;
@@ -130,8 +143,8 @@ public class HelloController extends DictionaryManagement {
         Trie trie1 = dictionaryManagement.getTrie();
         try {
             //textFieldSearch.textProperty().addListener((observableValue, oldvalue, newvalue) -> {//
-                wordSearch = textFieldSearch.getText();
-                System.out.println(wordSearch);
+            wordSearch = textFieldSearch.getText();
+            System.out.println(wordSearch);
             //});//
         } catch (Exception e) {
             System.out.println(e);  // xử lí ngoại lệ nhập văn bản
@@ -174,13 +187,13 @@ public class HelloController extends DictionaryManagement {
             }
         });
     }
+    @FXML
+    public void deleteTextField(){
+        textFieldSearch.clear();
+    }
 
     //-----------------------------table view hiện nghĩa của từ-------------------------
 
-
-
-    //-------------------Tính năng chuyển đổi sáng tối - check box-------------------
-    //Ứng dụng làm chức năng lưu từ vựng, game -- làm sau
 
     //---------------------------tạo container button để hiện các nút add,delete,edit---------------
     @FXML
@@ -200,9 +213,9 @@ public class HelloController extends DictionaryManagement {
             //toggleButton.setText("Hiển thị Nút Con");
         } else {
 
-            Button button1 = createImageButton("EditVocab/add.png","");
-            Button button2 = createImageButton("EditVocab/bin.png","");
-            Button button3 = createImageButton("EditVocab/edit.png","");
+            Button button1 = createImageButton("EditVocab/add.png", "");
+            Button button2 = createImageButton("EditVocab/bin.png", "");
+            Button button3 = createImageButton("EditVocab/edit.png", "");
 
             // Đặt style cho nút
             button1.setStyle("-fx-background-color: #DDDDDD; -fx-background-radius: 50;");
@@ -246,6 +259,7 @@ public class HelloController extends DictionaryManagement {
             //toggleButton.setText("Ẩn Nút Con");
         }
     }
+
     private Button createImageButton(String URL, String text) {
         // Tải hình ảnh từ tệp
         Image image = new Image(getClass().getResource("/" + URL).toExternalForm());
@@ -312,7 +326,7 @@ public class HelloController extends DictionaryManagement {
             Word newWord = new Word(pair.getKey(), pair.getValue());
             try {
                 insertWord(newWord);
-                Alert alert =new Alert(Alert.AlertType.INFORMATION);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setHeaderText("Add word successfully");
                 alert.show();
             } catch (SQLException e) {

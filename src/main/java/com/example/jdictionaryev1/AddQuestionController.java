@@ -2,15 +2,33 @@ package com.example.jdictionaryev1;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import module.SQLite.SQLiteConnection;
 
 import java.io.IOException;
 import java.sql.*;
 public class AddQuestionController extends SQLiteConnection {
 
+    @FXML
+    public Stage stage;
+    @FXML
+    public Scene scene;
+    public Parent root;
+    @FXML
+    public void switchToStartOlympiaGame(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("OlympiaStart.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root, 1080, 608);
+        stage.setScene(scene);
+        stage.show();
+    }
 
     @FXML
     private Button outPage;

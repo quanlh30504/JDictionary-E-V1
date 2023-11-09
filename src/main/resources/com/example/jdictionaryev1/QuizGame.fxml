@@ -7,29 +7,30 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="540.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.QuizGame.QuizGameController">
+<AnchorPane prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.QuizGame.QuizGameController">
    <children>
-      <Label fx:id="question" alignment="CENTER" layoutX="152.0" layoutY="89.0" prefHeight="68.0" prefWidth="534.0" text="My Question">
-         <font>
-            <Font name="Book Antiqua Bold Italic" size="23.0" />
-         </font></Label>
-      <Button fx:id="opt1" alignment="CENTER" layoutX="121.0" layoutY="271.0" mnemonicParsing="false" onAction="#opt1clicked" prefHeight="49.0" prefWidth="243.0" style="-fx-background-radius: 32;" styleClass="choice_Game" stylesheets="@../../../application.css" text="Opt1">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font></Button>
-      <Button fx:id="opt4" alignment="CENTER" layoutX="477.0" layoutY="354.0" mnemonicParsing="false" onAction="#opt4clicked" prefHeight="50.0" prefWidth="243.0" style="-fx-background-radius: 32;" styleClass="choice_Game" stylesheets="@../../../application.css" text="Opt4">
+      <ImageView fitHeight="700.0" fitWidth="720.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../QuizGame/quizGameBK.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="opt1" alignment="CENTER" layoutX="125.0" layoutY="496.0" mnemonicParsing="false" onAction="#opt1clicked" prefHeight="42.0" prefWidth="178.0" style="-fx-background-radius: 32;" styleClass="choice_Game" stylesheets="@../../../application.css" text="Opt1">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></Button>
-      <Button fx:id="opt3" alignment="CENTER" layoutX="121.0" layoutY="353.0" mnemonicParsing="false" onAction="#opt3clicked" prefHeight="50.0" prefWidth="243.0" style="-fx-background-radius: 32;" styleClass="choice_Game" stylesheets="@../../../application.css" text="Opt3">
+      <Button fx:id="opt4" alignment="CENTER" layoutX="438.0" layoutY="567.0" mnemonicParsing="false" onAction="#opt4clicked" prefHeight="42.0" prefWidth="178.0" style="-fx-background-radius: 32;" styleClass="choice_Game" stylesheets="@../../../application.css" text="Opt4">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></Button>
-      <Button fx:id="opt2" alignment="CENTER" layoutX="477.0" layoutY="271.0" mnemonicParsing="false" onAction="#opt2clicked" prefHeight="50.0" prefWidth="243.0" style="-fx-background-radius: 32;" styleClass="choice_Game" stylesheets="@../../../application.css" text="Opt2">
+      <Button fx:id="opt3" alignment="CENTER" layoutX="437.0" layoutY="496.0" mnemonicParsing="false" onAction="#opt3clicked" prefHeight="42.0" prefWidth="178.0" style="-fx-background-radius: 32;" styleClass="choice_Game" stylesheets="@../../../application.css" text="Opt3">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></Button>
-      <Button fx:id="outGame" layoutX="25.0" layoutY="475.0" mnemonicParsing="false" onAction="#returnApp" prefHeight="27.0" prefWidth="41.0" style="-fx-background-radius: 80;" styleClass="out" stylesheets="@../../../application.css">
+      <Button fx:id="opt2" alignment="CENTER" layoutX="125.0" layoutY="567.0" mnemonicParsing="false" onAction="#opt2clicked" prefHeight="42.0" prefWidth="178.0" style="-fx-background-radius: 32;" styleClass="choice_Game" stylesheets="@../../../application.css" text="Opt2">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Button>
+      <Button fx:id="outGame" layoutX="14.0" layoutY="643.0" mnemonicParsing="false" onAction="#returnApp" prefHeight="27.0" prefWidth="41.0" style="-fx-background-radius: 80;" styleClass="out" stylesheets="@../../../application.css">
          <graphic>
             <ImageView fitHeight="34.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 180;">
                <image>
@@ -38,5 +39,10 @@
             </ImageView>
          </graphic>
       </Button>
+      <Label fx:id="question" alignment="CENTER" layoutX="142.0" layoutY="282.0" prefHeight="83.0" prefWidth="419.0" text="Very good work!! This is your hard work and dedication which helped you to reach the zeinth of success.blablablablablalalalallaa" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
