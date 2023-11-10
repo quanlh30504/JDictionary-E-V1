@@ -8,9 +8,10 @@ module com.example.jdictionaryev1 {
     requires org.kordamp.bootstrapfx.core;
     requires com.almasb.fxgl.all;
     requires java.sql;
-    requires jsapi;
+    //requires jsapi;
     requires annotations;
     requires org.jsoup;
+    requires jsapi;
     //requires jsoup;
 
     opens com.example.jdictionaryev1 to javafx.fxml;

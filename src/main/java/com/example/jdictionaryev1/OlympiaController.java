@@ -1,5 +1,6 @@
 package com.example.jdictionaryev1;
 
+import game.Olympia.Round.Starting;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -188,6 +189,7 @@ public class OlympiaController {
     //    //----------------------------Round 1--------------------------
     @FXML
     public Button clickToContinue;
+    public Starting starting = new Starting(0);
 
     @FXML
     public void gotoRound1Review(ActionEvent event) throws IOException {
@@ -211,13 +213,17 @@ public class OlympiaController {
         if (counter == 3){
             Question.setText("Go to next round.");
             showQuestion();
+            submit.setDisable(true);
+            myAnswer.setDisable(true);
             showNextButton(nextToRound2Review);
         }
     }
     public boolean checkAlertAnswer(String ans){
-        if(ans.equals("")){
+        if (ans.equals("")){
             return true;
-        }else return false;
+        } else {
+            return false;
+        }
     }
     public boolean checkAnswerRound1(String ans) {
         ans = ans.toLowerCase();
@@ -272,10 +278,11 @@ public class OlympiaController {
         if (checkAnswerRound1(ans)) {
             showAnswer();
             showImageCorrect();
-            Mark += 20;
+            Mark = starting.correctAnsPlus(Mark);
             showScore(Mark);
         }else{
             showAnswer();
+            Mark = starting.incorrectAnsMinus(Mark);
             showImageWrong();
             showScore(Mark);
         }
@@ -298,14 +305,14 @@ public class OlympiaController {
     }
     @FXML
     public void startCountDownRound1() {
-        int seconds = 15;
+        int seconds = 60;
         Countdown(seconds,countdownLabel);
     }
     @FXML
     public void readyRound1(){
         countdownLabelReady.setVisible(true);
         Countdown(6, countdownLabelReady);
-
+        boolean typing = false;
         // Tạo một Timeline với một KeyFrame để thực hiện việc ẩn các thành phần sau khi hàm Countdown kết thúc
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(7), new EventHandler<ActionEvent>() {
             @Override
@@ -315,8 +322,10 @@ public class OlympiaController {
                 countdownLabelReady.setVisible(false);
                 correctImage.setVisible(false);
                 wrongImage.setVisible(false);
+
 //                nextToRound2Review.setVisible(false);
                 startRound1();
+                //submit.setDisable(true);
             }
         }));
 

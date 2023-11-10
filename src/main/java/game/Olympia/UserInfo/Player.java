@@ -60,6 +60,6 @@ public abstract class Player extends User {
         this.overallScore = overallScore;
     }
 
-    public abstract void correctAnsPlus(int score);
-    public abstract void incorrectAnsMinus(int score);
+    public abstract int correctAnsPlus(int score);
+    public abstract int incorrectAnsMinus(int score);
 }

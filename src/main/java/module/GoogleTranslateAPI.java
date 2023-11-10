@@ -1,4 +1,19 @@
-package module;
-
-public class GoogleTranslateAPI {
-}
+//package module;
+//
+//import com.darkprograms.speech.translator.GoogleTranslate;
+//
+//public class GoogleTranslateAPI {
+//    public static String google_Translate(String languagetarget,String target)//Hàm in ra từ dịch nghĩa qua api google translate
+//    {
+//        String target_translated="";
+//        try {
+//            target_translated= GoogleTranslate.translate(languagetarget,target);
+//
+//
+//        }catch (IOException e)
+//        {
+//            JOptionPane.showMessageDialog(null, "No internet connection!");
+//        }
+//        return target_translated;
+//    }
+//}

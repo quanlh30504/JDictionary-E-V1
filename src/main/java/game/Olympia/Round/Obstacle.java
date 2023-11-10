@@ -1,6 +1,7 @@
 package game.Olympia.Round;
 
 import game.Olympia.UserInfo.Player;
+import javafx.scene.image.ImageView;
 
 import java.util.Scanner;
 
@@ -11,14 +12,15 @@ public class Obstacle extends Player {
     }
 
     @Override
-    public void correctAnsPlus(int score) {
+    public int correctAnsPlus(int score) {
         score += 10;
-        setObstacleScore(score);
+        //setObstacleScore(score);
+        return score;
     }
 
     @Override
-    public void incorrectAnsMinus(int score) {
-
+    public int incorrectAnsMinus(int score) {
+        return score;
     }
 
     public void finalAnswer(int pickedRow, int score) {
@@ -43,6 +45,10 @@ public class Obstacle extends Player {
             default -> {
             }
         }
+    }
+
+    public void setImageForPlaying(ImageView image) {
+        //https://youtu.be/2c4NR9N933Y?si=srWEeksgYbK7OVNX
     }
 
     public static void main(String[] args) {

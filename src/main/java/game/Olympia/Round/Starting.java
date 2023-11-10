@@ -7,22 +7,22 @@ import java.util.Scanner;
 
 public class Starting extends Player {
 
-    //private Player player = new Player();
+    private int startingScore;
 
     public Starting(int startingScore) {
         this.startingScore = getStartingScore();
     }
 
     @Override
-    public void correctAnsPlus(int score) {
+    public int correctAnsPlus(int score) {
          score += 10;
-         setStartingScore(score);
+         return score;
     }
 
     @Override
-    public void incorrectAnsMinus(int score) {
+    public int incorrectAnsMinus(int score) {
         score -= 5;
-        setStartingScore(score);
+        return score;
     }
 
     public static void main(String[] args) {

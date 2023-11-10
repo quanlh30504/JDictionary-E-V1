@@ -82,7 +82,7 @@ public class Client {
         String username = scanner.nextLine();
         InetAddress inetAddress = InetAddress.getLocalHost();
         System.out.println(inetAddress.getHostAddress());
-        Socket socket = new Socket("192.168.74.2", 1234);
+        Socket socket = new Socket("10.90.158.171", 1234);
         Client client = new Client(socket, username);
         client.listenForMessage();
         client.sendMessage();

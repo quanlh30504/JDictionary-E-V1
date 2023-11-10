@@ -4,13 +4,13 @@ import game.Olympia.UserInfo.Player;
 
 public class Finish extends Player {
     @Override
-    public void correctAnsPlus(int score) {
-
+    public int correctAnsPlus(int score) {
+        return score;
     }
 
     @Override
-    public void incorrectAnsMinus(int score) {
-
+    public int incorrectAnsMinus(int score) {
+        return score;
     }
 
     public void scorePick() {
