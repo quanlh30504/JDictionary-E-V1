@@ -13,6 +13,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.jetbrains.annotations.NotNull;
@@ -106,16 +108,19 @@ public class OlympiaController {
 //                    } else if (remainingSeconds >= 0 && remainingSeconds <= 5) {
 //                        // You can remove this part if not needed
 //                    }
-
-                    remainingSeconds--;
+                    if (endR1) {
+                        remainingSeconds = 0;
+                    } else {
+                        remainingSeconds--;
+                    }
                 } else {
 //                    System.out.println("Hết cứu");
                     Platform.runLater(() -> {
                         if(labelCountDown == countdownLabel) {
                             labelCountDown.setText("Time's up!");
-                        }else if(labelCountDown == countdownNextRound){
+                        } else if(labelCountDown == countdownNextRound){
                             labelCountDown.setText("Go....");
-                        }else{
+                        } else{
                             labelCountDown.setText("Start");
                         }
                     });
@@ -195,7 +200,21 @@ public class OlympiaController {
     public void gotoRound1Review(ActionEvent event) throws IOException {
         HelloApplication helloApplication = new HelloApplication();
         helloApplication.changeScreen("round1Review.fxml", 1080, 608);
+//        myAnswer.setOnKeyPressed(new EventHandler<KeyEvent>() {
+//            @Override
+//            public void handle(KeyEvent keyEvent) {
+//                if (keyEvent.getCode().equals(KeyCode.ENTER)) {
+//                    try {
+//                        submitAnswerRound1();
+//                    } catch (IOException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                }
+//            }
+//        });
     }
+
+    public boolean endR1 = false;
 
     public void loadQuestion(){
         if (counter == 0) { //Question 1
@@ -213,6 +232,7 @@ public class OlympiaController {
         if (counter == 3){
             Question.setText("Go to next round.");
             showQuestion();
+            endR1 = true;
             submit.setDisable(true);
             myAnswer.setDisable(true);
             showNextButton(nextToRound2Review);
@@ -280,7 +300,7 @@ public class OlympiaController {
             showImageCorrect();
             Mark = starting.correctAnsPlus(Mark);
             showScore(Mark);
-        }else{
+        } else {
             showAnswer();
             Mark = starting.incorrectAnsMinus(Mark);
             showImageWrong();
@@ -303,16 +323,27 @@ public class OlympiaController {
         HelloApplication helloApplication = new HelloApplication();
         helloApplication.changeScreen("round1.fxml",1080,608);
     }
+
+    public static boolean start = true;
+
     @FXML
     public void startCountDownRound1() {
         int seconds = 60;
-        Countdown(seconds,countdownLabel);
+        if (start) {
+            Countdown(seconds, countdownLabel);
+            //System.out.println(seconds);
+            start = false;
+        }
     }
+
+    public static boolean readyR1 = true;
     @FXML
     public void readyRound1(){
         countdownLabelReady.setVisible(true);
-        Countdown(6, countdownLabelReady);
-        boolean typing = false;
+        if (readyR1) {
+            Countdown(6, countdownLabelReady);
+            readyR1 = false;
+        }
         // Tạo một Timeline với một KeyFrame để thực hiện việc ẩn các thành phần sau khi hàm Countdown kết thúc
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(7), new EventHandler<ActionEvent>() {
             @Override
@@ -326,11 +357,14 @@ public class OlympiaController {
 //                nextToRound2Review.setVisible(false);
                 startRound1();
                 //submit.setDisable(true);
+                start = true;
             }
         }));
 
-        // Bắt đầu Timeline
+        //if (readyR1) {
+            // Bắt đầu Timeline
         timeline.play();
+        readyR1 = true;
     }
     @FXML
     public void startRound1() {
@@ -340,6 +374,7 @@ public class OlympiaController {
         // nên viết hết vào lớp Starting trong game.Olympia để khời chạy
         hideImageCheck();
         hideAnswer();
+        startCountDownRound1();
         showScore(Mark);
         loadQuestion();
     }
@@ -367,6 +402,7 @@ public class OlympiaController {
         //sau khi submit hiện ảnh đúng sai và hiện đáp án, chú ý khi chuyển sang câu hỏi mới phải xóa đáp án câu cũ và ảnh correct/wrong
         // tao điều kiện khi hoàn thành câu cuối cùng sẽ hiện ra chữ + nút để chuyển round
         // nên viết hết vào lớp Starting trong game.Olympia để khời chạy
+
 
     }
 
