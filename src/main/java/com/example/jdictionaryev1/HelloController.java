@@ -35,10 +35,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.logging.Handler;
 
 public class HelloController extends DictionaryManagement {
@@ -324,13 +321,28 @@ public class HelloController extends DictionaryManagement {
             System.out.println("Entered new vocab: " + pair.getKey());
             System.out.println("Entered meaning: " + pair.getValue());
             Word newWord = new Word(pair.getKey(), pair.getValue());
+            SQLiteConnection sqLiteConnection2 = new SQLiteConnection();
+            sqLiteConnection2.setConnection(dbName);
             try {
-                insertWord(newWord);
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText("Add word successfully");
-                alert.show();
+                if (Objects.equals(dictionarySearcher(pair.getKey(), sqLiteConnection2), "Đần")) {
+                    insertWord(newWord);
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setHeaderText("Add word successfully");
+                    alert.show();
+                }
+                else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setHeaderText("Word already exits,please go to Edit if you want to modify it");
+                    alert.show();
+                }
             } catch (SQLException e) {
                 throw new RuntimeException("Help me ");
+            } finally {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
     }
@@ -376,18 +388,31 @@ public class HelloController extends DictionaryManagement {
 
         // Show the dialog and wait for the user's response
         Optional<String> result = dialog.showAndWait();
-
+        SQLiteConnection sqLiteConnection3 = new SQLiteConnection();
+        sqLiteConnection3.setConnection(dbName);
         // Process the result
         result.ifPresent(name -> {
                     System.out.println("Entered delete word: " + name);
                     try {
-                        deleteWord(name);
-                        connection.close();
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setHeaderText("Delete word successfully");
-                        alert.show();
+                        if (!Objects.equals(dictionarySearcher(name, sqLiteConnection3), "Đần")) {
+                            deleteWord(name);
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setHeaderText("Delete word successfully");
+                            alert.show();
+                        }
+                        else {
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setHeaderText("Word not found, please make sure to check your grammatical error");
+                            alert.show();
+                        }
                     } catch (SQLException E) {
                         throw new RuntimeException("");
+                    } finally {
+                        try {
+                            connection.close();
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
                 }
         );
@@ -435,16 +460,34 @@ public class HelloController extends DictionaryManagement {
 
         // Show the dialog and wait for the user's response
         Optional<Pair<String, String>> result = dialog.showAndWait();
-
+        SQLiteConnection sqLiteConnection4 = new SQLiteConnection();
+        sqLiteConnection4.setConnection(dbName);
         // Process the result
         result.ifPresent(pair -> {
-            System.out.println("Entered vocab: " + pair.getKey());
-            System.out.println("Entered meaning: " + pair.getValue());
-        });
+                    System.out.println("Entered vocab: " + pair.getKey());
+                    System.out.println("Entered meaning: " + pair.getValue());
+                    try {
+                        String search = dictionarySearcher(pair.getKey(), sqLiteConnection4);
+                        if (!Objects.equals(search, "Đần")) {
+                            editWord(pair.getKey(), pair.getValue());
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setHeaderText("Edit word successfully");
+                            alert.show();
+                        } else {
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setHeaderText("Word not found, please try again or add this word into the dictionary");
+                            alert.show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace(); // Handle the exception appropriately, log or show an error message
+                    } finally {
+                        try {
+                            connection.close();
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+            //-----------------Add Question into database-----------------------
+    });
     }
-    //-----------------Add Question into database-----------------------
-
-
-
-
 }
