@@ -9,7 +9,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="1080.0" style="-fx-background-color: #EF87BE;" stylesheets="@../../../application.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jdictionaryev1.AddQuestionController">
    <children>
       <TextField fx:id="questionInsert" layoutX="128.0" layoutY="95.0" prefHeight="38.0" prefWidth="402.0" promptText="Type question" />
-      <TextField fx:id="answerInsert" layoutX="128.0" layoutY="148.0" prefHeight="26.0" prefWidth="402.0" promptText="Type Answer" />
+      <TextField fx:id="answerInsert" layoutX="128.0" layoutY="148.0" prefHeight="26.0" prefWidth="402.0" promptText="Type Answer (Must be among 4 choices)" />
       <Button fx:id="Save" layoutX="219.0" layoutY="267.0" mnemonicParsing="false" onAction="#addQuestion" prefHeight="49.0" prefWidth="210.0" styleClass="save_button" stylesheets="@../../../application.css" text="Save" />
       <Button fx:id="outPage" layoutX="14.0" layoutY="537.0" mnemonicParsing="false" onAction="#switchToStartOlympiaGame" style="-fx-background-radius: 50;" styleClass="out" stylesheets="@../../../application.css">
          <graphic>
@@ -20,5 +20,9 @@
             </ImageView>
          </graphic>
       </Button>
+      <TextField fx:id="choice1Insert" layoutX="128.0" layoutY="184.0" promptText="Choice1" />
+      <TextField fx:id="choice2Insert" layoutX="382.0" layoutY="184.0" promptText="Choice2" />
+      <TextField fx:id="choice3Insert" layoutX="129.0" layoutY="234.0" promptText="Choice3" />
+      <TextField fx:id="choice4Insert" layoutX="383.0" layoutY="234.0" promptText="Choice4" />
    </children>
 </AnchorPane>
