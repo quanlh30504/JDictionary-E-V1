@@ -30,17 +30,21 @@ public class DictionaryManagement extends SQLiteConnection {
     }
 
     public String dictionarySearcher(String word, SQLiteConnection sqLiteConnection) throws SQLException {
+        String searchQuery = "SELECT html FROM " + dataTable + " WHERE word LIKE '" + word + "'";
 
-        String searchQuery = "SELECT html FROM " + dataTable + " WHERE word LIKE " + "'" + word + "'";
-        //System.out.println(searchQuery);
-        ResultSet resultSet = sqLiteConnection.query(searchQuery);
-        if (resultSet != null) {
-            String htmlContent = resultSet.getString(1).replaceAll("<[^>]*>" ,"\n");;
-            return htmlContent.trim().replaceAll("[\n]{2,}", "\n");
-        } else {
-            return "Đần";
+        try (ResultSet resultSet = sqLiteConnection.query(searchQuery)) {
+            if (resultSet.next()) {
+                String htmlContent = resultSet.getString(1).replaceAll("<[^>]*>", "\n");
+                return htmlContent.trim().replaceAll("[\n]{2,}", "\n");
+            } else {
+                return "Đần";
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e; // Rethrow the exception to signal the failure
         }
     }
+
     public void dictionarySpelling(String word) {
         TextToSpeech textToSpeech = new TextToSpeech();
         try {
@@ -88,13 +92,15 @@ public class DictionaryManagement extends SQLiteConnection {
             preparedStatement.setString(2, Word.wordFound);
             preparedStatement.setString(3, Word.wordExplaination);
             preparedStatement.executeUpdate();
-            connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            connection.close();
         }
+
     }
 
-    public void editWord(String word, String wordExplain) {
+    public void editWord(String word, String wordExplain) throws SQLException {
         String editQuery = "UPDATE " + dataTable + " SET html = ?" + " WHERE word = ?";
 
         try {
@@ -102,9 +108,10 @@ public class DictionaryManagement extends SQLiteConnection {
             preparedStatement.setString(1, wordExplain);
             preparedStatement.setString(2, word);
             preparedStatement.executeUpdate();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            connection.close();
         }
     }
 
@@ -123,7 +130,6 @@ public class DictionaryManagement extends SQLiteConnection {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     public Trie getTrie() {
@@ -149,9 +155,10 @@ public class DictionaryManagement extends SQLiteConnection {
         //String data = scanner.nextLine();
         dictionaryManagement.getAllWord(dbName);
         dictionaryManagement.setTrie();
-        Trie trie1 = dictionaryManagement.getTrie();
-        List<String> ans = trie1.autoComplete("a");
-        System.out.println(dictionaryManagement.dictionarySearcher("a la mode",sqLiteConnection3));
+        System.out.println(dictionaryManagement.dictionarySearcher("width",sqLiteConnection3));
+        //Trie trie1 = dictionaryManagement.getTrie();
+       // List<String> ans = trie1.autoComplete("a");
+        //System.out.println(dictionaryManagement.dictionarySearcher("a la mode",sqLiteConnection3));
         connection.close();
         /*
         Scanner scanner = new Scanner(System.in);
@@ -168,6 +175,6 @@ public class DictionaryManagement extends SQLiteConnection {
          */
         /* System.out.println(utils.getTextFromHTML(data)); */
         Word news = new  Word("Balon d'or","Bóng vàng");
-        dictionaryManagement.deleteWord("Balon d'or");
+
     }
 }
