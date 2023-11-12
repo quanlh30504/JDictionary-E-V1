@@ -155,7 +155,7 @@ public class HelloController extends DictionaryManagement {
             if (Character.isDigit(c)) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText("Number is not a word, please try again");
-                alert.show();
+                alert.showAndWait();
             }
         }
         List<String> searchResult = trie1.autoComplete(wordSearch);
@@ -331,9 +331,9 @@ public class HelloController extends DictionaryManagement {
                     alert.show();
                 }
                 else {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setHeaderText("Word already exits,please go to Edit if you want to modify it");
-                    alert.show();
+                    alert.showAndWait();
                 }
             } catch (SQLException e) {
                 throw new RuntimeException("Help me ");
@@ -401,9 +401,9 @@ public class HelloController extends DictionaryManagement {
                             alert.show();
                         }
                         else {
-                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
                             alert.setHeaderText("Word not found, please make sure to check your grammatical error");
-                            alert.show();
+                            alert.showAndWait();
                         }
                     } catch (SQLException E) {
                         throw new RuntimeException("");
@@ -474,9 +474,9 @@ public class HelloController extends DictionaryManagement {
                             alert.setHeaderText("Edit word successfully");
                             alert.show();
                         } else {
-                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
                             alert.setHeaderText("Word not found, please try again or add this word into the dictionary");
-                            alert.show();
+                            alert.showAndWait();
                         }
                     } catch (Exception e) {
                         e.printStackTrace(); // Handle the exception appropriately, log or show an error message
