@@ -10,42 +10,42 @@
 
 <AnchorPane prefHeight="608.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jdictionaryev1.OlympiaController">
    <children>
-      <ImageView fitHeight="636.0" fitWidth="1108.0" layoutX="-1.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="616.0" fitWidth="1099.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../GameOlympia/11.png" />
          </image>
       </ImageView>
-      <TextField fx:id="myAnswer" alignment="CENTER" layoutX="369.0" layoutY="363.0" prefHeight="56.0" prefWidth="299.0" promptText="My Answer" styleClass="text-field-Olympia" stylesheets="@../../../application.css">
+      <TextField fx:id="myAnswer" alignment="CENTER" disable="true" layoutX="369.0" layoutY="363.0" prefHeight="56.0" prefWidth="299.0" promptText="My Answer" styleClass="text-field-Olympia" stylesheets="@../../../application.css">
          <font>
             <Font name="Impact" size="36.0" />
          </font>
       </TextField>
-      <Label layoutX="522.0" layoutY="467.0" prefHeight="24.0" prefWidth="139.0" text="Answer" textFill="#c90b0b">
+      <Label fx:id="Answer" layoutX="522.0" layoutY="467.0" prefHeight="24.0" prefWidth="139.0" text="Answer" textFill="#c90b0b" visible="false">
          <font>
             <Font name="Impact" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="score" layoutX="1026.0" layoutY="154.0" text="Score">
+      <Label fx:id="score" layoutX="1017.0" layoutY="158.0" text="Score" visible="false">
          <font>
             <Font name="Impact" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="Question" alignment="CENTER" layoutX="303.0" layoutY="128.0" prefHeight="126.0" prefWidth="521.0" text="Very good work!! This is your hard work and dedication which helped you to reach the zeinth of success.blablablablablalalalallaa" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <Label fx:id="Question" alignment="CENTER" layoutX="289.0" layoutY="175.0" prefHeight="126.0" prefWidth="521.0" text="Very good work!! This is your hard work and dedication which helped you to reach the zeinth of success.blablablablablalalalallaa" textAlignment="CENTER" textFill="WHITE" visible="false" wrapText="true">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="QSscore" layoutX="109.0" layoutY="232.0" prefHeight="53.0" prefWidth="64.0" text="Question Score">
+      <Label fx:id="QSscore" alignment="CENTER" layoutX="97.0" layoutY="234.0" prefHeight="54.0" prefWidth="73.0" text=".....">
          <font>
-            <Font name="Impact" size="20.0" />
+            <Font name="Impact" size="36.0" />
          </font>
       </Label>
-      <ImageView fx:id="correctImage" fitHeight="40.0" fitWidth="48.0" layoutX="782.0" layoutY="343.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="correctImage" fitHeight="40.0" fitWidth="48.0" layoutX="782.0" layoutY="343.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../../GameOlympia/correct.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="wrongImage" fitHeight="40.0" fitWidth="48.0" layoutX="782.0" layoutY="396.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="wrongImage" fitHeight="40.0" fitWidth="48.0" layoutX="782.0" layoutY="396.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../../GameOlympia/wrong.png" />
          </image>
@@ -69,17 +69,12 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="resultButton" layoutX="423.0" layoutY="255.0" mnemonicParsing="false" onAction="#gotoResult" prefHeight="36.0" prefWidth="246.0" styleClass="choice_Game" stylesheets="@../../../application.css" text="End Game">
+      <Button fx:id="resultButton" layoutX="423.0" layoutY="255.0" mnemonicParsing="false" onAction="#gotoResult" prefHeight="36.0" prefWidth="246.0" styleClass="choice_Game" stylesheets="@../../../application.css" text="End Game" visible="false">
          <font>
             <Font name="Impact" size="34.0" />
          </font>
       </Button>
-      <Label fx:id="PackageQS" layoutX="1044.0" layoutY="274.0" text="PK">
-         <font>
-            <Font name="Impact" size="20.0" />
-         </font>
-      </Label>
-      <Button layoutX="666.0" layoutY="357.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="63.0" style="-fx-background-radius: 30;" styleClass="submit_button" stylesheets="@../../../application.css">
+      <Button fx:id="submit" disable="true" layoutX="666.0" layoutY="357.0" mnemonicParsing="false" onAction="#submitAnswerRound4" prefHeight="47.0" prefWidth="63.0" style="-fx-background-radius: 30;" styleClass="submit_button" stylesheets="@../../../application.css">
          <graphic>
             <ImageView fitHeight="58.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -88,5 +83,48 @@
             </ImageView>
          </graphic>
       </Button>
+      <Button fx:id="startRound4Button" layoutX="504.0" layoutY="222.0" mnemonicParsing="false" onAction="#startRound4" prefHeight="95.0" prefWidth="89.0" style="-fx-background-radius: 60;" styleClass="readyRound4" stylesheets="@../../../application.css">
+         <graphic>
+            <ImageView fitHeight="90.0" fitWidth="79.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../GameOlympia/start.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label fx:id="alertAnswer" layoutX="485.0" layoutY="318.0" prefHeight="31.0" prefWidth="163.0" text="Invalid answer" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Impact" size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelPackage1" alignment="CENTER" layoutX="913.0" layoutY="272.0" prefHeight="47.0" prefWidth="51.0" text="10" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Impact" size="22.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelPackage2" alignment="CENTER" layoutX="968.0" layoutY="272.0" prefHeight="47.0" prefWidth="51.0" text="10" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Impact" size="22.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelPackage3" alignment="CENTER" layoutX="1023.0" layoutY="272.0" prefHeight="47.0" prefWidth="51.0" text="10" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Impact" size="22.0" />
+         </font>
+      </Label>
+      <Button fx:id="starHopeButton" layoutX="965.0" layoutY="352.0" mnemonicParsing="false" onAction="#starHopeFunction" prefHeight="80.0" prefWidth="80.0" style="-fx-background-radius: 40;" styleClass="starButton" stylesheets="@../../../application.css" visible="false">
+         <graphic>
+            <ImageView fitHeight="63.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../GameOlympia/energetic.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <ImageView fx:id="starHopeImage" fitHeight="107.0" fitWidth="111.0" layoutX="796.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../GameOlympia/star.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
