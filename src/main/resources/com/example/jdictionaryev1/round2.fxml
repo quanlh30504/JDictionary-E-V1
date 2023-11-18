@@ -59,7 +59,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Label fx:id="countdownLabel" layoutX="428.0" layoutY="67.0" prefHeight="108.0" prefWidth="307.0" text="15" textFill="#fff9f9">
+      <Label fx:id="countdownLabel2" layoutX="428.0" layoutY="67.0" prefHeight="108.0" prefWidth="307.0" text="15" textFill="#fff9f9">
          <font>
             <Font name="Rockwell Condensed" size="89.0" />
          </font>

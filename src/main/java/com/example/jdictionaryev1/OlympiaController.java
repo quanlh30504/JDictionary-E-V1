@@ -89,7 +89,10 @@ public class OlympiaController {
 
     //--------------------------tạo count down -------------------
     @FXML
-    public Label countdownLabel;
+    public Label countdownLabel1;
+    public Label countdownLabel2;
+    public Label countdownLabel3;
+    public Label countdownLabel4;
     public Button countdownButton;
     public Label countdownNextRound;
 
@@ -118,8 +121,15 @@ public class OlympiaController {
                 } else {
 //                    System.out.println("Hết cứu");
                     Platform.runLater(() -> {
-                        if (labelCountDown == countdownLabel) {
+                        if (labelCountDown == countdownLabel1 || labelCountDown == countdownLabel2 || labelCountDown == countdownLabel4) {
                             labelCountDown.setText("Time's up!");
+                        }else if(labelCountDown == countdownLabel3){
+                            labelCountDown.setText("Bump!!!");
+                            try {
+                                submitAnswerRound3();
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
                         } else if (labelCountDown == countdownNextRound) {
                             labelCountDown.setText("Go....");
                         } else {
@@ -130,6 +140,14 @@ public class OlympiaController {
                 }
             }
         }, 0, 1000);
+    }
+    //------------------------tạo delay----------------------------------
+    public static void delay(int milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -149,6 +167,8 @@ public class OlympiaController {
     public Label Question;
     public TextField myAnswer;
     public Label Answer;
+    public Label AnswerWrong;
+
     public Label score;
     public Button submit;
     @FXML
@@ -186,9 +206,15 @@ public class OlympiaController {
     public void showAnswer() {
         Answer.setVisible(true);
     }
+    public void showAnswerWrong(){
+        AnswerWrong.setVisible(true);
+    }
 
     public void hideAnswer() {
         Answer.setVisible(false);
+    }
+    public void hideAnswerWrong(){
+        AnswerWrong.setVisible(false);
     }
 
     public void showNextButton(Button nextButton) {
@@ -330,7 +356,7 @@ public class OlympiaController {
     public void startCountDownRound1() {
         int seconds = 60;
         if (start) {
-            Countdown(seconds, countdownLabel);
+            Countdown(seconds, countdownLabel1);
             //System.out.println(seconds);
             start = false;
         }
@@ -410,6 +436,10 @@ public class OlympiaController {
     }
 
     //----------------------------------Round 3--------------------------
+    @FXML
+    public Label myAnswerLabel;
+    public Label myanswerIs;
+    public Label correctAnswerIs;
     @FXML
     public Button nextToRound3Review;
 
@@ -509,6 +539,8 @@ public class OlympiaController {
 
         // Kiểm tra nếu đã đến hình ảnh cuối cùng, thì dừng Timeline
         if (currentIndex == listImages.get(counter).size() - 1) {
+            // khi đến ảnh cuối cùng sẽ bắt đầu đếm thời gian
+            startCountDownRound3();
             timeline.stop();
         }
     }
@@ -519,7 +551,7 @@ public class OlympiaController {
             if (checkAlertAnswer(ans)) {
                 alertAnswer.setText("Invalid answer");
                 alertAnswer.setVisible(true);
-                Answer.setText("whale");
+                AnswerWrong.setText("whale");
                 return false;
             }
             if (ans.equals("whale")) {
@@ -527,7 +559,7 @@ public class OlympiaController {
                 alertAnswer.setVisible(false);
                 return true;
             } else {
-                Answer.setText("whale");
+                AnswerWrong.setText("whale");
                 alertAnswer.setVisible(false);
                 return false;
             }
@@ -536,7 +568,7 @@ public class OlympiaController {
             if (checkAlertAnswer(ans)) {
                 alertAnswer.setText("Invalid answer");
                 alertAnswer.setVisible(true);
-                Answer.setText("football / soccer");
+                AnswerWrong.setText("football / soccer");
                 return false;
             }
             if (ans.equals("football") || ans.equals("soccer")) {
@@ -544,7 +576,7 @@ public class OlympiaController {
                 alertAnswer.setVisible(false);
                 return true;
             } else {
-                Answer.setText("football / soccer");
+                AnswerWrong.setText("football / soccer");
                 alertAnswer.setVisible(false);
                 return false;
             }
@@ -553,7 +585,7 @@ public class OlympiaController {
             if (checkAlertAnswer(ans)) {
                 alertAnswer.setText("Invalid answer");
                 alertAnswer.setVisible(true);
-                Answer.setText("hospital");
+                AnswerWrong.setText("hospital");
                 return false;
             }
             if (ans.equals("hospital")) {
@@ -561,24 +593,41 @@ public class OlympiaController {
                 alertAnswer.setVisible(false);
                 return true;
             } else {
-                Answer.setText("hospital");
+                AnswerWrong.setText("hospital");
                 alertAnswer.setVisible(false);
                 return false;
             }
         }
         return false;
     }
+    @FXML
+    public void showMyAnswer(){
+        hideImageCheck();
+        alertAnswer.setVisible(false);
+        correctAnswerIs.setVisible(false);
+        Answer.setVisible(false);
+        AnswerWrong.setVisible(false);
+        myAnswerLabel.setVisible(true);
+        String ans = myAnswer.getText();
+        myanswerIs.setText(ans);
+        myanswerIs.setVisible(true);
+        myAnswer.clear();
+    }
 
     @FXML
     public void submitAnswerRound3() throws IOException {
-        String ans = myAnswer.getText().trim();
+        myAnswerLabel.setVisible(false);
+        myanswerIs.setVisible(false);
+        String ans = myanswerIs.getText().trim();
         if (checkAnswerRound3(ans)) {
             showAnswer();
+            correctAnswerIs.setVisible(true);
             showImageCorrect();
             Mark += 20;
             showScore(Mark);
         } else {
-            showAnswer();
+            showAnswerWrong();
+            correctAnswerIs.setVisible(true);
             Mark -= 5;
             showImageWrong();
             showScore(Mark);
@@ -586,6 +635,10 @@ public class OlympiaController {
         timeline.stop();
         myAnswer.clear();
         counter++;
+        countdownLabel3.setText("10");
+//        delay(2000);
+//        correctAnswerIs.setVisible(false);
+//        Answer.setVisible(false);
         nextQuestionImage();
     }
 
@@ -593,12 +646,13 @@ public class OlympiaController {
 
     @FXML
     public void startCountDownRound3() {
-        int seconds = 60;
-        if (start) {
-            Countdown(seconds, countdownLabel);
-            //System.out.println(seconds);
-            start = false;
-        }
+        int seconds = 11;
+//        if (start) {
+//            Countdown(seconds, countdownLabel3);
+//            //System.out.println(seconds);
+//            start = false;
+//        }
+        Countdown(seconds,countdownLabel3);
     }
 
     @FXML
@@ -641,10 +695,10 @@ public class OlympiaController {
     public void startRound3() {
         myAnswer.setDisable(false);
         submit.setDisable(false);
-        countdownLabel.setVisible(true);
+        countdownLabel3.setVisible(true);
         hideImageCheck();
         hideAnswer();
-        startCountDownRound3();
+//        startCountDownRound3();
         showScore(Mark);
         loadImageQuestion();
     }

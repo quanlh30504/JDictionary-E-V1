@@ -50,7 +50,7 @@
             <Image url="@../../../GameOlympia/wrong.png" />
          </image>
       </ImageView>
-      <Label fx:id="countdownLabel" layoutX="97.0" layoutY="311.0" prefHeight="108.0" prefWidth="307.0" text="15" textFill="#fff9f9">
+      <Label fx:id="countdownLabel4" layoutX="97.0" layoutY="311.0" prefHeight="108.0" prefWidth="307.0" text="15" textFill="#fff9f9">
          <font>
             <Font name="Rockwell Condensed" size="72.0" />
          </font>
