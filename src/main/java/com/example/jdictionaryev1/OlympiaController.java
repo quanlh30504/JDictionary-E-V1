@@ -428,6 +428,7 @@ public class OlympiaController {
     private int currentIndex;
     Timeline timeline;
 
+    // Need to modify
     @FXML
     private void loadImageQuestion() {
         // Tạo list 3 ảnh 1
@@ -513,6 +514,7 @@ public class OlympiaController {
         }
     }
 
+    // Hard-code
     public boolean checkAnswerRound3(String ans) {
         ans = ans.toLowerCase();
         if (counter == 0) {
@@ -572,22 +574,22 @@ public class OlympiaController {
     @FXML
     public void submitAnswerRound3() throws IOException {
         String ans = myAnswer.getText().trim();
-        if (checkAnswerRound3(ans)) {
-            showAnswer();
-            showImageCorrect();
-            Mark += 20;
-            showScore(Mark);
-        } else {
-            showAnswer();
-            Mark -= 5;
-            showImageWrong();
-            showScore(Mark);
+//        if (.getText().equals("0")) {
+            if (checkAnswerRound3(ans)) {
+                showAnswer();
+                showImageCorrect();
+                Mark += 20;
+                showScore(Mark);
+            } else {
+                showAnswer();
+                showImageWrong();
+            }
+            timeline.stop();
+            myAnswer.clear();
+            counter++;
+            nextQuestionImage();
         }
-        timeline.stop();
-        myAnswer.clear();
-        counter++;
-        nextQuestionImage();
-    }
+   // }
 
 //    public static boolean start = true;
 
@@ -596,7 +598,6 @@ public class OlympiaController {
         int seconds = 60;
         if (start) {
             Countdown(seconds, countdownLabel);
-            //System.out.println(seconds);
             start = false;
         }
     }
@@ -626,7 +627,6 @@ public class OlympiaController {
                 countdownLabelReady.setVisible(false);
                 correctImage.setVisible(false);
                 wrongImage.setVisible(false);
-
                 startRound3();
                 start = true;
             }
@@ -701,21 +701,29 @@ public class OlympiaController {
     private Button playRound4;
 
     public static List<String> listQuestion = new ArrayList<>() ;
-
+    public CheckBox[] checkBoxes = new CheckBox[11];
     @FXML
     public void loadCheckBox() {
 //        listQuestion = new ArrayList<>();
         // checkbox
         checkBox1.setOnAction(event -> handleCheckBoxAction(checkBox1));
+        checkBoxes[1] = checkBox1;
         checkBox2.setOnAction(event -> handleCheckBoxAction(checkBox2));
+        checkBoxes[2] = checkBox2;
         checkBox3.setOnAction(event -> handleCheckBoxAction(checkBox3));
+        checkBoxes[3] = checkBox3;
         checkBox4.setOnAction(event -> handleCheckBoxAction(checkBox4));
+        checkBoxes[4] = checkBox4;
         checkBox5.setOnAction(event -> handleCheckBoxAction(checkBox5));
+        checkBoxes[5] = checkBox5;
         checkBox6.setOnAction(event -> handleCheckBoxAction(checkBox6));
+        checkBoxes[6] = checkBox6;
         checkBox7.setOnAction(event -> handleCheckBoxAction(checkBox7));
+        checkBoxes[7] = checkBox7;
         checkBox8.setOnAction(event -> handleCheckBoxAction(checkBox8));
+        checkBoxes[8] = checkBox8;
         checkBox9.setOnAction(event -> handleCheckBoxAction(checkBox9));
-
+        checkBoxes[9] = checkBox9;
         //nút "Next"
         playRound4.setOnAction(event -> {
             try {
@@ -731,7 +739,6 @@ public class OlympiaController {
         if (checkBox.isSelected()) {
             // Nếu ô checkbox được chọn, thêm giá trị của ô đó vào danh sách
             listQuestion.add(checkBox.getText());
-            // chọn dc 3 check box thì dừng lại
             if (listQuestion.size() == 3) {
                 checkBox1.setDisable(true);
                 checkBox2.setDisable(true);
@@ -747,6 +754,95 @@ public class OlympiaController {
         } else {
             // Nếu ô checkbox bị hủy chọn, loại bỏ giá trị của ô đó khỏi danh sách
             listQuestion.remove(checkBox.getText());
+        }
+        setSwitchOnOffOtherBox(checkBox);
+    }
+
+    public void setSwitchOnOffOtherBox(CheckBox checkBox) {
+        if (checkBox.equals(checkBox1)) {
+            //checkBox2.setDisable(bool(1 - convertToInt(checkBox2.isDisable())));
+            //checkBox3.setDisable(bool(1 - convertToInt(checkBox3.isDisable())));
+            checkBox4.setDisable(bool(1 - convertToInt(checkBox4.isDisable())));
+            checkBox7.setDisable(bool(1 - convertToInt(checkBox7.isDisable())));
+        } else if (checkBox.equals(checkBox2)) {
+            //checkBox1.setDisable(bool(1 - convertToInt(checkBox1.isDisable())));
+            //checkBox3.setDisable(bool(1 - convertToInt(checkBox3.isDisable())));
+            checkBox5.setDisable(bool(1 - convertToInt(checkBox5.isDisable())));
+            checkBox8.setDisable(bool(1 - convertToInt(checkBox8.isDisable())));
+        } else if (checkBox.equals(checkBox3)) {
+            //checkBox1.setDisable(bool(1 - convertToInt(checkBox1.isDisable())));
+            //checkBox2.setDisable(bool(1 - convertToInt(checkBox2.isDisable())));
+            checkBox6.setDisable(bool(1 - convertToInt(checkBox6.isDisable())));
+            checkBox9.setDisable(bool(1 - convertToInt(checkBox9.isDisable())));
+        } else if (checkBox.equals(checkBox4)) {
+            checkBox5.setDisable(bool(1 - convertToInt(checkBox5.isDisable())));
+            checkBox6.setDisable(bool(1 - convertToInt(checkBox6.isDisable())));
+//            checkBox1.setDisable(bool(1 - convertToInt(checkBox1.isDisable())));
+//            checkBox7.setDisable(bool(1 - convertToInt(checkBox7.isDisable())));
+        } else if (checkBox.equals(checkBox5)) {
+//            checkBox6.setDisable(bool(1 - convertToInt(checkBox6.isDisable())));
+//            checkBox4.setDisable(bool(1 - convertToInt(checkBox4.isDisable())));
+            checkBox2.setDisable(bool(1 - convertToInt(checkBox2.isDisable())));
+            checkBox8.setDisable(bool(1 - convertToInt(checkBox8.isDisable())));
+        } else if (checkBox.equals(checkBox6)) {
+//            checkBox4.setDisable(bool(1 - convertToInt(checkBox4.isDisable())));
+//            checkBox5.setDisable(bool(1 - convertToInt(checkBox5.isDisable())));
+            checkBox3.setDisable(bool(1 - convertToInt(checkBox3.isDisable())));
+            checkBox9.setDisable(bool(1 - convertToInt(checkBox9.isDisable())));
+        } else if (checkBox.equals(checkBox7)) {
+//            checkBox8.setDisable(bool(1 - convertToInt(checkBox8.isDisable())));
+//            checkBox9.setDisable(bool(1 - convertToInt(checkBox9.isDisable())));
+            checkBox1.setDisable(bool(1 - convertToInt(checkBox1.isDisable())));
+            checkBox4.setDisable(bool(1 - convertToInt(checkBox4.isDisable())));
+        } else if (checkBox.equals(checkBox8)) {
+//            checkBox9.setDisable(bool(1 - convertToInt(checkBox9.isDisable())));
+//            checkBox7.setDisable(bool(1 - convertToInt(checkBox7.isDisable())));
+            checkBox2.setDisable(bool(1 - convertToInt(checkBox2.isDisable())));
+            checkBox5.setDisable(bool(1 - convertToInt(checkBox5.isDisable())));
+        } else {
+//            checkBox8.setDisable(bool(1 - convertToInt(checkBox8.isDisable())));
+//            checkBox7.setDisable(bool(1 - convertToInt(checkBox7.isDisable())));
+            checkBox3.setDisable(bool(1 - convertToInt(checkBox3.isDisable())));
+            checkBox6.setDisable(bool(1 - convertToInt(checkBox6.isDisable())));
+        }
+
+    }
+
+    private int getIndex(CheckBox checkBox) {
+        if (checkBox.equals(checkBox1)) {
+            return 1;
+        } else if (checkBox.equals(checkBox2)) {
+            return 2;
+        } else if (checkBox.equals(checkBox3)) {
+            return 3;
+        } else if (checkBox.equals(checkBox4)) {
+            return 4;
+        } else if (checkBox.equals(checkBox5)) {
+            return 5;
+        } else if (checkBox.equals(checkBox6)) {
+            return 6;
+        } else if (checkBox.equals(checkBox7)) {
+            return 7;
+        } else if (checkBox.equals(checkBox8)) {
+            return 8;
+        } else {
+            return 9;
+        }
+    }
+
+    private boolean bool(int i) {
+        return (i == 0);
+    }
+
+    private int convertToInt(boolean bool) {
+        if (bool) {
+            return 0;
+        } else return 1;
+    }
+
+    private void checkIfSelected(CheckBox checkBox) {
+        if (!checkBox.isSelected()) {
+            checkBox.setDisable(bool(1 - convertToInt(checkBox.isDisable())));
         }
     }
 
@@ -1149,22 +1245,16 @@ public class OlympiaController {
                 if(checkStar){
                     subtract = 10;
                     checkStar = false;
-                }else{
-                    subtract = 5;
                 }
             }else if(listQuestion.get(counter).equals("20")){
                 if(checkStar){
                     subtract = 20;
                     checkStar = false;
-                }else{
-                    subtract = 10;
                 }
             }else if(listQuestion.get(counter).equals("30")){
                 if(checkStar){
                     subtract = 30;
                     checkStar = false;
-                }else{
-                    subtract = 15;
                 }
             }
             Mark -= subtract;
