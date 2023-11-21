@@ -89,7 +89,10 @@ public class OlympiaController {
 
     //--------------------------tạo count down -------------------
     @FXML
-    public Label countdownLabel;
+    public Label countdownLabel1;
+    public Label countdownLabel2;
+    public Label countdownLabel3;
+    public Label countdownLabel4;
     public Button countdownButton;
     public Label countdownNextRound;
 
@@ -118,9 +121,24 @@ public class OlympiaController {
                 } else {
 //                    System.out.println("Hết cứu");
                     Platform.runLater(() -> {
-                        if (labelCountDown == countdownLabel) {
+                        if (labelCountDown == countdownLabel1 || labelCountDown == countdownLabel2 ) {
                             labelCountDown.setText("Time's up!");
-                        } else if (labelCountDown == countdownNextRound) {
+                        }else if(labelCountDown == countdownLabel3){
+                            labelCountDown.setText("Bump!!!");
+                            try {
+                                submitAnswerRound3();
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }else if(labelCountDown == countdownLabel4) {
+                            labelCountDown.setText("Bump!!!");
+                            try {
+                                submitAnswerRound4();
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                        else if (labelCountDown == countdownNextRound) {
                             labelCountDown.setText("Go....");
                         } else {
                             labelCountDown.setText("Start");
@@ -130,6 +148,14 @@ public class OlympiaController {
                 }
             }
         }, 0, 1000);
+    }
+    //------------------------tạo delay----------------------------------
+    public static void delay(int milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -149,6 +175,8 @@ public class OlympiaController {
     public Label Question;
     public TextField myAnswer;
     public Label Answer;
+    public Label AnswerWrong;
+
     public Label score;
     public Button submit;
     @FXML
@@ -182,13 +210,25 @@ public class OlympiaController {
         wrongImage.setVisible(false);
         correctImage.setVisible(false);
     }
+    public void hideImageWrong(){
+        wrongImage.setVisible(false);
+    }
+    public void hideImageCorrect(){
+        correctImage.setVisible(false);
+    }
 
     public void showAnswer() {
         Answer.setVisible(true);
     }
+    public void showAnswerWrong(){
+        AnswerWrong.setVisible(true);
+    }
 
     public void hideAnswer() {
         Answer.setVisible(false);
+    }
+    public void hideAnswerWrong(){
+        AnswerWrong.setVisible(false);
     }
 
     public void showNextButton(Button nextButton) {
@@ -330,7 +370,7 @@ public class OlympiaController {
     public void startCountDownRound1() {
         int seconds = 60;
         if (start) {
-            Countdown(seconds, countdownLabel);
+            Countdown(seconds, countdownLabel1);
             //System.out.println(seconds);
             start = false;
         }
@@ -410,6 +450,10 @@ public class OlympiaController {
     }
 
     //----------------------------------Round 3--------------------------
+    @FXML
+    public Label myAnswerLabel;
+    public Label myanswerIs;
+    public Label correctAnswerIs;
     @FXML
     public Button nextToRound3Review;
 
@@ -510,6 +554,8 @@ public class OlympiaController {
 
         // Kiểm tra nếu đã đến hình ảnh cuối cùng, thì dừng Timeline
         if (currentIndex == listImages.get(counter).size() - 1) {
+            // khi đến ảnh cuối cùng sẽ bắt đầu đếm thời gian
+            startCountDownRound3();
             timeline.stop();
         }
     }
@@ -521,7 +567,7 @@ public class OlympiaController {
             if (checkAlertAnswer(ans)) {
                 alertAnswer.setText("Invalid answer");
                 alertAnswer.setVisible(true);
-                Answer.setText("whale");
+                AnswerWrong.setText("whale");
                 return false;
             }
             if (ans.equals("whale")) {
@@ -529,7 +575,7 @@ public class OlympiaController {
                 alertAnswer.setVisible(false);
                 return true;
             } else {
-                Answer.setText("whale");
+                AnswerWrong.setText("whale");
                 alertAnswer.setVisible(false);
                 return false;
             }
@@ -538,7 +584,7 @@ public class OlympiaController {
             if (checkAlertAnswer(ans)) {
                 alertAnswer.setText("Invalid answer");
                 alertAnswer.setVisible(true);
-                Answer.setText("football / soccer");
+                AnswerWrong.setText("football / soccer");
                 return false;
             }
             if (ans.equals("football") || ans.equals("soccer")) {
@@ -546,7 +592,7 @@ public class OlympiaController {
                 alertAnswer.setVisible(false);
                 return true;
             } else {
-                Answer.setText("football / soccer");
+                AnswerWrong.setText("football / soccer");
                 alertAnswer.setVisible(false);
                 return false;
             }
@@ -555,7 +601,7 @@ public class OlympiaController {
             if (checkAlertAnswer(ans)) {
                 alertAnswer.setText("Invalid answer");
                 alertAnswer.setVisible(true);
-                Answer.setText("hospital");
+                AnswerWrong.setText("hospital");
                 return false;
             }
             if (ans.equals("hospital")) {
@@ -563,43 +609,66 @@ public class OlympiaController {
                 alertAnswer.setVisible(false);
                 return true;
             } else {
-                Answer.setText("hospital");
+                AnswerWrong.setText("hospital");
                 alertAnswer.setVisible(false);
                 return false;
             }
         }
         return false;
     }
+    @FXML
+    public void showMyAnsRound3(){
+        hideImageCheck();
+        alertAnswer.setVisible(false);
+        correctAnswerIs.setVisible(false);
+        Answer.setVisible(false);
+        AnswerWrong.setVisible(false);
+        myanswerIs.setVisible(true);
+        String ans = myAnswer.getText();
+        myAnswerLabel.setText(ans);
+        myAnswerLabel.setVisible(true);
+        myAnswer.clear();
+    }
 
     @FXML
     public void submitAnswerRound3() throws IOException {
-        String ans = myAnswer.getText().trim();
-//        if (.getText().equals("0")) {
-            if (checkAnswerRound3(ans)) {
-                showAnswer();
-                showImageCorrect();
-                Mark += 20;
-                showScore(Mark);
-            } else {
-                showAnswer();
-                showImageWrong();
-            }
-            timeline.stop();
-            myAnswer.clear();
-            counter++;
-            nextQuestionImage();
+        myAnswerLabel.setVisible(false);
+        myanswerIs.setVisible(false);
+        String ans = myAnswerLabel.getText().trim();
+        if (checkAnswerRound3(ans)) {
+            showAnswer();
+            correctAnswerIs.setVisible(true);
+            showImageCorrect();
+            Mark += 20;
+            showScore(Mark);
+        } else {
+            showAnswerWrong();
+            correctAnswerIs.setVisible(true);
+            Mark -= 5;
+            showImageWrong();
+            showScore(Mark);
         }
-   // }
+        timeline.stop();
+        myAnswer.clear();
+        counter++;
+        countdownLabel3.setText("10");
+//        delay(2000);
+//        correctAnswerIs.setVisible(false);
+//        Answer.setVisible(false);
+        nextQuestionImage();
+    }
 
 //    public static boolean start = true;
 
     @FXML
     public void startCountDownRound3() {
-        int seconds = 60;
-        if (start) {
-            Countdown(seconds, countdownLabel);
-            start = false;
-        }
+        int seconds = 11;
+//        if (start) {
+//            Countdown(seconds, countdownLabel3);
+//            //System.out.println(seconds);
+//            start = false;
+//        }
+        Countdown(seconds,countdownLabel3);
     }
 
     @FXML
@@ -641,10 +710,10 @@ public class OlympiaController {
     public void startRound3() {
         myAnswer.setDisable(false);
         submit.setDisable(false);
-        countdownLabel.setVisible(true);
+        countdownLabel3.setVisible(true);
         hideImageCheck();
         hideAnswer();
-        startCountDownRound3();
+//        startCountDownRound3();
         showScore(Mark);
         loadImageQuestion();
     }
@@ -940,143 +1009,7 @@ public class OlympiaController {
 
     public void loadQuestion4() {
 //        System.out.println("go to load question");
-        alertAnswer.setVisible(false);
-
-        if (counter == 0) { //Question 1
-            if (listQuestion.get(counter).equals("10")) {
-                if (idQuestion10 == -1) {
-                    idQuestion10 = randomQuestion(package10);
-                } else {
-                    int oldID = idQuestion10;
-                    idQuestion10 = randomQuestion(package10);
-                    while (idQuestion10 == oldID) {
-                        idQuestion10 = randomQuestion(package10);
-                    }
-                }
-                QSscore.setText("10");
-                String ques = package10.get(idQuestion10);
-                Question.setText("1."+ques);
-                showQuestion();
-            } else if (listQuestion.get(counter).equals("20")) {
-                if (idQuestion20 == -1) {
-                    idQuestion20 = randomQuestion(package20);
-                } else {
-                    int oldID = idQuestion20;
-                    idQuestion20 = randomQuestion(package20);
-                    while (idQuestion20 == oldID) {
-                        idQuestion20 = randomQuestion(package20);
-                    }
-                }
-                QSscore.setText("20");
-                String ques = package20.get(idQuestion20);
-                Question.setText("1."+ques);
-                showQuestion();
-            } else if (listQuestion.get(counter).equals("30")) {
-                if (idQuestion30 == -1) {
-                    idQuestion30 = randomQuestion(package30);
-                } else {
-                    int oldID = idQuestion30;
-                    idQuestion30 = randomQuestion(package30);
-                    while (idQuestion30 == oldID) {
-                        idQuestion30 = randomQuestion(package30);
-                    }
-                }
-                QSscore.setText("30");
-                String ques = package30.get(idQuestion30);
-                Question.setText("1."+ques);
-                showQuestion();
-            }
-        }
-        if (counter == 1) {
-            if (listQuestion.get(counter).equals("10")) {
-                if (idQuestion10 == -1) {
-                    idQuestion10 = randomQuestion(package10);
-                } else {
-                    int oldID = idQuestion10;
-                    idQuestion10 = randomQuestion(package10);
-                    while (idQuestion10 == oldID) {
-                        idQuestion10 = randomQuestion(package10);
-                    }
-                }
-                QSscore.setText("10");
-                String ques = package10.get(idQuestion10);
-                Question.setText("2."+ques);
-                showQuestion();
-            } else if (listQuestion.get(counter).equals("20")) {
-                if (idQuestion20 == -1) {
-                    idQuestion20 = randomQuestion(package20);
-                } else {
-                    int oldID = idQuestion20;
-                    idQuestion20 = randomQuestion(package20);
-                    while (idQuestion20 == oldID) {
-                        idQuestion20 = randomQuestion(package20);
-                    }
-                }
-                QSscore.setText("20");
-                String ques = package20.get(idQuestion20);
-                Question.setText("2."+ques);
-                showQuestion();
-            } else if (listQuestion.get(counter).equals("30")) {
-                if (idQuestion30 == -1) {
-                    idQuestion30 = randomQuestion(package30);
-                } else {
-                    int oldID = idQuestion30;
-                    idQuestion30 = randomQuestion(package30);
-                    while (idQuestion30 == oldID) {
-                        idQuestion30 = randomQuestion(package30);
-                    }
-                }
-                QSscore.setText("30");
-                String ques = package30.get(idQuestion30);
-                Question.setText("2."+ques);
-                showQuestion();
-            }
-        }
-        if (counter == 2) {
-            if (listQuestion.get(counter).equals("10")) {
-                if (idQuestion10 == -1) {
-                    idQuestion10 = randomQuestion(package10);
-                } else {
-                    int oldID = idQuestion10;
-                    idQuestion10 = randomQuestion(package10);
-                    while (idQuestion10 == oldID) {
-                        idQuestion10 = randomQuestion(package10);
-                    }
-                }
-                QSscore.setText("10");
-                String ques = package10.get(idQuestion10);
-                Question.setText("3."+ques);
-                showQuestion();
-            } else if (listQuestion.get(counter).equals("20")) {
-                if (idQuestion20 == -1) {
-                    idQuestion20 = randomQuestion(package20);
-                } else {
-                    int oldID = idQuestion20;
-                    idQuestion20 = randomQuestion(package20);
-                    while (idQuestion20 == oldID) {
-                        idQuestion20 = randomQuestion(package20);
-                    }
-                }
-                QSscore.setText("20");
-                String ques = package20.get(idQuestion20);
-                Question.setText("3."+ques);
-                showQuestion();
-            } else if (listQuestion.get(counter).equals("30")) {
-                if (idQuestion30 == -1) {
-                    idQuestion30 = randomQuestion(package30);
-                } else {
-                    int oldID = idQuestion30;
-                    idQuestion30 = randomQuestion(package30);
-                    while (idQuestion30 == oldID) {
-                        idQuestion30 = randomQuestion(package30);
-                    }
-                }
-                QSscore.setText("30");
-                String ques = package30.get(idQuestion30);
-                Question.setText("3."+ques);
-                showQuestion();
-            }
-        }
+//        alertAnswer.setVisible(false);
         if (counter == 3) {
             Question.setText("Congratulate!");
             showQuestion();
@@ -1087,6 +1020,146 @@ public class OlympiaController {
             Answer.setDisable(true);
             starHopeButton.setDisable(true);
             showNextButton(resultButton); // hiện nút endgame dẫn ra bảng kết quả
+        }else {
+            countdownLabel4.setText("20");
+            startCountDownRound4(21);
+
+            if (counter == 0) { //Question 1
+
+                if (listQuestion.get(counter).equals("10")) {
+                    if (idQuestion10 == -1) {
+                        idQuestion10 = randomQuestion(package10);
+                    } else {
+                        int oldID = idQuestion10;
+                        idQuestion10 = randomQuestion(package10);
+                        while (idQuestion10 == oldID) {
+                            idQuestion10 = randomQuestion(package10);
+                        }
+                    }
+                    QSscore.setText("10");
+                    String ques = package10.get(idQuestion10);
+                    Question.setText("1." + ques);
+                    showQuestion();
+                } else if (listQuestion.get(counter).equals("20")) {
+                    if (idQuestion20 == -1) {
+                        idQuestion20 = randomQuestion(package20);
+                    } else {
+                        int oldID = idQuestion20;
+                        idQuestion20 = randomQuestion(package20);
+                        while (idQuestion20 == oldID) {
+                            idQuestion20 = randomQuestion(package20);
+                        }
+                    }
+                    QSscore.setText("20");
+                    String ques = package20.get(idQuestion20);
+                    Question.setText("1." + ques);
+                    showQuestion();
+                } else if (listQuestion.get(counter).equals("30")) {
+                    if (idQuestion30 == -1) {
+                        idQuestion30 = randomQuestion(package30);
+                    } else {
+                        int oldID = idQuestion30;
+                        idQuestion30 = randomQuestion(package30);
+                        while (idQuestion30 == oldID) {
+                            idQuestion30 = randomQuestion(package30);
+                        }
+                    }
+                    QSscore.setText("30");
+                    String ques = package30.get(idQuestion30);
+                    Question.setText("1." + ques);
+                    showQuestion();
+                }
+            }
+            if (counter == 1) {
+                if (listQuestion.get(counter).equals("10")) {
+                    if (idQuestion10 == -1) {
+                        idQuestion10 = randomQuestion(package10);
+                    } else {
+                        int oldID = idQuestion10;
+                        idQuestion10 = randomQuestion(package10);
+                        while (idQuestion10 == oldID) {
+                            idQuestion10 = randomQuestion(package10);
+                        }
+                    }
+                    QSscore.setText("10");
+                    String ques = package10.get(idQuestion10);
+                    Question.setText("2." + ques);
+                    showQuestion();
+                } else if (listQuestion.get(counter).equals("20")) {
+                    if (idQuestion20 == -1) {
+                        idQuestion20 = randomQuestion(package20);
+                    } else {
+                        int oldID = idQuestion20;
+                        idQuestion20 = randomQuestion(package20);
+                        while (idQuestion20 == oldID) {
+                            idQuestion20 = randomQuestion(package20);
+                        }
+                    }
+                    QSscore.setText("20");
+                    String ques = package20.get(idQuestion20);
+                    Question.setText("2." + ques);
+                    showQuestion();
+                } else if (listQuestion.get(counter).equals("30")) {
+                    if (idQuestion30 == -1) {
+                        idQuestion30 = randomQuestion(package30);
+                    } else {
+                        int oldID = idQuestion30;
+                        idQuestion30 = randomQuestion(package30);
+                        while (idQuestion30 == oldID) {
+                            idQuestion30 = randomQuestion(package30);
+                        }
+                    }
+                    QSscore.setText("30");
+                    String ques = package30.get(idQuestion30);
+                    Question.setText("2." + ques);
+                    showQuestion();
+                }
+            }
+            if (counter == 2) {
+                if (listQuestion.get(counter).equals("10")) {
+                    if (idQuestion10 == -1) {
+                        idQuestion10 = randomQuestion(package10);
+                    } else {
+                        int oldID = idQuestion10;
+                        idQuestion10 = randomQuestion(package10);
+                        while (idQuestion10 == oldID) {
+                            idQuestion10 = randomQuestion(package10);
+                        }
+                    }
+                    QSscore.setText("10");
+                    String ques = package10.get(idQuestion10);
+                    Question.setText("3." + ques);
+                    showQuestion();
+                } else if (listQuestion.get(counter).equals("20")) {
+                    if (idQuestion20 == -1) {
+                        idQuestion20 = randomQuestion(package20);
+                    } else {
+                        int oldID = idQuestion20;
+                        idQuestion20 = randomQuestion(package20);
+                        while (idQuestion20 == oldID) {
+                            idQuestion20 = randomQuestion(package20);
+                        }
+                    }
+                    QSscore.setText("20");
+                    String ques = package20.get(idQuestion20);
+                    Question.setText("3." + ques);
+                    showQuestion();
+                } else if (listQuestion.get(counter).equals("30")) {
+                    if (idQuestion30 == -1) {
+                        idQuestion30 = randomQuestion(package30);
+                    } else {
+                        int oldID = idQuestion30;
+                        idQuestion30 = randomQuestion(package30);
+                        while (idQuestion30 == oldID) {
+                            idQuestion30 = randomQuestion(package30);
+                        }
+                    }
+                    QSscore.setText("30");
+                    String ques = package30.get(idQuestion30);
+                    Question.setText("3." + ques);
+                    showQuestion();
+                }
+            }
         }
     }
 
@@ -1106,7 +1179,7 @@ public class OlympiaController {
                     Answer.setText(ansCorrect);
                     return true;
                 } else {
-                    Answer.setText(ansCorrect);
+                    AnswerWrong.setText(ansCorrect);
                     return false;
                 }
             } else if (listQuestion.get(counter).equals("20")) {
@@ -1115,7 +1188,7 @@ public class OlympiaController {
                     Answer.setText(ansCorrect);
                     return true;
                 } else {
-                    Answer.setText(ansCorrect);
+                    AnswerWrong.setText(ansCorrect);
                     return false;
                 }
             } else if (listQuestion.get(counter).equals("30")) {
@@ -1124,7 +1197,7 @@ public class OlympiaController {
                     Answer.setText(ansCorrect);
                     return true;
                 } else {
-                    Answer.setText(ansCorrect);
+                    AnswerWrong.setText(ansCorrect);
                     return false;
                 }
             }
@@ -1143,7 +1216,7 @@ public class OlympiaController {
                     Answer.setText(ansCorrect);
                     return true;
                 } else {
-                    Answer.setText(ansCorrect);
+                    AnswerWrong.setText(ansCorrect);
                     return false;
                 }
             } else if (listQuestion.get(counter).equals("20")) {
@@ -1152,7 +1225,7 @@ public class OlympiaController {
                     Answer.setText(ansCorrect);
                     return true;
                 } else {
-                    Answer.setText(ansCorrect);
+                    AnswerWrong.setText(ansCorrect);
                     return false;
                 }
             } else if (listQuestion.get(counter).equals("30")) {
@@ -1161,7 +1234,7 @@ public class OlympiaController {
                     Answer.setText(ansCorrect);
                     return true;
                 } else {
-                    Answer.setText(ansCorrect);
+                    AnswerWrong.setText(ansCorrect);
                     return false;
                 }
             }
@@ -1179,7 +1252,7 @@ public class OlympiaController {
                     Answer.setText(ansCorrect);
                     return true;
                 } else {
-                    Answer.setText(ansCorrect);
+                    AnswerWrong.setText(ansCorrect);
                     return false;
                 }
             } else if (listQuestion.get(counter).equals("20")) {
@@ -1188,7 +1261,7 @@ public class OlympiaController {
                     Answer.setText(ansCorrect);
                     return true;
                 } else {
-                    Answer.setText(ansCorrect);
+                    AnswerWrong.setText(ansCorrect);
                     return false;
                 }
             } else if (listQuestion.get(counter).equals("30")) {
@@ -1197,21 +1270,39 @@ public class OlympiaController {
                     Answer.setText(ansCorrect);
                     return true;
                 } else {
-                    Answer.setText(ansCorrect);
+                    AnswerWrong.setText(ansCorrect);
                     return false;
                 }
             }
         }
         return false;
     }
+    @FXML
+    public void showMyAnsRound4(){
+        hideImageCheck();
+        alertAnswer.setVisible(false);
+        correctAnswerIs.setVisible(false);
+        Answer.setVisible(false);
+        AnswerWrong.setVisible(false);
+        myanswerIs.setVisible(true);
+        String ans = myAnswer.getText();
+        myAnswerLabel.setText(ans);
+        myAnswerLabel.setVisible(true);
+        myAnswer.clear();
+    }
     public boolean checkStar = false;
     @FXML
     public void submitAnswerRound4() throws IOException {
+        myAnswerLabel.setVisible(false);
+        myanswerIs.setVisible(false);
         starHopeImage.setVisible(false);
-        String ans = myAnswer.getText().trim();
+        String ans = myAnswerLabel.getText().trim();
         if (checkAnswerRound4(ans)) {
             showAnswer();
+            correctAnswerIs.setVisible(true);
+            hideAnswerWrong();
             showImageCorrect();
+            hideImageWrong();
             int add = 0;
             if(listQuestion.get(counter).equals("10")){
                 if(checkStar){
@@ -1238,8 +1329,11 @@ public class OlympiaController {
             Mark += add;
             showScore(Mark);
         } else {
-            showAnswer();
+            correctAnswerIs.setVisible(true);
+            showAnswerWrong();
+            hideAnswer();
             showImageWrong();
+            hideImageCorrect();
             int subtract = 0;
             if(listQuestion.get(counter).equals("10")){
                 if(checkStar){
@@ -1258,7 +1352,6 @@ public class OlympiaController {
                 }
             }
             Mark -= subtract;
-            showImageWrong();
             showScore(Mark);
         }
         myAnswer.clear();
@@ -1273,6 +1366,16 @@ public class OlympiaController {
     public Label labelPackage1;
     public Label labelPackage2;
     public Label labelPackage3;
+
+    public void startCountDownRound4(int time) {
+        int seconds = time;
+//        if (start) {
+//            Countdown(seconds, countdownLabel3);
+//            //System.out.println(seconds);
+//            start = false;
+//        }
+        Countdown(seconds,countdownLabel4);
+    }
 
     @FXML
     public void starHopeFunction(){
@@ -1298,6 +1401,8 @@ public class OlympiaController {
         showScore(Mark);
         // hiện nút ngôi sao hy vọng
         starHopeButton.setVisible(true);
+        //count down
+//        startCountDownRound4(16);
         // load câu hỏi ra màn hình
         loadQuestion4();
 

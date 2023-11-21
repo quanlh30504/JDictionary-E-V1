@@ -10,22 +10,17 @@
 
 <AnchorPane prefHeight="608.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jdictionaryev1.OlympiaController">
    <children>
-      <ImageView fitHeight="617.0" fitWidth="1088.0" layoutX="-1.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="611.0" fitWidth="1083.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../GameOlympia/8.png" />
          </image>
       </ImageView>
-      <TextField fx:id="myAnswer" alignment="CENTER" disable="true" layoutX="351.0" layoutY="452.0" prefHeight="70.0" prefWidth="311.0" promptText="My Answer" styleClass="text-field-Olympia" stylesheets="@../../../application.css">
+      <TextField fx:id="myAnswer" alignment="CENTER" disable="true" layoutX="351.0" layoutY="454.0" prefHeight="70.0" prefWidth="311.0" promptText="My Answer" styleClass="text-field-Olympia" stylesheets="@../../../application.css">
          <font>
             <Font name="Impact" size="25.0" />
          </font>
       </TextField>
-      <Label fx:id="score" layoutX="96.0" layoutY="237.0" text="Score" visible="false">
-         <font>
-            <Font name="Impact" size="20.0" />
-         </font>
-      </Label>
-      <Label fx:id="Answer" layoutX="555.0" layoutY="548.0" prefHeight="24.0" prefWidth="246.0" text="Answer" textFill="WHITE" visible="false">
+      <Label fx:id="score" layoutX="96.0" layoutY="299.0" text="Score" visible="false">
          <font>
             <Font name="Impact" size="20.0" />
          </font>
@@ -39,7 +34,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="submit" disable="true" layoutX="674.0" layoutY="457.0" mnemonicParsing="false" onAction="#submitAnswerRound3" prefHeight="47.0" prefWidth="63.0" style="-fx-background-radius: 30;" styleClass="submit_button" stylesheets="@../../../application.css">
+      <Button fx:id="submit" disable="true" layoutX="674.0" layoutY="459.0" mnemonicParsing="false" onAction="#showMyAnsRound3" prefHeight="47.0" prefWidth="63.0" style="-fx-background-radius: 30;" styleClass="submit_button" stylesheets="@../../../application.css">
          <graphic>
             <ImageView fitHeight="58.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -58,10 +53,9 @@
             <Image url="@../../../GameOlympia/wrong.png" />
          </image>
       </ImageView>
-      <Label text="Label" />
-      <Label fx:id="countdownLabel" layoutX="62.0" layoutY="42.0" prefHeight="82.0" prefWidth="301.0" text="60" textFill="#61fa7d" visible="false">
+      <Label fx:id="countdownLabel3" alignment="CENTER" layoutX="10.0" layoutY="71.0" prefHeight="53.0" prefWidth="147.0" text="10" visible="false">
          <font>
-            <Font name="Rockwell Condensed" size="66.0" />
+            <Font name="Rockwell Condensed" size="62.0" />
          </font>
       </Label>
       <ImageView fx:id="imageViewQuestion" fitHeight="360.0" fitWidth="740.0" layoutX="192.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
@@ -89,9 +83,34 @@
             <Font name="Impact" size="34.0" />
          </font>
       </Button>
-      <Label fx:id="alertAnswer" layoutX="885.0" layoutY="464.0" prefHeight="50.0" prefWidth="108.0" text="Invalid answer" textFill="WHITE" visible="false">
+      <Label fx:id="alertAnswer" layoutX="838.0" layoutY="489.0" prefHeight="50.0" prefWidth="108.0" text="Invalid answer" textFill="WHITE" visible="false">
          <font>
             <Font name="Impact" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="myanswerIs" layoutX="369.0" layoutY="544.0" prefHeight="38.0" prefWidth="217.0" text="My answer is :" textFill="#fff9f9" visible="false">
+         <font>
+            <Font name="Impact" size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="myAnswerLabel" layoutX="534.0" layoutY="546.0" prefHeight="38.0" prefWidth="233.0" text="My answer" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Impact" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="correctAnswerIs" layoutX="369.0" layoutY="544.0" prefHeight="38.0" prefWidth="217.0" text="Correct answer is :" textFill="#fff9f9" visible="false">
+         <font>
+            <Font name="Impact" size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="Answer" layoutX="573.0" layoutY="553.0" prefHeight="24.0" prefWidth="142.0" text="Answer" textFill="#1eff00" visible="false">
+         <font>
+            <Font name="Impact" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="AnswerWrong" layoutX="574.0" layoutY="553.0" prefHeight="24.0" prefWidth="142.0" text="AnswerWrong" textFill="#ff5d2b" visible="false">
+         <font>
+            <Font name="Impact" size="20.0" />
          </font>
       </Label>
    </children>
