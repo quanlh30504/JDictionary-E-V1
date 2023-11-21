@@ -43,7 +43,9 @@ public class Trie {
     public List<String> autoComplete(String prefix) {
         Trie trieNode = this;
         for (char c : prefix.toCharArray()) {
-            if (!trieNode.children.containsKey(c)) return null;
+            if (!trieNode.children.containsKey(c)) {
+                return null;
+            }
             trieNode = trieNode.children.get(c);
         }
         return trieNode.allPre();

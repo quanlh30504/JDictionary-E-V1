@@ -49,7 +49,7 @@
             <Font name="Impact" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="score" layoutX="930.0" layoutY="67.0" prefHeight="39.0" prefWidth="79.0" text="Score" visible="false">
+      <Label fx:id="score" layoutX="930.0" layoutY="68.0" prefHeight="39.0" prefWidth="79.0" text="Score" visible="false">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
