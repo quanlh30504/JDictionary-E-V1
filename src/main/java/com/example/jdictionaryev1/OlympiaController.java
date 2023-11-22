@@ -387,7 +387,7 @@ public class OlympiaController {
             readyR1 = false;
         }
         // Tạo một Timeline với một KeyFrame để thực hiện việc ẩn các thành phần sau khi hàm Countdown kết thúc
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(7), new EventHandler<ActionEvent>() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(6), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 imageReady.setVisible(false);
@@ -510,7 +510,7 @@ public class OlympiaController {
         // Set up a Timeline to switch images every 5 seconds
         timeline = new Timeline(
                 new KeyFrame(
-                        Duration.seconds(3),
+                        Duration.seconds(60 / listImages.size()),
                         this::nextImage
                 )
         );
@@ -522,7 +522,6 @@ public class OlympiaController {
     public void nextQuestionImage() {
         // check counter == 3 thì show nút next to round 4
         if (counter == 3) {
-
             // chuyển màn
             counter = 0;
             endR3 = true;
@@ -532,14 +531,17 @@ public class OlympiaController {
             imageViewQuestion.setVisible(false);
             return;
         }
+        delay(3000);
         currentIndex = 0;
         // Display the first image
         imageViewQuestion.setImage(listImages.get(counter).get(currentIndex));
 
+        System.out.println(listImages.size());
+        startCountDownRound3();
         // Set up a Timeline to switch images every 5 seconds
         timeline = new Timeline(
                 new KeyFrame(
-                        Duration.seconds(3),
+                        Duration.seconds(6),
                         this::nextImage
                 )
         );
@@ -555,7 +557,7 @@ public class OlympiaController {
         // Kiểm tra nếu đã đến hình ảnh cuối cùng, thì dừng Timeline
         if (currentIndex == listImages.get(counter).size() - 1) {
             // khi đến ảnh cuối cùng sẽ bắt đầu đếm thời gian
-            startCountDownRound3();
+            //startCountDownRound3();
             timeline.stop();
         }
     }
@@ -651,7 +653,7 @@ public class OlympiaController {
         timeline.stop();
         myAnswer.clear();
         counter++;
-        countdownLabel3.setText("10");
+        countdownLabel3.setText("60");
 //        delay(2000);
 //        correctAnswerIs.setVisible(false);
 //        Answer.setVisible(false);
@@ -662,7 +664,7 @@ public class OlympiaController {
 
     @FXML
     public void startCountDownRound3() {
-        int seconds = 11;
+        int seconds = 61;
 //        if (start) {
 //            Countdown(seconds, countdownLabel3);
 //            //System.out.println(seconds);
@@ -696,6 +698,7 @@ public class OlympiaController {
                 countdownLabelReady.setVisible(false);
                 correctImage.setVisible(false);
                 wrongImage.setVisible(false);
+                delay(2000);
                 startRound3();
                 start = true;
             }
@@ -713,9 +716,9 @@ public class OlympiaController {
         countdownLabel3.setVisible(true);
         hideImageCheck();
         hideAnswer();
-//        startCountDownRound3();
         showScore(Mark);
         loadImageQuestion();
+        startCountDownRound3();
     }
 
     //----------------------------------Round 4--------------------------
@@ -797,7 +800,8 @@ public class OlympiaController {
         playRound4.setOnAction(event -> {
             try {
                 gotoRound4();
-            } catch (IOException e) {
+                Thread.sleep(4000);
+            } catch (IOException | InterruptedException e) {
                 throw new RuntimeException(e);
             }
         });
@@ -1418,6 +1422,14 @@ public class OlympiaController {
         helloApplication.changeScreen("resultOlympia.fxml", 1080, 608);
     }
 
-
-
+    @FXML
+    public void startCountDownRound4() {
+        if (listQuestion.get(counter).equals("10")) {
+            Countdown(11, countdownLabel4);
+        } else if (listQuestion.get(counter).equals("20")) {
+            Countdown(16, countdownLabel4);
+        } else {
+            Countdown(21, countdownLabel4);
+        }
+    }
 }
