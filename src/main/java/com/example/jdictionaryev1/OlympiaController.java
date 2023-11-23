@@ -261,13 +261,20 @@ public class OlympiaController {
 //        }
     }
 
-    public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        String path = "src/main/resources/GameOlympia/OlympiaSound/StartUp/KĐ_60s_O15.wav";
-        File file = new File(path);
-        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
-        Clip clip = AudioSystem.getClip();
-        clip.open(audioInputStream);
-        clip.start();
+    public static void main(String[] args)  {
+        try {
+            String path = "src/main/resources/GameOlympia/OlympiaSound/StartUp/KĐ_60s_O15.wav";
+            File file = new File(path);
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+            Thread.sleep(clip.getMicrosecondLength() / 1000);
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     //    //----------------------------Round 1--------------------------
