@@ -141,7 +141,7 @@ public class HelloController extends DictionaryManagement {
         try {
             //textFieldSearch.textProperty().addListener((observableValue, oldvalue, newvalue) -> {//
             wordSearch = textFieldSearch.getText();
-            System.out.println(wordSearch);
+//            System.out.println(wordSearch);
             //});//
         } catch (Exception e) {
             System.out.println(e);  // xử lí ngoại lệ nhập văn bản
