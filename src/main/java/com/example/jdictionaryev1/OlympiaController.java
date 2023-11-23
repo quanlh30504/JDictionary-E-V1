@@ -25,6 +25,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -182,6 +183,7 @@ public class OlympiaController {
         }
     }
 
+
     //--------------------------set up thông số ---------------------------
     public static int counter = 0;
 //    public static int correct = 0;
@@ -195,6 +197,7 @@ public class OlympiaController {
     public Label countdownLabelReady;
     public ImageView imageReady;
     public Button readyButton;
+    public Label annouceNextRound;
     public Label alertAnswer;
     @FXML
     public Label Question;
@@ -1292,7 +1295,6 @@ public class OlympiaController {
                 checkBox7.setDisable(true);
                 checkBox8.setDisable(true);
                 checkBox9.setDisable(true);
-
                 playRound4.setVisible(true);
             }
         } else {
