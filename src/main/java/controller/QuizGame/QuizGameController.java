@@ -67,7 +67,7 @@ public class QuizGameController extends SQLiteConnection {
             preparedStatement.setInt(1, randomId); // Assuming your questions start from 1
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                question.setText(resultSet.getString("description"));
+                question.setText(String.valueOf(counter+1)+"."+resultSet.getString("description"));
                 opt1.setText(resultSet.getString("choice1"));
                 opt2.setText(resultSet.getString("choice2"));
                 opt3.setText(resultSet.getString("choice3"));

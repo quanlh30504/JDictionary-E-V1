@@ -52,7 +52,7 @@ public class HelloApplication extends Application {
         englishSearchBar.setId("textFieldSearch");
         //englishSearchBar.setPromptText("English Search");
         englishSearchBar.setOnMouseClicked(event -> englishSearchBar.clear());
-        System.out.println(englishSearchBar.getId());
+//        System.out.println(englishSearchBar.getId());
     }
 
     //change screen

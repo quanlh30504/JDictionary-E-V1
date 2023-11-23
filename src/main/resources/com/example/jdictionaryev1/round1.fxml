@@ -20,16 +20,11 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="countdownLabel1" layoutX="747.0" layoutY="237.0" prefHeight="108.0" prefWidth="307.0" text="60" textFill="#fff9f9">
+      <Label fx:id="countdownLabel1" alignment="CENTER" layoutX="697.0" layoutY="247.0" prefHeight="108.0" prefWidth="315.0" text="60" textFill="#fff9f9">
          <font>
-            <Font name="Rockwell Condensed" size="89.0" />
+            <Font name="Rockwell Condensed" size="71.0" />
          </font>
       </Label>
-      <Button fx:id="countdownButton" layoutX="772.0" layoutY="371.0" mnemonicParsing="false" onAction="#startCountDownRound1" prefHeight="62.0" prefWidth="148.0" text="Start">
-         <font>
-            <Font size="29.0" />
-         </font>
-      </Button>
       <Button fx:id="endGameButton" layoutX="992.0" layoutY="537.0" mnemonicParsing="false" onAction="#endGame" prefHeight="63.0" prefWidth="68.0" style="-fx-background-radius: 60;" styleClass="out" stylesheets="@../../../application.css">
          <graphic>
             <ImageView fitHeight="54.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
@@ -44,11 +39,6 @@
             <Font name="Impact" size="36.0" />
          </font>
       </TextField>
-      <Label fx:id="Answer" layoutX="286.0" layoutY="504.0" prefHeight="37.0" prefWidth="179.0" text="answer" visible="false">
-         <font>
-            <Font name="Impact" size="20.0" />
-         </font>
-      </Label>
       <Label fx:id="score" layoutX="930.0" layoutY="68.0" prefHeight="39.0" prefWidth="79.0" text="Score" visible="false">
          <font>
             <Font name="System Bold" size="24.0" />
@@ -100,6 +90,16 @@
       <Label fx:id="countdownLabelReady" layoutX="443.0" layoutY="422.0" prefHeight="63.0" prefWidth="148.0" text="5" visible="false">
          <font>
             <Font name="Impact" size="38.0" />
+         </font>
+      </Label>
+      <Label fx:id="Answer" layoutX="293.0" layoutY="505.0" prefHeight="37.0" prefWidth="179.0" text="answerCorrect" textFill="#1ec147" visible="false">
+         <font>
+            <Font name="Impact" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="AnswerWrong" layoutX="288.0" layoutY="505.0" prefHeight="37.0" prefWidth="179.0" text="answerWrong" textFill="#df1d1d" visible="false">
+         <font>
+            <Font name="Impact" size="20.0" />
          </font>
       </Label>
    </children>
