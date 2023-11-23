@@ -12,6 +12,8 @@ module com.example.jdictionaryev1 {
     requires org.jsoup;
     requires json.simple;
     requires jsapi;
+    requires javafx.media;
+    requires java.desktop;
 
     opens com.example.jdictionaryev1 to javafx.fxml;
     exports com.example.jdictionaryev1;

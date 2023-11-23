@@ -1,6 +1,10 @@
 package com.example.jdictionaryev1;
 
+import com.almasb.fxgl.audio.Audio;
+import com.sun.javafx.scene.control.skin.Utils;
+import game.Olympia.Media.MediaInit;
 import game.Olympia.Round.Starting;
+import game.Olympia.UserInfo.Player;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -17,11 +21,17 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
+import javax.sound.sampled.*;
+import javax.swing.*;
+
+import java.io.*;
 import java.util.*;
+import java.util.Timer;
 
 public class OlympiaController {
     @FXML
@@ -235,6 +245,30 @@ public class OlympiaController {
         nextButton.setVisible(true);
     }
 
+    public void mediaInit(String path) {
+//        try {
+//            File musicPath = new File(path);
+//            if (musicPath.exists()) {
+//                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musicPath);
+//                Clip clip = AudioSystem.getClip();
+//                clip.open(audioInputStream);
+//                clip.start();
+//            } else {
+//                System.out.println("cút");
+//            }
+//        } catch (Exception e) {
+//                System.out.println("Cút");
+//        }
+    }
+
+    public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        String path = "src/main/resources/GameOlympia/OlympiaSound/StartUp/KĐ_60s_O15.wav";
+        File file = new File(path);
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioInputStream);
+        clip.start();
+    }
 
     //    //----------------------------Round 1--------------------------
     @FXML
@@ -245,6 +279,7 @@ public class OlympiaController {
     public void gotoRound1Review(ActionEvent event) throws IOException {
         HelloApplication helloApplication = new HelloApplication();
         helloApplication.changeScreen("round1Review.fxml", 1080, 608);
+        //mediaInit();
     }
 
     public boolean endR1 = false;
@@ -510,7 +545,7 @@ public class OlympiaController {
         // Set up a Timeline to switch images every 5 seconds
         timeline = new Timeline(
                 new KeyFrame(
-                        Duration.seconds(60 / listImages.size()),
+                        Duration.seconds(15 / listImages.size()),
                         this::nextImage
                 )
         );
@@ -664,7 +699,7 @@ public class OlympiaController {
 
     @FXML
     public void startCountDownRound3() {
-        int seconds = 61;
+        int seconds = 16;
 //        if (start) {
 //            Countdown(seconds, countdownLabel3);
 //            //System.out.println(seconds);
