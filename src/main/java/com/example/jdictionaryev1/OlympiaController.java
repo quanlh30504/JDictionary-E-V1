@@ -20,6 +20,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -41,6 +42,9 @@ public class OlympiaController {
     @FXML
     public Scene scene;
     public Parent root;
+
+    public OlympiaController() throws LineUnavailableException {
+    }
 
     @FXML
     public void backToDictionary(ActionEvent event) throws IOException {
@@ -132,6 +136,9 @@ public class OlympiaController {
 //                    System.out.println("Hết cứu");
                     Platform.runLater(() -> {
                         if (labelCountDown == countdownLabel1 || labelCountDown == countdownLabel2 ) {
+                            if (labelCountDown == countdownLabel1) {
+                                playAudioClip(clip[6]);
+                            }
                             labelCountDown.setText("Time's up!");
                         }else if(labelCountDown == countdownLabel3){
                             labelCountDown.setText("Bump!!!");
@@ -245,36 +252,37 @@ public class OlympiaController {
         nextButton.setVisible(true);
     }
 
-    public void mediaInit(String path) {
-//        try {
-//            File musicPath = new File(path);
-//            if (musicPath.exists()) {
-//                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musicPath);
-//                Clip clip = AudioSystem.getClip();
-//                clip.open(audioInputStream);
-//                clip.start();
-//            } else {
-//                System.out.println("cút");
-//            }
-//        } catch (Exception e) {
-//                System.out.println("Cút");
-//        }
+    public static AudioClip[] clip = new AudioClip[100];
+
+    public static int i = 0;
+
+    public void SoundR1() {
+        String[] path = {
+                "src/main/resources/GameOlympia/OlympiaSound/StartUp/KĐ_bắt_đầu_O15.wav",
+                "src/main/resources/GameOlympia/OlympiaSound/StartUp/KĐ_chuẩn_bị_O15.wav",
+                "src/main/resources/GameOlympia/OlympiaSound/StartUp/KĐ_60s_O15.wav",
+                "src/main/resources/GameOlympia/OlympiaSound/StartUp/KĐ_mở_câu_hỏi_O15.mp3.mpeg",
+                "src/main/resources/GameOlympia/OlympiaSound/StartUp/KĐ_đúng_O15.wav",
+                "src/main/resources/GameOlympia/OlympiaSound/StartUp/KĐ_sai_O15.wav",
+                "src/main/resources/GameOlympia/OlympiaSound/StartUp/KĐ_hoàn_thành_O15.wav"
+        };
+        for (String path1 : path) {
+            clip[i] = new AudioClip(new File(path1).toURI().toString());
+            System.out.println(clip[i]);
+            i++;
+        }
+//        clip[0] = new AudioClip(new File(path[0]).toURI().toString());
+//        clip[1] = new AudioClip(new File(path[1]).toURI().toString());
+//        clip[2] = new AudioClip(new File(path[2]).toURI().toString());
+//        clip[3] = new AudioClip(new File(path[3]).toURI().toString());
     }
 
-    public static void main(String[] args)  {
-        try {
-            String path = "src/main/resources/GameOlympia/OlympiaSound/StartUp/KĐ_60s_O15.wav";
-            File file = new File(path);
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            clip.start();
-            Thread.sleep(clip.getMicrosecondLength() / 1000);
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+    public void playAudioClip(AudioClip audioClip) {
+        audioClip.play();
+    }
+
+    public void stopAudioClip(AudioClip audioClip) {
+        audioClip.stop();
     }
 
     //    //----------------------------Round 1--------------------------
@@ -283,16 +291,16 @@ public class OlympiaController {
     public Starting starting = new Starting(0);
 
     @FXML
-    public void gotoRound1Review(ActionEvent event) throws IOException {
+    public void gotoRound1Review(ActionEvent event) throws IOException, LineUnavailableException {
         HelloApplication helloApplication = new HelloApplication();
         helloApplication.changeScreen("round1Review.fxml", 1080, 608);
-        //mediaInit();
+        SoundR1();
+        playAudioClip(clip[0]);
     }
 
     public boolean endR1 = false;
 
     public void loadQuestion1() {
-
 
         if (counter == 0) { //Question 1
             Question.setText("1." + "What is the opposite of \"big\"?");
@@ -309,6 +317,8 @@ public class OlympiaController {
         if (counter == 3) {
             Question.setText("Go to next round.");
             showQuestion();
+            stopAudioClip(clip[2]);
+            playAudioClip(clip[6]);
             endR1 = true;
             counter = 0;
             submit.setDisable(true);
@@ -318,11 +328,7 @@ public class OlympiaController {
     }
 
     public boolean checkAlertAnswer(String ans) {
-        if (ans.equals("")) {
-            return true;
-        } else {
-            return false;
-        }
+        return ans.isEmpty();
     }
 
     public boolean checkAnswerRound1(String ans) {
@@ -385,12 +391,15 @@ public class OlympiaController {
     public void submitAnswerRound1() throws IOException {
         String ans = myAnswer.getText().trim();
         if (checkAnswerRound1(ans)) {
+//            mediaInit("src/main/resources/GameOlympia/OlympiaSound/StartUp/KĐ_đúng_O15.wav");
             showAnswer();
+            playAudioClip(clip[4]);
             showImageCorrect();
             Mark = starting.correctAnsPlus(Mark);
             showScore(Mark);
         } else {
             showAnswer();
+            playAudioClip(clip[5]);
             Mark = starting.incorrectAnsMinus(Mark);
             showImageWrong();
             showScore(Mark);
@@ -410,7 +419,7 @@ public class OlympiaController {
 
     @FXML
     public void startCountDownRound1() {
-        int seconds = 60;
+        int seconds = 61;
         if (start) {
             Countdown(seconds, countdownLabel1);
             //System.out.println(seconds);
@@ -437,7 +446,6 @@ public class OlympiaController {
                 countdownLabelReady.setVisible(false);
                 correctImage.setVisible(false);
                 wrongImage.setVisible(false);
-
 //                nextToRound2Review.setVisible(false);
                 startRound1();
                 //submit.setDisable(true);
@@ -449,6 +457,8 @@ public class OlympiaController {
         // Bắt đầu Timeline
         timeline.play();
         readyR1 = true;
+        playAudioClip(clip[3]);
+        playAudioClip(clip[1]);
     }
 
     @FXML
@@ -460,6 +470,7 @@ public class OlympiaController {
         hideImageCheck();
         hideAnswer();
         startCountDownRound1();
+        playAudioClip(clip[2]);
         showScore(Mark);
         loadQuestion1();
     }
