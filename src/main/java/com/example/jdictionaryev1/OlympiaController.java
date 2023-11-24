@@ -239,7 +239,7 @@ public class OlympiaController {
 
     @FXML
     public void showImageCorrect() {
-        playAudioClip(clipOb[4]);
+        playAudioClip(clipSU[4]);
         correctImage.setVisible(true);   // hàm hiện ảnh biểu thị correct
         wrongImage.setVisible(false);
     }
@@ -412,7 +412,6 @@ public class OlympiaController {
 //            mediaInit("src/main/resources/GameOlympia/OlympiaSound/StartUp/KĐ_đúng_O15.wav");
             showAnswer();
             hideAnswerWrong();
-            playAudioClip(clipSU[4]);
             showImageCorrect();
             Mark = starting.correctAnsPlus(Mark);
             showScore(Mark);
