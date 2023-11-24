@@ -49,7 +49,7 @@
                 <Font name="System Bold" size="20.0" />
             </font>
         </Label>
-        <Label fx:id="wrongtext" layoutX="474.0" layoutY="541.0" prefHeight="30.0" prefWidth="201.0" text="Incorrect Answers : 1" textFill="RED">
+        <Label fx:id="wrongtext" layoutX="470.0" layoutY="541.0" prefHeight="30.0" prefWidth="227.0" text="Incorrect Answers : 1" textFill="RED">
             <font>
                 <Font name="System Bold" size="20.0" />
             </font>
