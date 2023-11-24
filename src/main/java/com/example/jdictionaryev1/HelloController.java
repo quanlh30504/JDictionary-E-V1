@@ -22,6 +22,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
 import javafx.scene.shape.Circle;
 import javafx.stage.Popup;
 import javafx.stage.PopupWindow;
@@ -31,6 +32,8 @@ import module.SQLite.SQLiteConnection;
 import org.jetbrains.annotations.NotNull;
 import searchingAlgorithm.Trie;
 
+import javax.sound.sampled.LineUnavailableException;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -74,6 +77,12 @@ public class HelloController extends DictionaryManagement {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root, 1080, 608);
         stage.setScene(scene);
+        try {
+            OlympiaController olympiaController = new OlympiaController();
+            olympiaController.playAudioClip(new AudioClip(new File("src/main/resources/GameOlympia/OlympiaSound/Giới_thiệu_cuộc_thi_O15.mp3.mpeg").toURI().toString()));
+        } catch (LineUnavailableException e) {
+            throw new RuntimeException(e);
+        }
         stage.show();
     }
         //----------------------------------------
