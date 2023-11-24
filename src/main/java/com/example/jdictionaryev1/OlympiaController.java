@@ -535,7 +535,7 @@ public class OlympiaController {
         listQuestionRound2.add("How does social media assist people in staying in touch with friends and family?");
         listQuestionRound2.add("How does the ____________ affect outdoor activities?");
         listQuestionRound2.add("The vocabulary we want to talk about here is?");
-    }
+    }//
 
 
     @FXML
@@ -661,7 +661,7 @@ public class OlympiaController {
                 }
                 j++;
                 if(i==39){
-                    j=0;
+                    j=0;//
                 }
             }
         }
@@ -673,7 +673,7 @@ public class OlympiaController {
         String ques = listQuestionRound2.get(line);
         String cmt = String.valueOf(line+1);
        Question.setText(cmt +"." + ques);
-       showQuestion();
+       showQuestion();//
     }
 
     public boolean checkAnswerRound2(String ans) {
@@ -708,7 +708,7 @@ public class OlympiaController {
                 openImageButton4.setDisable(true);
             }
         }
-        return false;
+        return false;//
     }
 
     @FXML
@@ -723,7 +723,7 @@ public class OlympiaController {
             wrongAnsRound2();
             Mark -= 5;
             showImageWrong();
-            showScore(Mark);
+            showScore(Mark);//
         }
     }
 
@@ -732,13 +732,13 @@ public class OlympiaController {
         String myAns = myAnswer.getText().toLowerCase().trim();
         myAnswerLabel.setText(myAns);
         myAnswerLabel.setVisible(true);
-        myanswerIs.setVisible(true);
+        myanswerIs.setVisible(true);//
         myAnswer.clear();
     }
     @FXML
     public void startCountDownRound2() {
         int seconds = 21;
-        Countdown(seconds,countdownLabel2);
+        Countdown(seconds,countdownLabel2);//
     }
 
 
@@ -748,7 +748,7 @@ public class OlympiaController {
         changeColorGreen(Line);
     }
     public void wrongAnsRound2(){
-        changeColorRed(Line);
+        changeColorRed(Line);//
     }
     @FXML
     public void chooseLine0(){
@@ -761,7 +761,7 @@ public class OlympiaController {
         changeColorYellow(0);
         loadQuestionRound2(Line);
         countdownLabel2.setText("20");
-        startCountDownRound2();
+        startCountDownRound2();//
     }
     public void chooseLine1(){
         //xoa du lieu cau cu
@@ -773,7 +773,7 @@ public class OlympiaController {
         changeColorYellow(1);
         loadQuestionRound2(Line);
         countdownLabel2.setText("20");
-        startCountDownRound2();
+        startCountDownRound2();//
     }
     public void chooseLine2(){
         //xoa du lieu cau cu
@@ -785,7 +785,7 @@ public class OlympiaController {
         changeColorYellow(2);
         loadQuestionRound2(Line);
         countdownLabel2.setText("20");
-        startCountDownRound2();
+        startCountDownRound2();//
 
     }
     public void chooseLine3(){
@@ -797,31 +797,31 @@ public class OlympiaController {
         Line = 3;
         changeColorYellow(3);
         loadQuestionRound2(Line);
-        countdownLabel2.setText("20");
+        countdownLabel2.setText("20");//
         startCountDownRound2();
     }
 
     @FXML
     public void changeColorRed(int line){
         for(int i = 10*line;i<10*line+10;i++){
-            circles[i].setFill(Color.web("#FF6666"));
+            circles[i].setFill(Color.web("#FF6666"));//
         }
     }
     public void changeColorGreen(int line){
         for(int i = 10*line;i<10*line+10;i++){
-            circles[i].setFill(Color.web("#00CC00"));
+            circles[i].setFill(Color.web("#00CC00"));//
         }
     }
     public void changeColorYellow(int line){
         for(int i = 10*line;i<10*line+10;i++){
-            circles[i].setFill(Color.web("#FFCC33"));
+            circles[i].setFill(Color.web("#FFCC33"));//
         }
     }
 
     @FXML
     public void showTextLine(int line){
         for(int i = line*10;i<line*10+10;i++){
-            textAns[i].setVisible(true);
+            textAns[i].setVisible(true);//
         }
     }
 
@@ -833,7 +833,7 @@ public class OlympiaController {
         countdownLabelReady.setVisible(true);
         if (readyR1) {
             Countdown(6, countdownLabelReady);
-            readyR2 = false;
+            readyR2 = false;//
         }
         // Tạo một Timeline với một KeyFrame để thực hiện việc ẩn các thành phần sau khi hàm Countdown kết thúc
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(7), new EventHandler<ActionEvent>() {
@@ -855,7 +855,7 @@ public class OlympiaController {
             }
         }));
         // Bắt đầu Timeline
-        timeline.play();
+        timeline.play();//
     }
 
     @FXML
@@ -874,7 +874,7 @@ public class OlympiaController {
         myAnswerLabel.setVisible(false);
         submit.setDisable(true);
         myAnswer.setDisable(true);
-        AnchorPaneRound2Submit.setVisible(true);
+        AnchorPaneRound2Submit.setVisible(true);//
     }
 
     @FXML
@@ -899,7 +899,7 @@ public class OlympiaController {
             anchorPaneLoseRound2.setVisible(true);
 
         }
-        AnchorPaneRound2Submit.setVisible(false);
+        AnchorPaneRound2Submit.setVisible(false);//
     }
     public void cancelRound2(){
         showFullImageQuestion();
@@ -910,7 +910,7 @@ public class OlympiaController {
         AnswerWrong.setText(correctAns);
         AnswerWrong.setVisible(true);
         Mark -= 15;
-        showScore(Mark);
+        showScore(Mark);//
     }
     public void showFullImageQuestion(){
         openImageButton1.setVisible(false);
@@ -921,12 +921,12 @@ public class OlympiaController {
         pieceImage2.setVisible(false);
         pieceImage3.setVisible(false);
         pieceImage4.setVisible(false);
-        pieceImage5.setVisible(false);
+        pieceImage5.setVisible(false);//
     }
 
     @FXML
     public void startRound2() {
-        anchorPaneReady.setVisible(false);
+        anchorPaneReady.setVisible(false);//
     }
 
     //----------------------------------Round 3--------------------------
