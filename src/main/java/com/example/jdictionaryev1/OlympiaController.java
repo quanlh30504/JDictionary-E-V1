@@ -239,6 +239,7 @@ public class OlympiaController {
 
     @FXML
     public void showImageCorrect() {
+        playAudioClip(clipOb[4]);
         correctImage.setVisible(true);   // hàm hiện ảnh biểu thị correct
         wrongImage.setVisible(false);
     }
@@ -703,8 +704,8 @@ public class OlympiaController {
     public void loadQuestionRound2(int line){
         String ques = listQuestionRound2.get(line);
         String cmt = String.valueOf(line+1);
-       Question.setText(cmt +"." + ques);
-       showQuestion();//
+        Question.setText(cmt +"." + ques);
+        showQuestion();//
     }
 
     public boolean checkAnswerRound2(String ans) {
@@ -747,6 +748,8 @@ public class OlympiaController {
         String ans = myAnswerLabel.getText().toLowerCase().trim();
         if (checkAnswerRound2(ans)) {
             correctAnsRound2();
+            playAudioClip(clipOb[7]);
+            delay(8000);
             showImageCorrect();
             Mark += 10;
             showScore(Mark);
@@ -768,6 +771,7 @@ public class OlympiaController {
     @FXML
     public void startCountDownRound2() {
         int seconds = 16;
+        playAudioClip(clipOb[1]);
         Countdown(seconds,countdownLabel2);
     }
 
@@ -781,7 +785,7 @@ public class OlympiaController {
         changeColorRed(Line);//
     }
     @FXML
-    public void chooseLine0(){
+    public void chooseLine0() throws InterruptedException {
         //xoa du lieu cau cu
         hideImageCheck();
         myAnswerLabel.setVisible(false);
@@ -789,8 +793,11 @@ public class OlympiaController {
         //------------
         Line = 0;
         changeColorYellow(0);
+        playAudioClip(clipOb[2]);
+        delay(2000);
+        playAudioClip(clipOb[3]);
         loadQuestionRound2(Line);
-        countdownLabel2.setText("20");
+        countdownLabel2.setText("15");
         startCountDownRound2();//
     }
     public void chooseLine1(){
@@ -801,8 +808,11 @@ public class OlympiaController {
         //------------
         Line = 1;
         changeColorYellow(1);
+        playAudioClip(clipOb[2]);
+        delay(2000);
+        playAudioClip(clipOb[3]);
         loadQuestionRound2(Line);
-        countdownLabel2.setText("20");
+        countdownLabel2.setText("15");
         startCountDownRound2();//
     }
     public void chooseLine2(){
@@ -813,8 +823,11 @@ public class OlympiaController {
         //------------
         Line = 2;
         changeColorYellow(2);
+        playAudioClip(clipOb[2]);
+        delay(2000);
+        playAudioClip(clipOb[3]);
         loadQuestionRound2(Line);
-        countdownLabel2.setText("20");
+        countdownLabel2.setText("15");
         startCountDownRound2();//
 
     }
@@ -826,8 +839,11 @@ public class OlympiaController {
         //------------
         Line = 3;
         changeColorYellow(3);
+        playAudioClip(clipOb[2]);
+        delay(2000);
+        playAudioClip(clipOb[3]);
         loadQuestionRound2(Line);
-        countdownLabel2.setText("20");//
+        countdownLabel2.setText("15");//
         startCountDownRound2();
     }
 
@@ -959,6 +975,7 @@ public class OlympiaController {
     @FXML
     public void startRound2() {
         anchorPaneReady.setVisible(false);//
+        playAudioClip(clipOb[9]);
     }
 
     //----------------------------------Round 3--------------------------

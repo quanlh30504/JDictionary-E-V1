@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextField layoutX="440.0" layoutY="74.0" prefHeight="356.0" prefWidth="313.0" />
+      <ImageView fitHeight="52.0" fitWidth="79.0" layoutX="261.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true" />
+      <TextField layoutX="27.0" layoutY="74.0" prefHeight="356.0" prefWidth="313.0" />
+      <ImageView fx:id="Translate" fitHeight="52.0" fitWidth="100.0" layoutX="340.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true" />
+      <TextArea fx:id="searchLanguage" layoutX="108.0" layoutY="14.0" prefHeight="23.0" prefWidth="151.0" text="Việt" />
+      <TextArea fx:id="targetLanguage" layoutX="531.0" layoutY="13.0" prefHeight="23.0" prefWidth="151.0" text="Anh" />
+   </children>
+</Pane>
