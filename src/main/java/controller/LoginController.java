@@ -14,19 +14,7 @@ import java.io.IOException;
 
 public class LoginController {
 
-    @FXML
-    //--------------------------------tạo chuyển cảnh---------------------------
-    public Stage stage;
     public Scene scene;
-    public Parent root;
-    // chuyển sang từ điển
-    public void switchToDictionary(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Dictionary.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root,840,540);
-        stage.setScene(scene);
-        stage.show();
-    }
 
     public LoginController() {
     }
