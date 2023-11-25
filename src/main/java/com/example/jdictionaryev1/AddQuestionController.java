@@ -20,7 +20,7 @@ public class AddQuestionController extends SQLiteConnection {
     public Stage stage;
     @FXML
     public Scene scene;
-    public Parent root;
+
     @FXML
     public void switchToStartOlympiaGame(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("OlympiaStart.fxml"));
@@ -30,8 +30,6 @@ public class AddQuestionController extends SQLiteConnection {
         stage.show();
     }
 
-    @FXML
-    private Button outPage;
     @FXML
     private TextField answerInsert;
 
@@ -99,9 +97,4 @@ public class AddQuestionController extends SQLiteConnection {
         choice4Insert.clear();
     }
 
-    public void QuitPage(ActionEvent event) throws IOException {
-        //chuyển về màn hình app
-        HelloApplication helloApplication = new HelloApplication();
-        helloApplication.changeScreen("Dictionary.fxml",840,540);
-    }
 }

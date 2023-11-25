@@ -47,7 +47,6 @@ public class HelloController extends DictionaryManagement {
     @FXML
     public Stage stage;
     public Scene scene;
-    public Parent root;
 
     //----------------------------- chuyển sang từ điển---------------------
     @FXML
@@ -86,16 +85,6 @@ public class HelloController extends DictionaryManagement {
         stage.show();
     }
         //----------------------------------------
-
-    @FXML
-    public void switchToAdd(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Addq.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root, 840, 540);
-        stage.setScene(scene);
-        stage.show();
-
-    }
 
     //------------------------------ start game-------------------------
     @FXML
