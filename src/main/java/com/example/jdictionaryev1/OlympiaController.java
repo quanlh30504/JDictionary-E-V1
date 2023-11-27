@@ -995,7 +995,8 @@ public class OlympiaController {
                 "src/main/resources/GameOlympia/OlympiaSound/SpeedUp/TT_30s_O15.mp3",
                 "src/main/resources/GameOlympia/OlympiaSound/SpeedUp/TT_mở_đáp_án_O15.mp3",
                 "src/main/resources/GameOlympia/OlympiaSound/SpeedUp/VCNV_ô_chữ_được_mở_O15.mp3.mpeg",
-                "src/main/resources/GameOlympia/OlympiaSound/SpeedUp/KĐ_sai_O7.mp3.mpeg"
+                "src/main/resources/GameOlympia/OlympiaSound/SpeedUp/KĐ_sai_O7.mp3.mpeg",
+                "src/main/resources/GameOlympia/OlympiaSound/SpeedUp/TT_mở_câu_hỏi_O15.mp3.mpeg"
         };// TT is not finished.
 
         for (String path1 : path) {
@@ -1058,7 +1059,7 @@ public class OlympiaController {
         // Set up a Timeline to switch images every 5 seconds
         timeline = new Timeline(
                 new KeyFrame(
-                        Duration.seconds(10 / listImages.size()),
+                        Duration.seconds(3 / listImages.size()),
                         this::nextImage
                 )
         );
@@ -1080,6 +1081,7 @@ public class OlympiaController {
             return;
         }
         delay(3000);
+        playAudioClip(clipSp[5]);
         currentIndex = 0;
         // Display the first image
         imageViewQuestion.setImage(listImages.get(counter).get(currentIndex));
@@ -1118,15 +1120,18 @@ public class OlympiaController {
                 alertAnswer.setText("Invalid answer");
                 alertAnswer.setVisible(true);
                 AnswerWrong.setText("whale");
+                playAudioClip(clipSp[4]);
                 return false;
             }
             if (ans.equals("whale")) {
                 Answer.setText("whale");
+                playAudioClip(clipSp[3]);
                 alertAnswer.setVisible(false);
                 return true;
             } else {
                 AnswerWrong.setText("whale");
                 alertAnswer.setVisible(false);
+                playAudioClip(clipSp[4]);
                 return false;
             }
         }
@@ -1276,7 +1281,7 @@ public class OlympiaController {
 
     public Label QSscore;
 
-    public static AudioClip[] clipF = new AudioClip[10];
+    public static AudioClip[] clipF = new AudioClip[15];
 
     public void SoundR4() {
         i = 0;
@@ -1286,8 +1291,13 @@ public class OlympiaController {
                 "src/main/resources/GameOlympia/OlympiaSound/ReachToFinishLine/VĐ_lên_sân_khấu_O15.mp3.mpeg",
                 "src/main/resources/GameOlympia/OlympiaSound/ReachToFinishLine/VĐ_ngôi_sao_O15.mp3.mpeg",
                 "src/main/resources/GameOlympia/OlympiaSound/ReachToFinishLine/VĐ_sai_O21.mp3.mpeg",
-                "src/main/resources/GameOlympia/OlympiaSound/ReachToFinishLine/VĐ_đúng_O15.mp3.mpeg"
-        };
+                "src/main/resources/GameOlympia/OlympiaSound/ReachToFinishLine/VĐ_đúng_O15.mp3.mpeg",
+                "src/main/resources/GameOlympia/OlympiaSound/ReachToFinishLine/VĐ_10s_O15_1.mp3",
+                "src/main/resources/GameOlympia/OlympiaSound/ReachToFinishLine/VĐ_15s_O15_1.mp3",
+                "src/main/resources/GameOlympia/OlympiaSound/ReachToFinishLine/VĐ_20s_O15.mp3",
+                "src/main/resources/GameOlympia/OlympiaSound/ReachToFinishLine/TT_mở_đáp_án_thí_sinh_O14.mp3",
+                "src/main/resources/GameOlympia/OlympiaSound/ReachToFinishLine/VĐ_mở_câu_hỏi_O15.mp3.mpeg",
+        }; // wrong and correct
 
         for (String path1 : path) {
             clipF[i] = new AudioClip(new File(path1).toURI().toString());
@@ -1368,21 +1378,6 @@ public class OlympiaController {
         checkBox7.setOnAction(event -> handleCheckBoxAction(checkBox7));
         checkBox8.setOnAction(event -> handleCheckBoxAction(checkBox8));
         checkBox9.setOnAction(event -> handleCheckBoxAction(checkBox9));
-//        checkBoxes[1].setOnAction(event -> handleCheckBoxAction(checkBox1));
-//        checkBoxes[2].setOnAction(event -> handleCheckBoxAction(checkBox2));
-//        checkBoxé.setOnAction(event -> handleCheckBoxAction(checkBox3));
-//        checkBox4.setOnAction(event -> handleCheckBoxAction(checkBox4));
-//        checkBox5.setOnAction(event -> handleCheckBoxAction(checkBox5));
-//        checkBox6.setOnAction(event -> handleCheckBoxAction(checkBox6));
-//        checkBox7.setOnAction(event -> handleCheckBoxAction(checkBox7));
-//        checkBox8.setOnAction(event -> handleCheckBoxAction(checkBox8));
-//        checkBox9.setOnAction(event -> handleCheckBoxAction(checkBox9));
-        //nút "Next"
-//        for (int i = 1; i <= 9; ++i) {
-//            if (i % 3 != 1) {
-//                setSwitchOnOffOtherBox(checkBoxes[i], true);
-//            }
-//        }
         counterR4();
         playRound4.setOnAction(event -> {
             try {
@@ -1397,6 +1392,7 @@ public class OlympiaController {
     @FXML
     public void handleCheckBoxAction(CheckBox checkBox) {
         if (checkBox.isSelected()) {
+            playAudioClip(clipF[9]);
             // Nếu ô checkbox được chọn, thêm giá trị của ô đó vào danh sách
             listQuestion.add(checkBox.getText());
             setSwitchOnOffOtherBox(checkBox, true);
@@ -1469,16 +1465,6 @@ public class OlympiaController {
         }
     }
 
-    private boolean bool(int i) {
-        return (i == 0);
-    }
-
-    private int convertToInt(boolean bool) {
-        if (bool) {
-            return 0;
-        } else return 1;
-    }
-
     public static boolean readyR4 = true;
 
     @FXML
@@ -1489,6 +1475,7 @@ public class OlympiaController {
             Countdown(6, countdownLabelReady);
             readyR4 = false;
         }
+        playAudioClip(clipF[2]);
         // Tạo một Timeline với một KeyFrame để thực hiện việc ẩn các thành phần sau khi hàm Countdown kết thúc
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(7), new EventHandler<ActionEvent>() {
             @Override
@@ -1506,9 +1493,6 @@ public class OlympiaController {
 
     @FXML
     public void gotoRound4() throws IOException {
-        // In ra giá trị đã chọn
-//        System.out.println("Selected values: " + listQuestion);
-
         HelloApplication helloApplication = new HelloApplication();
         helloApplication.changeScreen("round4.fxml", 1080, 608);
     }
@@ -1937,6 +1921,7 @@ public class OlympiaController {
 
     @FXML
     public void starHopeFunction(){
+        playAudioClip(clipF[3]);
         starHopeImage.setVisible(true);
         checkStar = true;
         starHopeButton.setDisable(true);
@@ -1944,6 +1929,7 @@ public class OlympiaController {
     @FXML
     public void startRound4() {
         // show các câu hỏi đã lựa chọn vào ô tròn
+        playAudioClip(clipF[1]);
         labelPackage1.setVisible(true);
         labelPackage2.setVisible(true);
         labelPackage3.setVisible(true);
@@ -1959,6 +1945,7 @@ public class OlympiaController {
         showScore(Mark);
         // hiện nút ngôi sao hy vọng
         starHopeButton.setVisible(true);
+        playAudioClip(clipF[10]);
         //count down
 //        startCountDownRound4(16);
         // load câu hỏi ra màn hình
