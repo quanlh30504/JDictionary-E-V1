@@ -16,9 +16,16 @@ public class OlympiaDB extends SQLiteConnection {
         return preparedStatement.executeQuery();
     }
 
-    public ResultSet executeObstacle() throws SQLException {
+    public ResultSet executeObstacle(String question) throws SQLException {
         String dataTable = "VCNV";
-        String searchQuery = "SELECT Question FROM " + dataTable;
+        String searchQuery = "SELECT " + question +  " FROM " + dataTable;
+        PreparedStatement preparedStatement = connection.prepareStatement(searchQuery);
+        return preparedStatement.executeQuery();
+    }
+
+    public ResultSet addImageR2() throws SQLException {
+        String dataTable = "VCNV";
+        String searchQuery = "SELECT Image FROM " + dataTable;
         PreparedStatement preparedStatement = connection.prepareStatement(searchQuery);
         return preparedStatement.executeQuery();
     }
