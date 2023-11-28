@@ -226,7 +226,6 @@ public class OlympiaController {
 
     @FXML
     public void showImageCorrect() {
-        playAudioClip(clipOb[4]);
         correctImage.setVisible(true);   // hàm hiện ảnh biểu thị correct
         wrongImage.setVisible(false);
     }
@@ -264,6 +263,14 @@ public class OlympiaController {
 
     public void showNextButton(Button nextButton) {
         nextButton.setVisible(true);
+    }
+
+    public void endSound(AudioClip[] audioClips) {
+        for (AudioClip audioClip : audioClips) {
+            if (audioClip.isPlaying()) {
+                audioClip.stop();
+            }
+        }
     }
 
     public static AudioClip[] clipSU = new AudioClip[10];
@@ -403,9 +410,9 @@ public class OlympiaController {
     public void submitAnswerRound1() throws SQLException {
         String ans = myAnswer.getText().trim();
         if (checkAnswerRound1(ans)) {
-//            mediaInit("src/main/resources/GameOlympia/OlympiaSound/StartUp/KĐ_đúng_O15.wav");
             showAnswer();
             hideAnswerWrong();
+            playAudioClip(clipSU[4]);
             showImageCorrect();
             Mark = starting.correctAnsPlus(Mark);
             showScore(Mark);
@@ -525,7 +532,6 @@ public class OlympiaController {
     public void gotoRound2Review() throws IOException, SQLException {
         HelloApplication helloApplication = new HelloApplication();
         helloApplication.changeScreen("round2Review.fxml", 1080, 608);
-        stopAudioClip(clipSU[6]);
         SoundR2();
         playAudioClip(clipOb[0]);
 //        olympiaDB.executeObstacle();
@@ -1010,6 +1016,7 @@ public class OlympiaController {
     public void gotoRound3Review() throws IOException {
         HelloApplication helloApplication = new HelloApplication();
         helloApplication.changeScreen("round3Review.fxml", 1080, 608);
+        //endSound(clipOb);
         SoundR3();
         playAudioClip(clipSp[0]);
     }
@@ -1080,12 +1087,12 @@ public class OlympiaController {
             imageViewQuestion.setVisible(false);
             return;
         }
-        delay(3000);
         playAudioClip(clipSp[5]);
         currentIndex = 0;
         // Display the first image
         imageViewQuestion.setImage(listImages.get(counter).get(currentIndex));
 
+        delay(6000);
 //        System.out.println(listImages.size());
         startCountDownRound3();
         // Set up a Timeline to switch images every 5 seconds
@@ -1217,7 +1224,7 @@ public class OlympiaController {
 
     @FXML
     public void startCountDownRound3() {
-        int seconds = 10;
+        int seconds = 3;
         playAudioClip(clipSp[1]);
 //        if (start) {
 //            Countdown(seconds, countdownLabel3);
@@ -1310,6 +1317,7 @@ public class OlympiaController {
     public void gotoRound4Review() throws IOException {
         HelloApplication helloApplication = new HelloApplication();
         helloApplication.changeScreen("round4Review.fxml", 1080, 608);
+        stopAudioClip(clipSU[6]);
         SoundR4();
         playAudioClip(clipF[0]);
     }
@@ -1568,9 +1576,15 @@ public class OlympiaController {
             Answer.setDisable(true);
             starHopeButton.setDisable(true);
             showNextButton(resultButton); // hiện nút endgame dẫn ra bảng kết quả
-        }else {
-            countdownLabel4.setText("20");
-            startCountDownRound4(21);
+        } else {
+//            countdownLabel4.setText("20");
+            if (listQuestion.get(counter).equals("10")) {
+                countdownLabel4.setText("10");
+            } else if (listQuestion.get(counter).equals("20")) {
+                countdownLabel4.setText("15");
+            } else {
+                countdownLabel4.setText("20");
+            }
 
             if (counter == 0) { //Question 1
 
@@ -1709,6 +1723,8 @@ public class OlympiaController {
                 }
             }
         }
+        delay(5000);
+        startCountDownRound4();
     }
 
 
@@ -1847,6 +1863,7 @@ public class OlympiaController {
         String ans = myAnswerLabel.getText().trim();
         if (checkAnswerRound4(ans)) {
             showAnswer();
+            playAudioClip(clipF[5]);
             correctAnswerIs.setVisible(true);
             hideAnswerWrong();
             showImageCorrect();
@@ -1877,6 +1894,7 @@ public class OlympiaController {
             Mark += add;
             showScore(Mark);
         } else {
+            playAudioClip(clipF[6]);
             correctAnswerIs.setVisible(true);
             showAnswerWrong();
             hideAnswer();
@@ -1929,7 +1947,6 @@ public class OlympiaController {
     @FXML
     public void startRound4() {
         // show các câu hỏi đã lựa chọn vào ô tròn
-        playAudioClip(clipF[1]);
         labelPackage1.setVisible(true);
         labelPackage2.setVisible(true);
         labelPackage3.setVisible(true);
@@ -1942,10 +1959,11 @@ public class OlympiaController {
         Question.setVisible(true);
         submit.setDisable(false);
         myAnswer.setDisable(false);
+        countdownLabel4.setVisible(true);
         showScore(Mark);
         // hiện nút ngôi sao hy vọng
         starHopeButton.setVisible(true);
-        playAudioClip(clipF[10]);
+        //playAudioClip(clipF[10]);
         //count down
 //        startCountDownRound4(16);
         // load câu hỏi ra màn hình
@@ -1989,23 +2007,6 @@ public class OlympiaController {
         //System.out.println("im here");
         if (alert.showAndWait().get() == ButtonType.OK) {
             HelloApplication helloApplication = new HelloApplication();
-//            for (AudioClip clip : clipSU)
-//                if (clip.isPlaying()) {
-//                    clip.stop();
-//                }
-//            for (AudioClip clip : clipOb) {
-//                if (clip.isPlaying()) {
-//                    clip.stop();
-//                }
-//            }
-//            for (AudioClip clip : clipSp)
-//                if (clip.isPlaying()) {
-//                    clip.stop();
-//                }
-//            for (AudioClip clip : clipF)
-//                if (clip.isPlaying()) {
-//                    clip.stop();
-//                }
             helloApplication.changeScreen("OlympiaStart.fxml", 1080, 608);
             playAudioClip(new AudioClip(new File("src/main/resources/GameOlympia/OlympiaSound/Giới_thiệu_cuộc_thi_O15.mp3.mpeg").toURI().toString()));
         }

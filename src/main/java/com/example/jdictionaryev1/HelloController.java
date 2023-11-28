@@ -29,10 +29,13 @@ import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 import module.SQLite.SQLiteConnection;
+import module.TextToSpeech;
 import org.jetbrains.annotations.NotNull;
 import searchingAlgorithm.Trie;
 
 import javax.sound.sampled.LineUnavailableException;
+import javax.speech.AudioException;
+import javax.speech.EngineException;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -487,5 +490,22 @@ public class HelloController extends DictionaryManagement {
                     }
             //-----------------Add Question into database-----------------------
     });
+    }
+
+    @FXML
+    public Button makeSoundButton;
+
+    @FXML
+    public void makeSound() {
+        TextToSpeech textToSpeech = new TextToSpeech();
+        try {
+            textToSpeech.Spelling("Hello Guy");
+        } catch (EngineException e) {
+            throw new RuntimeException(e);
+        } catch (AudioException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
