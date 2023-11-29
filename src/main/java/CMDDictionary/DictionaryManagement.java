@@ -45,7 +45,7 @@ public class DictionaryManagement {
             System.out.println((i + 1) + " | " + word.getWordFound() + " | " + word.getWordExplaination());
         }
     }
-
+//
     public void insertFromFile(String filePath) {
         filePath = "src/main/java/CMDDictionary/"
                 + filePath + ".txt";
