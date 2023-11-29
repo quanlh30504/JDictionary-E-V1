@@ -20,7 +20,7 @@ public class GoogleTranslateAPI {
         }
     }
 
-    private static String translate(String text, String targetLanguage) throws Exception {
+    public static String translate(String text, String targetLanguage) throws Exception {
         String url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl="
                 + URLEncoder.encode(targetLanguage, "UTF-8") + "&dt=t&q=" + URLEncoder.encode(text, "UTF-8");
         URL obj = new URL(url);

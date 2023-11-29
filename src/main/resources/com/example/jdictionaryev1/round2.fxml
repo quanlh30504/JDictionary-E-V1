@@ -109,11 +109,6 @@
             <Font name="Impact" size="39.0" />
          </font>
       </Button>
-      <ImageView fx:id="pieceImage5" fitHeight="189.0" fitWidth="183.0" layoutX="781.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../GameOlympia/square.png" />
-         </image>
-      </ImageView>
       <Label fx:id="myanswerIs" layoutX="53.0" layoutY="533.0" prefHeight="34.0" prefWidth="164.0" text="My answer is :" textFill="#f7f7f7" visible="false">
          <font>
             <Font name="Impact" size="26.0" />
@@ -203,6 +198,31 @@
             </Button>
          </children>
       </AnchorPane>
+      <Label fx:id="correctAnswerIs" layoutX="713.0" layoutY="511.0" prefHeight="30.0" prefWidth="146.0" text="The answer is :" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Impact" size="22.0" />
+         </font>
+      </Label>
+      <Label fx:id="Answer" layoutX="865.0" layoutY="512.0" prefHeight="27.0" prefWidth="152.0" text="answer" textFill="#56f445" visible="false">
+         <font>
+            <Font name="Impact" size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="AnswerWrong" layoutX="865.0" layoutY="512.0" prefHeight="27.0" prefWidth="152.0" text="answerWrong" textFill="#ff4d4d" visible="false">
+         <font>
+            <Font name="Impact" size="21.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="pieceImage5" fitHeight="192.0" fitWidth="194.0" layoutX="768.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../GameOlympia/square.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="openImageButton5" disable="true" layoutX="786.0" layoutY="240.0" mnemonicParsing="false" onAction="#loadQuestion5R2" prefHeight="154.0" prefWidth="154.0" style="-fx-background-radius: 50; -fx-background-color: transparent;" styleClass="choose_image_5" stylesheets="@../../../application.css" text="5">
+         <font>
+            <Font name="Impact" size="39.0" />
+         </font>
+      </Button>
       <AnchorPane fx:id="anchorPaneReady" layoutX="174.0" layoutY="101.0" prefHeight="418.0" prefWidth="765.0">
          <children>
             <ImageView fitHeight="459.0" fitWidth="783.0" layoutX="-2.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
@@ -226,20 +246,5 @@
             </Label>
          </children>
       </AnchorPane>
-      <Label fx:id="correctAnswerIs" layoutX="713.0" layoutY="511.0" prefHeight="30.0" prefWidth="146.0" text="The answer is :" textFill="WHITE" visible="false">
-         <font>
-            <Font name="Impact" size="22.0" />
-         </font>
-      </Label>
-      <Label fx:id="Answer" layoutX="865.0" layoutY="512.0" prefHeight="27.0" prefWidth="152.0" text="answer" textFill="#56f445" visible="false">
-         <font>
-            <Font name="Impact" size="21.0" />
-         </font>
-      </Label>
-      <Label fx:id="AnswerWrong" layoutX="865.0" layoutY="512.0" prefHeight="27.0" prefWidth="152.0" text="answerWrong" textFill="#ff4d4d" visible="false">
-         <font>
-            <Font name="Impact" size="21.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

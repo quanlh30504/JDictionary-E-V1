@@ -16,7 +16,7 @@ public class TextToSpeech {
             Central.registerEngineCentral("com.sun.speech.freetts.jsapi.FreeTTSEngineCentral");
             Synthesizer synthesizer = Central.createSynthesizer(new SynthesizerModeDesc(Locale.US));
             synthesizer.allocate();
-            System.out.println(1);
+//            System.out.println(1);
             synthesizer.resume();
             synthesizer.speakPlainText(word, null);
             synthesizer.waitEngineState(synthesizer.QUEUE_EMPTY);
