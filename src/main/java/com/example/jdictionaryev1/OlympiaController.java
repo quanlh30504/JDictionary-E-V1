@@ -41,6 +41,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.Timer;
+import java.util.concurrent.TimeUnit;
 
 import static java.lang.Math.max;
 import static java.lang.Math.min;
@@ -109,10 +110,14 @@ public class OlympiaController {
     @FXML
     public void Countdown(int seconds, Label labelCountDown) {
         Timer timer = new Timer();
+        int de_lay = 0;
+
+        if (labelCountDown == countdownLabel2 || labelCountDown == countdownLabel3) {
+            de_lay = 6000;
+        }
 
         timer.scheduleAtFixedRate(new TimerTask() {
             int remainingSeconds = seconds;
-
             @Override
             public void run() {
                 if (remainingSeconds > 0) {
@@ -174,7 +179,8 @@ public class OlympiaController {
                     timer.cancel();
                 }
             }
-        }, 0, 1000);
+        }, de_lay, 1000);
+
     }
     //------------------------tạo delay----------------------------------
     public static void delay(int milliseconds) {
@@ -824,10 +830,16 @@ public class OlympiaController {
     @FXML
     public void startCountDownRound2() {
         int seconds = 16;
-        playAudioClip(clipOb[1]);
         Countdown(seconds,countdownLabel2);
-    }
+        try {
+            wait(6000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        playAudioClip(clipOb[1]);
+        System.out.println(1);
 
+    }
 
     @FXML
     public void correctAnsRound2(){
@@ -837,8 +849,9 @@ public class OlympiaController {
     public void wrongAnsRound2(){
         changeColorRed(Line);//
     }
+
     @FXML
-    public void chooseLine0() throws InterruptedException {
+    public synchronized void chooseLine0() throws InterruptedException {
         //xoa du lieu cau cu
         hideImageCheck();
         myAnswerLabel.setVisible(false);
@@ -847,11 +860,12 @@ public class OlympiaController {
         Line = 0;
         changeColorYellow(0);
         playAudioClip(clipOb[2]);
-        delay(2000);
+        wait(2000);
         playAudioClip(clipOb[3]);
         loadQuestionRound2(Line);
+        System.out.println(2);
         countdownLabel2.setText("15");
-        startCountDownRound2();//
+        startCountDownRound2();
     }
     public void chooseLine1(){
         //xoa du lieu cau cu
@@ -862,7 +876,6 @@ public class OlympiaController {
         Line = 1;
         changeColorYellow(1);
         playAudioClip(clipOb[2]);
-        delay(2000);
         playAudioClip(clipOb[3]);
         loadQuestionRound2(Line);
         countdownLabel2.setText("15");
@@ -877,7 +890,6 @@ public class OlympiaController {
         Line = 2;
         changeColorYellow(2);
         playAudioClip(clipOb[2]);
-        delay(2000);
         playAudioClip(clipOb[3]);
         loadQuestionRound2(Line);
         countdownLabel2.setText("15");
@@ -893,7 +905,6 @@ public class OlympiaController {
         Line = 3;
         changeColorYellow(3);
         playAudioClip(clipOb[2]);
-        delay(2000);
         playAudioClip(clipOb[3]);
         loadQuestionRound2(Line);
         countdownLabel2.setText("15");//
@@ -1083,6 +1094,7 @@ public class OlympiaController {
     private void loadImageQuestion() {
         // Tạo list 3 ảnh 1
         // List 1
+        //delay(5000);
         List<Image> images1 = new ArrayList<>();
         images1.add(new Image(Objects.requireNonNull(getClass().getResource("/GameOlympia/QuestionRound3/question1/1.png")).toExternalForm()));
         images1.add(new Image(Objects.requireNonNull(getClass().getResource("/GameOlympia/QuestionRound3/question1/2.png")).toExternalForm()));
@@ -1120,6 +1132,7 @@ public class OlympiaController {
                 )
         );
         timeline.setCycleCount(Timeline.INDEFINITE);
+        //timeline.setDelay(Duration.millis(6000));
         timeline.play();
     }
 
@@ -1141,7 +1154,11 @@ public class OlympiaController {
         // Display the first image
         imageViewQuestion.setImage(listImages.get(counter).get(currentIndex));
 
-        delay(6000);
+        try {
+            Thread.sleep(6000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 //        System.out.println(listImages.size());
         startCountDownRound3();
         // Set up a Timeline to switch images every 5 seconds
@@ -1353,6 +1370,7 @@ public class OlympiaController {
                 "src/main/resources/GameOlympia/OlympiaSound/ReachToFinishLine/VĐ_20s_O15.mp3",
                 "src/main/resources/GameOlympia/OlympiaSound/ReachToFinishLine/TT_mở_đáp_án_thí_sinh_O14.mp3",
                 "src/main/resources/GameOlympia/OlympiaSound/ReachToFinishLine/VĐ_mở_câu_hỏi_O15.mp3.mpeg",
+                "src/main/resources/GameOlympia/OlympiaSound/ReachToFinishLine/VĐ_về_vị_trí_O15.mp3.mpeg"
         }; // wrong and correct
 
         for (String path1 : path) {
@@ -1617,6 +1635,7 @@ public class OlympiaController {
     public void loadQuestion4() {
 //        System.out.println("go to load question");
 //        alertAnswer.setVisible(false);
+        System.out.println(counter);
         if (counter == 3) {
             Question.setText("Congratulate!");
             showQuestion();
@@ -1625,9 +1644,13 @@ public class OlympiaController {
             submit.setDisable(true);
             myAnswer.setDisable(true);
             Answer.setDisable(true);
+            countdownLabel4.setVisible(false);
+            //Question.setVisible(false);
             starHopeButton.setDisable(true);
             showNextButton(resultButton);
-            endSound(clipF);// hiện nút endgame dẫn ra bảng kết quả
+            //endSound(clipF);
+            playAudioClip(clipF[11]);
+            // hiện nút endgame dẫn ra bảng kết quả
         } else {
             if (listQuestion.get(counter).equals("10")) {
                 countdownLabel4.setText("10");
@@ -1681,7 +1704,6 @@ public class OlympiaController {
                     Question.setText("1." + ques);
                     showQuestion();
                 }
-                delay(5000);
                 startCountDownRound4();
             }
             if (counter == 1) {
@@ -1973,8 +1995,10 @@ public class OlympiaController {
         myAnswer.clear();
         counter++;
         loadQuestion4();
-        delay(5000);
-        startCountDownRound4();
+        //delay(5000);
+        if (!endR4) {
+            startCountDownRound4();
+        }
     }
 
     @FXML
