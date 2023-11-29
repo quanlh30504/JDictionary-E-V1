@@ -47,7 +47,7 @@ public class DictionaryManagement {
     }
 
     public void insertFromFile(String filePath) {
-        filePath = "C:/Users/ADMIN/Documents/code/OOP/JDictionary-E-V1/src/main/java/CMDDictionary/"
+        filePath = "src/main/java/CMDDictionary/"
                 + filePath + ".txt";
         try {
             File file = new File(filePath);
@@ -184,7 +184,7 @@ public class DictionaryManagement {
         String fileName = scanner.nextLine().trim();
         boolean flag = false;
         try {
-            File dict = new File("C:/Users/ADMIN/Documents/code/OOP/JDictionary-E-V1/src/main/java"
+            File dict = new File("src/main/java"
                     + "/CMDDictionary/" + fileName + ".txt");
             if (dict.createNewFile()) {
                 System.out.println("File created: " + dict.getName());
@@ -210,7 +210,7 @@ public class DictionaryManagement {
             e.printStackTrace();
         }
         try {
-            FileWriter writer = new FileWriter("C:/Users/ADMIN/Documents/code/OOP/JDictionary-E-V1/src/main/java"
+            FileWriter writer = new FileWriter("src/main/java"
                     + "/CMDDictionary/" + fileName + ".txt");
             Collections.sort(dictionary.words, (word1, word2) -> word1.wordFound.compareToIgnoreCase(word2.wordFound));
             for (Word word : dictionary.words) {

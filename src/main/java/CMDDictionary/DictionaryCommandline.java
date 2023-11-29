@@ -98,7 +98,7 @@ public class DictionaryCommandline {
   public static void main(String[] args) {
       DictionaryCommandline dictionaryCommandline = new DictionaryCommandline();
       dictionaryCommandline.dictionaryAdvance();
-      //dictionaryCommandline.dictionaryManagement.insertFromFile("C:/Users/ADMIN/Documents/code/OOP/JDictionary-E-V1/src/main/java/CMDDictionary/dictionaries.txt");
+      //dictionaryCommandline.dictionaryManagement.insertFromFile("src/main/java/CMDDictionary/dictionaries.txt");
       //dictionaryCommandline.dictionaryManagement.insertFromCommandline();
       //dictionaryCommandline.dictionaryManagement.dictionaryExportToFile();
 
