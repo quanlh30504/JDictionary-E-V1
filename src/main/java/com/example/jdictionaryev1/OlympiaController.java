@@ -325,9 +325,11 @@ public class OlympiaController {
         ResultSet resultSet = olympiaDB.executeStartUp();
 
         if (counter == 0) { //Question 1
-            Question.setText("1." + "What is the opposite of \"big\"?");
+//            Question.setText("1." + "What is the opposite of \"big\"?");
             while (resultSet.next()) {
-                Question.setText(resultSet.getString(1));
+                if (resultSet.getString(1) != null) {
+                    Question.setText("1." + resultSet.getString(1));
+                }
             }
             showQuestion();
         }
