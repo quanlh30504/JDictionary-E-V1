@@ -39,6 +39,7 @@ import javax.swing.*;
 import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.*;
 import java.util.Timer;
 import java.util.concurrent.TimeUnit;
@@ -111,10 +112,6 @@ public class OlympiaController {
     public void Countdown(int seconds, Label labelCountDown) {
         Timer timer = new Timer();
         int de_lay = 0;
-
-        if (labelCountDown == countdownLabel2 || labelCountDown == countdownLabel3) {
-            de_lay = 6000;
-        }
 
         timer.scheduleAtFixedRate(new TimerTask() {
             int remainingSeconds = seconds;
@@ -801,23 +798,36 @@ public class OlympiaController {
                 showImageWrong();
                 showScore(Mark);
             }
-        }else {
+        } else {
             if (checkAnswerRound2(ans)) {
                 correctAnsRound2();
                 playAudioClip(clipOb[7]);
-                delay(8000);
-                showImageCorrect();
+//                Timeline timeline1 = new Timeline(new KeyFrame(Duration.seconds(7), new EventHandler<ActionEvent>() {
+//                    @Override
+//                    public void handle(ActionEvent event) {
+//                        showImageCorrect();
+//                    }
+//                }));
+//                timeline1.play();
+                //showImageCorrect();
                 Mark += 10;
                 showScore(Mark);
             } else {
                 playAudioClip(clipOb[10]);
                 wrongAnsRound2();
-                showImageWrong();
+//                showImageWrong();
+//                Timeline timeline1 = new Timeline(new KeyFrame(Duration.seconds(7), new EventHandler<ActionEvent>() {
+//                    @Override
+//                    public void handle(ActionEvent event) {
+//                        showImageWrong();
+//                    }
+//                }));
                 showScore(Mark);//
             }
             if (countQuestionR2 == 4) {
                 openImageButton5.setDisable(false);
             }
+//            timeline1.play();
         }
     }
 
@@ -1129,7 +1139,7 @@ public class OlympiaController {
         // Set up a Timeline to switch images every 5 seconds
         timeline = new Timeline(
                 new KeyFrame(
-                        Duration.seconds(3 / listImages.size()),
+                        Duration.seconds(30 / listImages.size()),
                         this::nextImage
                 )
         );
@@ -1156,11 +1166,6 @@ public class OlympiaController {
         // Display the first image
         imageViewQuestion.setImage(listImages.get(counter).get(currentIndex));
 
-        try {
-            Thread.sleep(6000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
 //        System.out.println(listImages.size());
         startCountDownRound3();
         // Set up a Timeline to switch images every 5 seconds
@@ -1292,7 +1297,7 @@ public class OlympiaController {
 
     @FXML
     public void startCountDownRound3() {
-        int seconds = 3;
+        int seconds = 31;
         playAudioClip(clipSp[1]);
 //        if (start) {
 //            Countdown(seconds, countdownLabel3);
@@ -1327,7 +1332,6 @@ public class OlympiaController {
                 countdownLabelReady.setVisible(false);
                 correctImage.setVisible(false);
                 wrongImage.setVisible(false);
-                delay(2000);
                 startRound3();
                 start = true;
             }
@@ -1997,9 +2001,22 @@ public class OlympiaController {
         myAnswer.clear();
         counter++;
         loadQuestion4();
+        if (!checkStar) {
+            starHopeButton.setDisable(false);
+        }
         //delay(5000);
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                startCountDownRound4();
+                if (!checkStar) {
+                    starHopeButton.setDisable(true);
+                }
+            }
+        }));
+
         if (!endR4) {
-            startCountDownRound4();
+            timeline.play();
         }
     }
 
@@ -2045,7 +2062,14 @@ public class OlympiaController {
         //count down
 //        startCountDownRound4(16);
         // load câu hỏi ra màn hình
+//        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(10), new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//                startCountDownRound4();
+//            }
+//        }));
         loadQuestion4();
+//        timeline.play();
     }
 
     //--------------------------------------bảng điểm-------------
@@ -2056,7 +2080,7 @@ public class OlympiaController {
     public void gotoResult() throws IOException {
         HelloApplication helloApplication = new HelloApplication();
         helloApplication.changeScreen("resultOlympia.fxml", 1080, 608);
-        playAudioClip(new AudioClip(new File("src/main/resources/GameOlympia/OlympiaSound/FinalResult/Tổng_kết_điểm_O15.mp3.mpeg").
+        playAudioClip(new AudioClip(new File("src/main/resources/GameOlympia/OlympiaSound/FinalResult/Trao_giải_thưởng_O15.mp3").
                 toURI().toString()));
     }
 
