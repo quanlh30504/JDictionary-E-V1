@@ -25,6 +25,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.shape.Circle;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Popup;
 import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
@@ -137,7 +139,8 @@ public class HelloController extends DictionaryManagement {
     public TextField textFieldSearch;
     public Button buttonSearch;
     public ListView<String> listVocab;
-    public TextArea meaning;
+    public WebView view = new WebView();
+    public WebEngine e;
     String wordSearch;
 
     // --wordSearch nhận đầu vào văn bản nhập từ bàn phím
@@ -185,10 +188,11 @@ public class HelloController extends DictionaryManagement {
         }
         listVocab.setOnMouseClicked(event2 -> {
             String selectedItem = listVocab.getSelectionModel().getSelectedItem();
+            e = view.getEngine();
             if (selectedItem != null) {
                 try {
-                    makeSoundButton.setVisible(true);
-                    meaning.setText(dictionaryManagement.dictionarySearcher(selectedItem,sqLiteConnection3));
+                    String htmlContent = dictionaryManagement.dictionarySearcher(selectedItem, sqLiteConnection3);
+                    e.loadContent(htmlContent);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }

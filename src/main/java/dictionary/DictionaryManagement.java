@@ -34,8 +34,7 @@ public class DictionaryManagement extends SQLiteConnection {
 
         try (ResultSet resultSet = sqLiteConnection.query(searchQuery)) {
             if (resultSet.next()) {
-                String htmlContent = resultSet.getString(1).replaceAll("<[^>]*>", "\n");
-                return htmlContent.trim().replaceAll("[\n]{2,}", "\n");
+                return resultSet.getString(1);
             } else {
                 return "Đần";
             }
@@ -78,6 +77,15 @@ public class DictionaryManagement extends SQLiteConnection {
 
     }
 
+    private String generateHtmlForWord(Word word) {
+        String wordName = word.getWordFound();
+
+        //<h1>zonal</h1><h3><i>//</i></h3><ul><li>(thuộc) đới, theo đới</li></ul>
+        String html = "<h1>" + word.getWordFound() + "</h1>" +
+                "<h3><i>//</i></h3><ul><li>" + word.getWordExplaination() + "</li></ul>";
+        return html;
+    }
+
     public void insertWord(Word word) throws SQLException {
         SQLiteConnection sqLiteConnection1 = new SQLiteConnection();
         sqLiteConnection1.setConnection(dbName);
@@ -90,7 +98,7 @@ public class DictionaryManagement extends SQLiteConnection {
             preparedStatement = connection.prepareStatement(insertQuery);
             preparedStatement.setInt(1, resultSet.getInt("id")+ 1);
             preparedStatement.setString(2, Word.wordFound);
-            preparedStatement.setString(3, Word.wordExplaination);
+            preparedStatement.setString(3, generateHtmlForWord(word));
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
