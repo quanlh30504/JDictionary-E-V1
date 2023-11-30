@@ -193,6 +193,7 @@ public class HelloController extends DictionaryManagement {
                 try {
                     String htmlContent = dictionaryManagement.dictionarySearcher(selectedItem, sqLiteConnection3);
                     e.loadContent(htmlContent);
+                    makeSoundButton.setVisible(true); // hiện nút make sound
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
