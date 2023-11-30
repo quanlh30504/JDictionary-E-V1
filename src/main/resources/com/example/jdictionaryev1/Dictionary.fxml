@@ -90,14 +90,6 @@
          </graphic>
       </Button>
       <VBox fx:id="buttonContainer" layoutX="66.0" layoutY="181.0" prefHeight="161.0" prefWidth="89.0" />
-      <Button fx:id="makeSoundButton" layoutX="665.0" layoutY="211.0" mnemonicParsing="false" onAction="#makeSound" prefHeight="50.0" prefWidth="48.0" style="-fx-background-radius: 40;" styleClass="menu_button" stylesheets="@../../../application.css" visible="false">
-         <graphic>
-            <ImageView fitHeight="37.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../icons/volume.png" />
-               </image>
-            </ImageView>
-         </graphic></Button>
       <Button layoutX="12.0" layoutY="300.0" mnemonicParsing="false" onAction="#switchToTranslate" prefHeight="50.0" prefWidth="39.0" style="-fx-background-radius: 50;" styleClass="menu_button" stylesheets="@../../../application.css">
          <graphic>
             <ImageView fitHeight="42.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
@@ -108,5 +100,13 @@
          </graphic>
       </Button>
       <WebView fx:id="view" layoutX="336.0" layoutY="200.0" prefHeight="288.0" prefWidth="432.0" />
+      <Button fx:id="makeSoundButton" layoutX="665.0" layoutY="211.0" mnemonicParsing="false" onAction="#makeSound" prefHeight="50.0" prefWidth="48.0" style="-fx-background-radius: 40;" styleClass="menu_button" stylesheets="@../../../application.css" visible="false">
+         <graphic>
+            <ImageView fitHeight="37.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../icons/volume.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
    </children>
 </AnchorPane>
