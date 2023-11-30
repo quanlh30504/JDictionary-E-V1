@@ -96,6 +96,10 @@
 .choose_image: hover{
     -fx-text-fill: #FFFF66;
 }
+
+.choose_image_5: hover{
+    -fx-text-fill: #3399FF;
+}
 .submit_round2 {
    -fx-background-color:#FFCC33;
 }
@@ -151,4 +155,10 @@
 .starButton: hover{
     -fx-background-color:#FFCC66;
 }
-/*----------------------------------------------------------------------------*/
+/*----------------------------Translate------------------------------------------------*/
+.translate_button{
+    -fx-background-color:#6699FF
+}
+.translate_button:hover{
+    -fx-background-color:#0099FF
+}

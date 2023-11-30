@@ -39,6 +39,7 @@ import javax.swing.*;
 import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.*;
 import java.util.Timer;
 import java.util.concurrent.TimeUnit;
@@ -111,10 +112,6 @@ public class OlympiaController {
     public void Countdown(int seconds, Label labelCountDown) {
         Timer timer = new Timer();
         int de_lay = 0;
-
-        if (labelCountDown == countdownLabel2 || labelCountDown == countdownLabel3) {
-            de_lay = 6000;
-        }
 
         timer.scheduleAtFixedRate(new TimerTask() {
             int remainingSeconds = seconds;
@@ -325,9 +322,11 @@ public class OlympiaController {
         ResultSet resultSet = olympiaDB.executeStartUp();
 
         if (counter == 0) { //Question 1
-            Question.setText("1." + "What is the opposite of \"big\"?");
+//            Question.setText("1." + "What is the opposite of \"big\"?");
             while (resultSet.next()) {
-                Question.setText(resultSet.getString(1));
+                if (resultSet.getString(1) != null) {
+                    Question.setText("1." + resultSet.getString(1));
+                }
             }
             showQuestion();
         }
@@ -507,6 +506,7 @@ public class OlympiaController {
 
 
     //----------------------------------------round 2---------------------------
+    public static int countQuestionR2 = 0;
     @FXML
     public Button nextToRound2Review;
     public boolean endR2 = false;
@@ -562,6 +562,8 @@ public class OlympiaController {
     public Button openImageButton2;
     public Button openImageButton3;
     public Button openImageButton4;
+    public Button openImageButton5;
+
     public static int Line = -1;
     @FXML
     public AnchorPane containerCircle = new AnchorPane();
@@ -571,14 +573,16 @@ public class OlympiaController {
     public Text[] textAns = new Text[40];
 
     public void loadQuesAndAnsRound2() throws SQLException {
-        listAns = Arrays.asList("happy","courageous","connect","weather","discover");
+        listAns = Arrays.asList("happy","courageous","connect","weather","explorify","discover");
         listQuestionRound2 = new ArrayList<>();
 //        ResultSet resultSet = olympiaDB.executeObstacle("Ques1");
         listQuestionRound2.add("What were the children when they received their presents?");
         listQuestionRound2.add("What did the firefighter display when rescuing people from the burning building?");
         listQuestionRound2.add("How does social media assist people in staying in touch with friends and family?");
         listQuestionRound2.add("How does the ____________ affect outdoor activities?");
+        listQuestionRound2.add("What aspects of the newly Explorified concept intrigue you the most, and how do you think it will impact our understanding of the world around us?");
         listQuestionRound2.add("The vocabulary we want to talk about here is?");
+
     }//
 
 
@@ -714,42 +718,69 @@ public class OlympiaController {
     }
 
     public void loadQuestionRound2(int line){
+        countQuestionR2++;
         String ques = listQuestionRound2.get(line);
         String cmt = String.valueOf(line+1);
         Question.setText(cmt +"." + ques);
         showQuestion();//
     }
+    public void loadQuestion5R2(){
+        hideImageCheck();
+        myanswerIs.setVisible(false);
+        myAnswerLabel.setVisible(false);
+        countQuestionR2++;
+        String ques = listQuestionRound2.get(4).trim();
+        Question.setText("5."+ques);
+        showQuestion();
+        startCountDownRound2();
+    }
 
     public boolean checkAnswerRound2(String ans) {
-        String correctAns = listAns.get(Line).toLowerCase();
-        if(ans.equals(correctAns)){
-            showImageCorrect();
-            hideImageWrong();
-            if(Line == 0){
-                openImageButton1.setVisible(false);
-                pieceImage1.setVisible(false);
-            }else if(Line == 1){
-                openImageButton2.setVisible(false);
-                pieceImage2.setVisible(false);
-            }else if(Line == 2){
-                openImageButton3.setVisible(false);
-                pieceImage3.setVisible(false);
-            }else if(Line == 3){
-                openImageButton4.setVisible(false);
-                pieceImage4.setVisible(false);
+        if(countQuestionR2 == 5){
+            String correctAns = listAns.get(4).toLowerCase();
+            if (ans.equals(correctAns)) {
+                showImageCorrect();
+                hideImageWrong();
+                openImageButton5.setVisible(false);
+                pieceImage5.setVisible(false);
+                return true;
+            } else {
+                showImageWrong();
+                hideImageCorrect();
+                openImageButton5.setVisible(true);
+                pieceImage5.setVisible(true);
             }
-            return true;
         }else {
-            showImageWrong();
-            hideImageCorrect();
-            if(Line == 0){
-                openImageButton1.setDisable(true);
-            }else if(Line == 1){
-                openImageButton2.setDisable(true);
-            }else if(Line == 2){
-                openImageButton3.setDisable(true);
-            }else if(Line == 3){
-                openImageButton4.setDisable(true);
+            String correctAns = listAns.get(Line).toLowerCase();
+            if (ans.equals(correctAns)) {
+                showImageCorrect();
+                hideImageWrong();
+                if (Line == 0) {
+                    openImageButton1.setVisible(false);
+                    pieceImage1.setVisible(false);
+                } else if (Line == 1) {
+                    openImageButton2.setVisible(false);
+                    pieceImage2.setVisible(false);
+                } else if (Line == 2) {
+                    openImageButton3.setVisible(false);
+                    pieceImage3.setVisible(false);
+                } else if (Line == 3) {
+                    openImageButton4.setVisible(false);
+                    pieceImage4.setVisible(false);
+                }
+                return true;
+            } else {
+                showImageWrong();
+                hideImageCorrect();
+                if (Line == 0) {
+                    openImageButton1.setDisable(true);
+                } else if (Line == 1) {
+                    openImageButton2.setDisable(true);
+                } else if (Line == 2) {
+                    openImageButton3.setDisable(true);
+                } else if (Line == 3) {
+                    openImageButton4.setDisable(true);
+                }
             }
         }
         return false;//
@@ -758,17 +789,45 @@ public class OlympiaController {
     @FXML
     public void submitAnswerRound2() throws IOException {
         String ans = myAnswerLabel.getText().toLowerCase().trim();
-        if (checkAnswerRound2(ans)) {
-            correctAnsRound2();
-            playAudioClip(clipOb[7]);
-            showImageCorrect();
-            Mark += 10;
-            showScore(Mark);
+        if(countQuestionR2 == 5){
+            if(checkAnswerRound2(ans)){
+                showImageCorrect();
+                Mark += 10;
+                showScore(Mark);
+            }else{
+                showImageWrong();
+                showScore(Mark);
+            }
         } else {
-            playAudioClip(clipOb[10]);
-            wrongAnsRound2();
-            showImageWrong();
-            showScore(Mark);//
+            if (checkAnswerRound2(ans)) {
+                correctAnsRound2();
+                playAudioClip(clipOb[7]);
+//                Timeline timeline1 = new Timeline(new KeyFrame(Duration.seconds(7), new EventHandler<ActionEvent>() {
+//                    @Override
+//                    public void handle(ActionEvent event) {
+//                        showImageCorrect();
+//                    }
+//                }));
+//                timeline1.play();
+                //showImageCorrect();
+                Mark += 10;
+                showScore(Mark);
+            } else {
+                playAudioClip(clipOb[10]);
+                wrongAnsRound2();
+//                showImageWrong();
+//                Timeline timeline1 = new Timeline(new KeyFrame(Duration.seconds(7), new EventHandler<ActionEvent>() {
+//                    @Override
+//                    public void handle(ActionEvent event) {
+//                        showImageWrong();
+//                    }
+//                }));
+                showScore(Mark);//
+            }
+            if (countQuestionR2 == 4) {
+                openImageButton5.setDisable(false);
+            }
+//            timeline1.play();
         }
     }
 
@@ -864,6 +923,7 @@ public class OlympiaController {
         startCountDownRound2();
     }
 
+
     @FXML
     public void changeColorRed(int line){
         for(int i = 10*line;i<10*line+10;i++){
@@ -949,7 +1009,7 @@ public class OlympiaController {
     public void submitRound2(){
         showFullImageQuestion();
         String ans = myAnsRound2.getText().toLowerCase().trim();
-        String correctAns = listAns.get(4).toLowerCase();
+        String correctAns = listAns.get(5).toLowerCase();
         if(ans.equals(correctAns)){
             correctAnswerIs.setVisible(true);
             Answer.setText(correctAns);
@@ -972,7 +1032,7 @@ public class OlympiaController {
     }
     public void cancelRound2(){
         showFullImageQuestion();
-        String correctAns = listAns.get(4).toLowerCase();
+        String correctAns = listAns.get(5).toLowerCase();
         AnchorPaneRound2Submit.setVisible(false);
         anchorPaneLoseRound2.setVisible(true);
         correctAnswerIs.setVisible(true);
@@ -1079,7 +1139,7 @@ public class OlympiaController {
         // Set up a Timeline to switch images every 5 seconds
         timeline = new Timeline(
                 new KeyFrame(
-                        Duration.seconds(3 / listImages.size()),
+                        Duration.seconds(30 / listImages.size()),
                         this::nextImage
                 )
         );
@@ -1106,11 +1166,6 @@ public class OlympiaController {
         // Display the first image
         imageViewQuestion.setImage(listImages.get(counter).get(currentIndex));
 
-        try {
-            Thread.sleep(6000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
 //        System.out.println(listImages.size());
         startCountDownRound3();
         // Set up a Timeline to switch images every 5 seconds
@@ -1242,7 +1297,7 @@ public class OlympiaController {
 
     @FXML
     public void startCountDownRound3() {
-        int seconds = 3;
+        int seconds = 31;
         playAudioClip(clipSp[1]);
 //        if (start) {
 //            Countdown(seconds, countdownLabel3);
@@ -1277,7 +1332,6 @@ public class OlympiaController {
                 countdownLabelReady.setVisible(false);
                 correctImage.setVisible(false);
                 wrongImage.setVisible(false);
-                delay(2000);
                 startRound3();
                 start = true;
             }
@@ -1947,9 +2001,22 @@ public class OlympiaController {
         myAnswer.clear();
         counter++;
         loadQuestion4();
+        if (!checkStar) {
+            starHopeButton.setDisable(false);
+        }
         //delay(5000);
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                startCountDownRound4();
+                if (!checkStar) {
+                    starHopeButton.setDisable(true);
+                }
+            }
+        }));
+
         if (!endR4) {
-            startCountDownRound4();
+            timeline.play();
         }
     }
 
@@ -1995,7 +2062,14 @@ public class OlympiaController {
         //count down
 //        startCountDownRound4(16);
         // load câu hỏi ra màn hình
+//        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(10), new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//                startCountDownRound4();
+//            }
+//        }));
         loadQuestion4();
+//        timeline.play();
     }
 
     //--------------------------------------bảng điểm-------------
@@ -2006,7 +2080,7 @@ public class OlympiaController {
     public void gotoResult() throws IOException {
         HelloApplication helloApplication = new HelloApplication();
         helloApplication.changeScreen("resultOlympia.fxml", 1080, 608);
-        playAudioClip(new AudioClip(new File("src/main/resources/GameOlympia/OlympiaSound/FinalResult/Tổng_kết_điểm_O15.mp3.mpeg").
+        playAudioClip(new AudioClip(new File("src/main/resources/GameOlympia/OlympiaSound/FinalResult/Trao_giải_thưởng_O15.mp3").
                 toURI().toString()));
     }
 
