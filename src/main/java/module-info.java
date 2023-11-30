@@ -14,6 +14,7 @@ module com.example.jdictionaryev1 {
     requires jsapi;
     requires javafx.media;
     requires java.desktop;
+    requires javafx.web;
 
     opens com.example.jdictionaryev1 to javafx.fxml;
     exports com.example.jdictionaryev1;
