@@ -162,3 +162,74 @@
 .translate_button:hover{
     -fx-background-color:#0099FF
 }
+/*------------------------list view------------------------------*/
+.list-view {
+    -fx-background-radius: 10; /* Bo tròn ở 4 góc */
+}
+
+.list-cell {
+    -fx-control-inner-background: lavender; /* Màu nền của mỗi cell trong ListView */
+    -fx-background-color:#CC99CC;
+    -fx-background-radius: 5 0 0 5; /* Bo tròn bên trái, giữ nguyên bên phải */
+}
+
+.list-cell:hover {
+    -fx-background-color: #FF9999; /* Màu nền khi di chuột qua mỗi cell */
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: #FF9999; /* Màu nền khi cell được chọn */
+    -fx-text-fill: black; /* Màu chữ khi cell được chọn */
+}
+.list-cell:selected .text {
+    -fx-font-weight: bold; /* In đậm chữ khi cell được chọn */
+}
+
+.list-view:focused {
+    -fx-faint-focus-color: transparent; /* Loại bỏ viền focus khi ListView được chọn */
+}
+
+/* ScrollBar */
+.scroll-bar {
+    -fx-background-color: #CC99CC; /* Màu nền của thanh cuộn */
+    -fx-background-radius: 0 5 5 0;
+}
+
+.scroll-bar-thumb {
+    -fx-background-color: #CC99FF; /* Màu của thanh cuộn khi di chuyển */
+    -fx-background-radius: 0; /* Bo tròn ở 4 góc thanh cuộn */
+}
+
+.scroll-bar-thumb:pressed {
+    -fx-background-color: #CC66FF; /* Màu của thanh cuộn khi được nhấn */
+}
+/*-----------------------web view ----------*/
+.web-view {
+    -fx-background-color: #f0f0f0; /* Màu nền của WebView */
+}
+
+/* WebEngine Style (for the content inside WebView) */
+.web-view .root {
+    -fx-background-color: white; /* Màu nền của nội dung trong WebView */
+    -fx-border-color: #cccccc; /* Màu viền của nội dung trong WebView */
+
+    -fx-border-radius: 5; /* Độ cong của góc viền */
+}
+
+/* ScrollBar Style */
+.web-view .scroll-bar {
+    -fx-background-color: transparent; /* Màu nền thanh cuộn */
+}
+
+.web-view .scroll-bar-thumb {
+    -fx-background-color: #666666; /* Màu của thanh cuộn khi di chuyển */
+    -fx-background-radius: 5; /* Độ cong của góc thanh cuộn */
+}
+
+.web-view .scroll-bar-thumb:pressed {
+    -fx-background-color: #444444; /* Màu của thanh cuộn khi được nhấn */
+}
+
+.web-view .scroll-bar-thumb:hover {
+    -fx-background-color: #888888; /* Màu của thanh cuộn khi di chuột qua */
+}

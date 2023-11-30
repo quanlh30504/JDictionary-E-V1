@@ -187,6 +187,7 @@ public class HelloController extends DictionaryManagement {
             alert.show();
         }
         listVocab.setOnMouseClicked(event2 -> {
+            view.setVisible(true);
             String selectedItem = listVocab.getSelectionModel().getSelectedItem();
             e = view.getEngine();
             if (selectedItem != null) {
