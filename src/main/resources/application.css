@@ -155,6 +155,16 @@
 .starButton: hover{
     -fx-background-color:#FFCC66;
 }
+/*----------------------start dictionary---------------------------------*/
+.startDic{
+    -fx-background-color:#FFCC99;
+}
+.startDic: hover{
+    -fx-background-color:#FFCC00;
+}
+
+
+
 /*----------------------------Translate------------------------------------------------*/
 .translate_button{
     -fx-background-color:#6699FF

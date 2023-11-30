@@ -23,10 +23,11 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         stg = stage;
-        Parent root = FXMLLoader.load(getClass().getResource("LoginGUI.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("StartDictionary.fxml"));
         stg.setTitle("JDictionary English-Vietnamese");
         stg.getIcons().add(new Image("dictionary_icon.png"));
-        Scene scene = new Scene(root,780  ,460);
+//        Scene scene = new Scene(root,780  ,460);
+        Scene scene = new Scene(root,840,540);
         stg.setScene(scene);
         // ẩn viền ứng dụng
 //        stg.initStyle(StageStyle.TRANSPARENT);
