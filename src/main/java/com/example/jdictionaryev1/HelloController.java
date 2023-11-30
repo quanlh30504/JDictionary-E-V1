@@ -20,16 +20,16 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.shape.Circle;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
 import javafx.stage.Popup;
 import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
 import javafx.util.Pair;
+import module.GoogleTranslateAPI;
 import module.SQLite.SQLiteConnection;
 import module.TextToSpeech;
 import org.jetbrains.annotations.NotNull;
@@ -55,41 +55,48 @@ public class HelloController extends DictionaryManagement {
 
     //----------------------------- chuyển sang từ điển---------------------
     @FXML
-    public void switchToDictionary(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Dictionary.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root, 840, 540);
-        stage.setScene(scene);
-        stage.show();
+    public void switchToDictionary() throws IOException {
+        HelloApplication helloApplication = new HelloApplication();
+        helloApplication.changeScreen("Dictionary.fxml",840,540);
     }
 
     // -----------------------------chuyển sang quiz game------------------------
     @FXML
-    public void switchToGame(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Game.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root, 840, 540);
-        stage.setScene(scene);
-        stage.show();
+    public void switchToGame() throws IOException {
+        HelloApplication helloApplication = new HelloApplication();
+        helloApplication.changeScreen("Game.fxml",840,540);
+//        Parent root = FXMLLoader.load(getClass().getResource("Game.fxml"));
+//        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//        scene = new Scene(root, 840, 540);
+//        stage.setScene(scene);
+//        stage.show();
 
     }
     //-------------------------------Chuyển sang olympia game--------------------------
     @FXML
-    public void switchToOlympiaGame(ActionEvent event) throws IOException {
+    public void switchToOlympiaGame() throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("OlympiaStart.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root, 1080, 608);
-        stage.setScene(scene);
+        HelloApplication helloApplication = new HelloApplication();
+        helloApplication.changeScreen("OlympiaStart.fxml",1080,608);
         try {
             OlympiaController olympiaController = new OlympiaController();
             olympiaController.playAudioClip(new AudioClip(new File("src/main/resources/GameOlympia/OlympiaSound/Giới_thiệu_cuộc_thi_O15.mp3.mpeg").toURI().toString()));
         } catch (LineUnavailableException e) {
             throw new RuntimeException(e);
         }
-        stage.show();
     }
-        //----------------------------------------
+        //------------------------------Chuyển sang translate----------
+        @FXML
+        public void switchToTranslate() throws IOException {
+            HelloApplication helloApplication = new HelloApplication();
+            helloApplication.changeScreen("translate.fxml",840,540);
+//        Parent root = FXMLLoader.load(getClass().getResource("Game.fxml"));
+//        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//        scene = new Scene(root, 840, 540);
+//        stage.setScene(scene);
+//        stage.show();
+
+        }
 
     //------------------------------ start game-------------------------
     @FXML
@@ -108,7 +115,7 @@ public class HelloController extends DictionaryManagement {
     @FXML
     public AnchorPane scenePane;
     @FXML
-    public void logout(ActionEvent event) {
+    public void logout() {
         //Tạo hộp xác nhận
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Logout");
@@ -130,8 +137,7 @@ public class HelloController extends DictionaryManagement {
     public TextField textFieldSearch;
     public Button buttonSearch;
     public ListView<String> listVocab;
-    public WebView view = new WebView();
-    public WebEngine e;
+    public TextArea meaning;
     String wordSearch;
 
     // --wordSearch nhận đầu vào văn bản nhập từ bàn phím
@@ -179,11 +185,10 @@ public class HelloController extends DictionaryManagement {
         }
         listVocab.setOnMouseClicked(event2 -> {
             String selectedItem = listVocab.getSelectionModel().getSelectedItem();
-            e = view.getEngine();
             if (selectedItem != null) {
                 try {
-                    String htmlContent = dictionaryManagement.dictionarySearcher(selectedItem,sqLiteConnection3);
-                    e.loadContent(htmlContent);
+                    makeSoundButton.setVisible(true);
+                    meaning.setText(dictionaryManagement.dictionarySearcher(selectedItem,sqLiteConnection3));
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
@@ -208,7 +213,7 @@ public class HelloController extends DictionaryManagement {
     private boolean buttonsVisible = false;
 
     @FXML
-    void toggleButtonClicked(ActionEvent event) {
+    void toggleButtonClicked() {
         buttonContainer.setSpacing(20);
         if (buttonsVisible) {
             buttonContainer.getChildren().clear();
@@ -497,20 +502,181 @@ public class HelloController extends DictionaryManagement {
     });
     }
 
+    //------------------------------------make spelling---------------------------
     @FXML
     public Button makeSoundButton;
 
     @FXML
     public void makeSound() {
-        TextToSpeech textToSpeech = new TextToSpeech();
-        try {
-            textToSpeech.Spelling("Hello Guy");
-        } catch (EngineException e) {
-            throw new RuntimeException(e);
-        } catch (AudioException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+//        TextToSpeech textToSpeech = new TextToSpeech();
+//        try {
+//            textToSpeech.Spelling("Hello Guy");
+//        } catch (EngineException e) {
+//            throw new RuntimeException(e);
+//        } catch (AudioException e) {
+//            throw new RuntimeException(e);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+        String word = listVocab.getSelectionModel().getSelectedItem();
+        if (!Objects.equals(word, "")) {
+            DictionaryManagement dictionaryManagement = new DictionaryManagement();
+            dictionaryManagement.dictionarySpelling(word);
         }
     }
+
+    //-----------------------------translate-----------------------------------
+    @FXML
+    public Button translateButton;
+    private final String VIETNAMESE = "vi";
+    private final String ENGLISH = "en";
+    private final String JAPANESE = "ja";
+    private final String KOREAN = "ko";
+    private final String CHINESE = "zh-CN";
+
+    @FXML
+    private TextArea sourceDoc, targetDoc;
+    @FXML
+    private Pane rightFlat, leftFlat;
+    private String langTarget = "vi";
+
+    @FXML
+    public void translateFunction() throws Exception {
+        String source = sourceDoc.getText();
+        source = source.replace(". ", ",");
+        targetDoc.setText(GoogleTranslateAPI.translate(source,langTarget));
+    }
+
+    @FXML
+    public SplitMenuButton splitMenuButtonLeft;
+    @FXML
+    private java.awt.MenuBar menuBar;
+    @FXML
+    public java.awt.Menu menu ;
+    public RadioMenuItem englishLeft;
+    public RadioMenuItem vietnameseLeft;
+    public RadioMenuItem japaneseLeft;
+    public RadioMenuItem koreanLeft;
+    public RadioMenuItem chineseLeft;
+
+    @FXML
+    public SplitMenuButton splitMenuButtonRight;
+
+    public java.awt.MenuBar menuBarRight;
+    @FXML
+    public java.awt.Menu menuRight ;
+    public RadioMenuItem englishRight;
+    public RadioMenuItem vietnameseRight;
+    public RadioMenuItem japaneseRight;
+    public RadioMenuItem koreanRight;
+    public RadioMenuItem chineseRight;
+
+
+    // chuyển ngôn ngữ bên trái
+    @FXML
+    public void selectEnglishLeft(){
+        englishLeft.setSelected(true);
+        vietnameseLeft.setSelected(false);
+        japaneseLeft.setSelected(false);
+        koreanLeft.setSelected(false);
+        chineseLeft.setSelected(false);
+//        menuLeft.setLabel("English");
+        splitMenuButtonLeft.setText("English");
+    }
+    @FXML
+    public void selectVietnameseLeft(){
+        englishLeft.setSelected(false);
+        vietnameseLeft.setSelected(true);
+        japaneseLeft.setSelected(false);
+        koreanLeft.setSelected(false);
+        chineseLeft.setSelected(false);
+//        menuLeft.setLabel("English");
+        splitMenuButtonLeft.setText("Vietnamese");
+
+    }
+    @FXML
+    public void selectJapaneseLeft(){
+        englishLeft.setSelected(false);
+        vietnameseLeft.setSelected(false);
+        japaneseLeft.setSelected(true);
+        koreanLeft.setSelected(false);
+        chineseLeft.setSelected(false);
+//        menuLeft.setLabel("English");
+        splitMenuButtonLeft.setText("Japanese");
+
+    }
+    @FXML
+    public void selectKoreanLeft(){
+        englishLeft.setSelected(false);
+        vietnameseLeft.setSelected(false);
+        japaneseLeft.setSelected(false);
+        koreanLeft.setSelected(true);
+        chineseLeft.setSelected(false);
+//        menuLeft.setLabel("English");
+        splitMenuButtonLeft.setText("Korean");
+
+    }
+    @FXML
+    public void selectChineseLeft() {
+        englishLeft.setSelected(false);
+        vietnameseLeft.setSelected(false);
+        japaneseLeft.setSelected(false);
+        koreanLeft.setSelected(false);
+        chineseLeft.setSelected(true);
+//        menuLeft.setLabel("English");
+        splitMenuButtonLeft.setText("Chinese");
+    }
+
+    // Chuyển ngoon ngữ bên phải
+    @FXML
+    public void selectEnglishRight(){
+        englishRight.setSelected(true);
+        vietnameseRight.setSelected(false);
+        japaneseRight.setSelected(false);
+        koreanRight.setSelected(false);
+        chineseRight.setSelected(false);
+        splitMenuButtonRight.setText("English");
+        langTarget = ENGLISH;
+    }
+    @FXML
+    public void selectVietnameseRight(){
+        englishRight.setSelected(false);
+        vietnameseRight.setSelected(true);
+        japaneseRight.setSelected(false);
+        koreanRight.setSelected(false);
+        chineseRight.setSelected(false);
+        splitMenuButtonRight.setText("Vietnamese");
+        langTarget = VIETNAMESE;
+    }
+    @FXML
+    public void selectJapaneseRight(){
+        englishRight.setSelected(false);
+        vietnameseRight.setSelected(false);
+        japaneseRight.setSelected(true);
+        koreanRight.setSelected(false);
+        chineseRight.setSelected(false);
+        splitMenuButtonRight.setText("Japanese");
+        langTarget = JAPANESE;
+    }
+    @FXML
+    public void selectKoreanRight(){
+        englishRight.setSelected(false);
+        vietnameseRight.setSelected(false);
+        japaneseRight.setSelected(false);
+        koreanRight.setSelected(true);
+        chineseRight.setSelected(false);
+        splitMenuButtonRight.setText("Korean");
+        langTarget = KOREAN;
+    }
+    @FXML
+    public void selectChineseRight(){
+        englishRight.setSelected(false);
+        vietnameseRight.setSelected(false);
+        japaneseRight.setSelected(false);
+        koreanRight.setSelected(false);
+        chineseRight.setSelected(true);
+        splitMenuButtonRight.setText("Chinese");
+        langTarget = CHINESE;
+    }
+
 }
