@@ -9,13 +9,21 @@ public class OlympiaDB extends SQLiteConnection {
         sqLiteConnection1.setConnection("jdbc:sqlite:src/main/resources/database/Olympia.db");
     }
 
-    public ResultSet executeStartUp() throws SQLException {
+    public ResultSet executeStartUp(int counter ) throws SQLException {
         String dataTable = "KD";
-        String searchQuery = "SELECT Question FROM " + dataTable;
+        String searchQuery = "SELECT Question FROM " + dataTable + " WHERE ID = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(searchQuery);
+        preparedStatement.setInt(1,counter +1);
         return preparedStatement.executeQuery();
     }
 
+    public ResultSet getAnswerR1(int counter ) throws SQLException {
+        String dataTable = "KD";
+        String searchQuery = "SELECT Answer FROM " + dataTable + " WHERE ID = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(searchQuery);
+        preparedStatement.setInt(1,counter +1);
+        return preparedStatement.executeQuery();
+    }
     public ResultSet executeObstacle(String question) throws SQLException {
         String dataTable = "VCNV";
         String searchQuery = "SELECT " + question +  " FROM " + dataTable;

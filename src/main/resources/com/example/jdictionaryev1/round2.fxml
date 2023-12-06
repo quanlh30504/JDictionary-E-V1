@@ -64,11 +64,7 @@
          </graphic>
       </Button>
       <AnchorPane fx:id="containerCircle" layoutX="109.0" layoutY="103.0" prefHeight="163.0" prefWidth="386.0" />
-      <ImageView fitHeight="360.0" fitWidth="356.0" layoutX="687.0" layoutY="139.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../GameOlympia/QuestionRound2/QS1Round2.png" />
-         </image>
-      </ImageView>
+      <ImageView fx:id="mainImage" fitHeight="360.0" fitWidth="356.0" layoutX="687.0" layoutY="139.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="pieceImage1" fitHeight="185.0" fitWidth="204.0" layoutX="680.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../GameOlympia/squarePuple.png" />

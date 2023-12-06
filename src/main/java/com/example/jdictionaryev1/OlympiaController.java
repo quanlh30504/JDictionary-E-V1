@@ -131,7 +131,7 @@ public class OlympiaController {
                         remainingSeconds--;
                     }
                 } else {
-//                    System.out.println("Hết cứu");
+
                     Platform.runLater(() -> {
                         if (labelCountDown == countdownLabel1) {
                                 playAudioClip(clipSU[6]);
@@ -319,26 +319,16 @@ public class OlympiaController {
     public boolean endR1 = false;
 
     public void loadQuestion1() throws SQLException {
-        ResultSet resultSet = olympiaDB.executeStartUp();
+        ResultSet resultSet = olympiaDB.executeStartUp(counter);
 
-        if (counter == 0) { //Question 1
+        if (counter <3) { //Question 1
 //            Question.setText("1." + "What is the opposite of \"big\"?");
-            while (resultSet.next()) {
-                if (resultSet.getString(1) != null) {
-                    Question.setText("1." + resultSet.getString(1));
-                }
+          if (resultSet.next()) {
+              Question.setText(counter + 1 + "." + resultSet.getString("Question"));
             }
             showQuestion();
         }
-        if (counter == 1) {
-            Question.setText("2." + "What is the opposite of \"hot\"?");
-            showQuestion();
-        }
-        if (counter == 2) {
-            Question.setText("3." + "What is the opposite of \"up\"?");
-            showQuestion();
-        }
-        if (counter == 3) {
+        else  if (counter == 3) {
             Question.setText("Go to next round.");
             showQuestion();
             stopAudioClip(clipSU[2]);
@@ -355,57 +345,27 @@ public class OlympiaController {
         return ans.isEmpty();
     }
 
-    public boolean checkAnswerRound1(String ans) {
+    public boolean checkAnswerRound1(String ans) throws SQLException {
         ans = ans.toLowerCase();
-        if (counter == 0) {
-            if (checkAlertAnswer(ans)) {
-                alertAnswer.setText("Invalid answer");
-                alertAnswer.setVisible(true);
-                AnswerWrong.setText("small");
-                return false;
-            }
-            if (ans.equals("small")) {
-                Answer.setText("small");
-                alertAnswer.setVisible(false);
-                return true;
-            } else {
-                AnswerWrong.setText("small");
-                alertAnswer.setVisible(false);
-                return false;
-            }
-        }
-        if (counter == 1) {
-            if (checkAlertAnswer(ans)) {
-                alertAnswer.setText("Invalid answer");
-                alertAnswer.setVisible(true);
-                AnswerWrong.setText("cold");
-                return false;
-            }
-            if (ans.equals("cold")) {
-                Answer.setText("cold");
-                alertAnswer.setVisible(false);
-                return true;
-            } else {
-                AnswerWrong.setText("cold");
-                alertAnswer.setVisible(false);
-                return false;
-            }
-        }
-        if (counter == 2) {
-            if (checkAlertAnswer(ans)) {
-                alertAnswer.setText("Invalid answer");
-                alertAnswer.setVisible(true);
-                AnswerWrong.setText("down");
-                return false;
-            }
-            if (ans.equals("down")) {
-                Answer.setText("down");
-                alertAnswer.setVisible(false);
-                return true;
-            } else {
-                AnswerWrong.setText("down");
-                alertAnswer.setVisible(false);
-                return false;
+        ResultSet resultSet = olympiaDB.getAnswerR1(counter);
+        if (counter <3) {
+            if (resultSet.next()) {
+                String correctAns = resultSet.getString("Answer");
+                if (checkAlertAnswer(ans)) {
+                    alertAnswer.setText("Invalid answer");
+                    alertAnswer.setVisible(true);
+                    AnswerWrong.setText(correctAns);
+                    return false;
+                }
+                if (ans.equals(correctAns)) {
+                    Answer.setText(correctAns);
+                    alertAnswer.setVisible(false);
+                    return true;
+                } else {
+                    AnswerWrong.setText(correctAns);
+                    alertAnswer.setVisible(false);
+                    return false;
+                }
             }
         }
         return false;
@@ -546,6 +506,8 @@ public class OlympiaController {
     }
 
     @FXML
+    private ImageView mainImage;
+    @FXML
     public void gotoRound2() throws IOException {
         HelloApplication helloApplication = new HelloApplication();
         helloApplication.changeScreen("round2.fxml", 1080, 608);
@@ -582,7 +544,6 @@ public class OlympiaController {
         listQuestionRound2.add("How does the ____________ affect outdoor activities?");
         listQuestionRound2.add("What aspects of the newly Explorified concept intrigue you the most, and how do you think it will impact our understanding of the world around us?");
         listQuestionRound2.add("The vocabulary we want to talk about here is?");
-
     }//
 
 
@@ -842,16 +803,20 @@ public class OlympiaController {
     @FXML
     public void startCountDownRound2() {
         int seconds = 16;
-        Countdown(seconds,countdownLabel2);
-        try {
-            wait(6000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        playAudioClip(clipOb[1]);
-        System.out.println(1);
+        Countdown(seconds, countdownLabel2);
 
+        Thread countdownThread = new Thread(() -> {
+            try {
+                Thread.sleep(6000);
+                playAudioClip(clipOb[1]);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        countdownThread.start();
     }
+
 
     @FXML
     public void correctAnsRound2(){
@@ -875,7 +840,6 @@ public class OlympiaController {
         wait(2000);
         playAudioClip(clipOb[3]);
         loadQuestionRound2(Line);
-        System.out.println(2);
         countdownLabel2.setText("15");
         startCountDownRound2();
     }
@@ -971,6 +935,8 @@ public class OlympiaController {
                 openImageButton2.setDisable(false);
                 openImageButton3.setDisable(false);
                 openImageButton4.setDisable(false);
+                Image image = new Image("file:C:/Users/ADMIN/Documents/code/OOP/JDictionary-E-V1/src/main/resources/GameOlympia/QuestionRound2/QS1Round2.png");
+                mainImage.setImage(image);
                 try {
                     loadQuesAndAnsRound2();
                 } catch (SQLException e) {
