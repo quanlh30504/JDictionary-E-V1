@@ -37,6 +37,7 @@ import javax.sound.sampled.*;
 import javax.swing.*;
 
 import java.io.*;
+import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -535,15 +536,9 @@ public class OlympiaController {
     public Text[] textAns = new Text[40];
 
     public void loadQuesAndAnsRound2() throws SQLException {
-        listAns = Arrays.asList("happy","courageous","connect","weather","explorify","discover");
-        listQuestionRound2 = new ArrayList<>();
+        listAns = OlympiaDB.getAnswerR2();
+        listQuestionRound2 = OlympiaDB.getQuestionR2();
 //        ResultSet resultSet = olympiaDB.executeObstacle("Ques1");
-        listQuestionRound2.add("What were the children when they received their presents?");
-        listQuestionRound2.add("What did the firefighter display when rescuing people from the burning building?");
-        listQuestionRound2.add("How does social media assist people in staying in touch with friends and family?");
-        listQuestionRound2.add("How does the ____________ affect outdoor activities?");
-        listQuestionRound2.add("What aspects of the newly Explorified concept intrigue you the most, and how do you think it will impact our understanding of the world around us?");
-        listQuestionRound2.add("The vocabulary we want to talk about here is?");
     }//
 
 
@@ -912,6 +907,15 @@ public class OlympiaController {
         }
     }
 
+    public void setImageR2() throws SQLException {
+        ResultSet resultSet = OlympiaDB.addImageR2();
+        String initialPath = "C:/Users/ADMIN/Documents/code/OOP/";
+        if (resultSet.next()) {
+            Image image= new Image("file:"+ initialPath + resultSet.getString("Image"));
+            mainImage.setImage(image);
+        }
+    }
+
     @FXML
     public AnchorPane anchorPaneReady;
     @FXML
@@ -935,8 +939,11 @@ public class OlympiaController {
                 openImageButton2.setDisable(false);
                 openImageButton3.setDisable(false);
                 openImageButton4.setDisable(false);
-                Image image = new Image("file:C:/Users/ADMIN/Documents/code/OOP/JDictionary-E-V1/src/main/resources/GameOlympia/QuestionRound2/QS1Round2.png");
-                mainImage.setImage(image);
+                try {
+                    setImageR2();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
                 try {
                     loadQuesAndAnsRound2();
                 } catch (SQLException e) {
@@ -2086,4 +2093,4 @@ public class OlympiaController {
             playAudioClip(new AudioClip(new File("src/main/resources/GameOlympia/OlympiaSound/Giới_thiệu_cuộc_thi_O15.mp3.mpeg").toURI().toString()));
         }
     }
-}
+ }
