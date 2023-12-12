@@ -2,7 +2,6 @@ package module.SQLite;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class OlympiaDB extends SQLiteConnection {
@@ -92,25 +91,5 @@ public class OlympiaDB extends SQLiteConnection {
         return preparedStatement.executeQuery();
     }
 
-    public static void main(String[] args) throws SQLException {
-//        try {
-//            sqLiteConnection1.setConnection(dbName1);
-////            connection = (Connection) sqLiteConnection1.getSqLiteConnection();
-//            String dataTable = "KD";
-//            String searchQuery = "SELECT Question FROM " + dataTable;
-//            PreparedStatement preparedStatement = connection.prepareStatement(searchQuery);
-//            ResultSet resultSet = preparedStatement.executeQuery();
-//            System.out.println(resultSet);
-//            while (resultSet.next()) {
-//                System.out.println(resultSet.getString(1));
-//                //System.out.println(1);
-//            }
-//            resultSet.close();
-//            statement.close();
-//            connection.close();
-//        } catch (SQLException E) {
-//            E.printStackTrace();
-//        }
-    }
-
+    public static void main(String[] args) throws SQLException {}
 }
