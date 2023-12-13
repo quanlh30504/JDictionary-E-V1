@@ -405,7 +405,7 @@ public class OlympiaController {
 
     @FXML
     public void startCountDownRound1() {
-        int seconds = 10;
+        int seconds = 21;
         if (start) {
             Countdown(seconds, countdownLabel1);
             //System.out.println(seconds);
@@ -909,7 +909,7 @@ public class OlympiaController {
 
     public void setImageR2() throws SQLException {
         ResultSet resultSet = OlympiaDB.addImageR2();
-        String initialPath = "C:/Users/ADMIN/Documents/code/OOP/";
+        String initialPath = "E:/";
         if (resultSet.next()) {
             Image image= new Image("file:"+ initialPath + resultSet.getString("Image"));
             mainImage.setImage(image);
