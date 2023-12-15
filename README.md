@@ -1,11 +1,12 @@
 # **English dictionary for learning purposes** 
 ## 1. Introduction 
 This is a major assignment group project for our Object-oriented programming (OOP) class coding in 100% Java language. It contained all the basic functions expected of a common dictionary as well as some interesting game that was made by our group. There are 2 versions, the command line version and the graphic version
-**Class Diragram is represented via this link:** https://github.com/ngoctuannguyen/JDictionary-E-V1/blob/main/src/main/resources/InheritanceTree.svg
+**Class Diragram is represented via this link:** https://github.com/quanlh30504/JDictionary-E-V1/blob/main/src/main/resources/InheritanceTree.svg
 ## 2. Set up 
 **As of this moment, the app can only be run on IDE, we advise using Inteliji for this** 
 ### 2.1. The command line version 
 Simply open the CMDDictionary package and run the DictionaryCommandline class. To save your progress, after you are done use the export function to save it into a .txt file (you may use the dictionaries.txt that we already made or just export into a new .txt file). When you open it again, use the import function to load back the file into the dictionary
+
 ![image](https://hackmd.io/_uploads/Sy_GgLw86.png) 
 ### 2.2 The graphic version 
 Open jdictionaryev1 package and run HelloApplication class 
