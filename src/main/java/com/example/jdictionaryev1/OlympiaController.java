@@ -909,7 +909,7 @@ public class OlympiaController {
 
     public void setImageR2() throws SQLException {
         ResultSet resultSet = OlympiaDB.addImageR2();
-        String initialPath = "E:/";
+        String initialPath = "E:/";         // chú ý sửa lại đường dẫn đến thư mục chưa file source Code từ điển
         if (resultSet.next()) {
             Image image= new Image("file:"+ initialPath + resultSet.getString("Image"));
             mainImage.setImage(image);
